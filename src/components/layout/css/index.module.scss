@@ -1,0 +1,19 @@
+.layout_container {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - $base-header-height);
+  background-color: #f2f3f7;
+
+  .layout_slider {
+    color: white;
+    width: $base-menu-width;
+    height: calc(100vh - 70px);
+    background: $base-menu-background;
+    transition: all 0.3s;
+    background: $base-menu-background;
+    transition: all 0.3s;
+  }
+  .layout_content {
+    flex: 1;
+  }
+}
