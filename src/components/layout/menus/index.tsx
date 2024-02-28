@@ -44,7 +44,7 @@ export default function Menus() {
 
   return (
     <>
-      <Menu dir="v" activeName={location.pathname}>
+      <Menu dir="v" activeName={location.pathname} min={false}>
         {renderMenu(menuRoutes, null)}
       </Menu>
     </>

@@ -11,4 +11,34 @@
     background: $base-menu-background;
     transition: all 0.3s;
   }
+
+  .layout_tabbar {
+    position: fixed;
+    width: calc(100% - $base-menu-width);
+    height: $base-tabbar-height;
+    top: $base-header-height;
+    left: $base-menu-width;
+    transition: all 0.3s;
+    background-color: #fff;
+    box-shadow: 0 5px 10px #ddd;
+    padding-left: 16px;
+    display: flex;
+    align-items: center;
+    &.fold {
+      width: calc(100vw - $base-menu-min-width);
+      left: $base-menu-min-width;
+    }
+  }
+
+  .layout_content {
+    position: absolute;
+    width: calc(100% - $base-menu-width);
+    height: calc(100vh - $base-header-height - $base-tabbar-height);
+    left: $base-menu-width;
+    top: $base-header-height + $base-tabbar-height;
+    padding: 10px;
+    overflow: auto;
+    transition: all 0.3s;
+    background-color: '#f2f3f7';
+  }
 }
