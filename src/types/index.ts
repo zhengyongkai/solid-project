@@ -1,7 +1,9 @@
-import { RouteDefinition } from "@solidjs/router";
+import { RouteDefinition } from '@solidjs/router';
 
 export type routeInf = {
-  meta?: {
-    login: boolean;
+  meta: {
+    login?: boolean;
+    title?: string;
   };
+  children?: routeInf[];
 } & RouteDefinition;

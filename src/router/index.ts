@@ -1,24 +1,45 @@
+// @ts-nocheck
+
 import { lazy } from 'solid-js';
 import { routeInf } from '@/types';
 
-const routes: routeInf[] = [
+const baseRoutes: routeInf[] = [
   {
     path: '/login',
-    component: lazy(() => import('@/view/login/index')),
+    meta: {
+      title: '登录',
+    },
+    component: lazy(() => import('@/views/login/index')),
   },
+];
+
+const asyncRoutes: routeInf[] = [
   {
-    path: '/users',
+    path: '/system',
     component: lazy(() => import('@/components/layout/index')),
     children: [
       {
-        path: '/lll',
-        component: lazy(() => import('@/view/common/index')),
+        path: '/administrator',
+        component: lazy(() => import('@/views/system/administrator')),
+        meta: {
+          login: true,
+          title: '管理员列表',
+        },
+      },
+      {
+        path: '/role',
+        component: lazy(() => import('@/views/system/role')),
+        meta: {
+          login: true,
+          title: '第一次菜单',
+        },
       },
     ],
     meta: {
       login: true,
+      title: '系統管理',
     },
   },
 ];
 
-export default routes;
+export { baseRoutes, asyncRoutes };

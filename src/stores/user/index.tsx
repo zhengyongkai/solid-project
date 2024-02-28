@@ -1,20 +1,20 @@
-import { createWithSignal } from 'solid-zustand';
-import routes from '@/router/index';
+import createStore from 'solid-zustand';
+import { asyncRoutes } from '@/router/index';
 import { routeInf } from '~/src/types';
 
-interface userStoreState {
+export interface userStoreState {
   token: string;
   avatar: string;
   userInfo: {};
-  menuRoutes: routeInf;
+  menuRoutes: routeInf[];
 }
 
-const useStore = createWithSignal<userStoreState>((set) => ({
+const useStore = createStore<userStoreState>((set) => ({
   token: '',
   avatar: '',
   userInfo: {},
   //仓库存储生成菜单需要数组(路由)
-  menuRoutes: routes,
+  menuRoutes: asyncRoutes,
 }));
 
 export default useStore;

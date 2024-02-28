@@ -16,7 +16,6 @@ export default function BaseLayout(props: BaseLayoutInf) {
           <Menus></Menus>
         </div>
         <div class={Styles['layout_content']}>
-          <div>dasdasd</div>
           <div>{props.children}</div>
         </div>
       </div>
