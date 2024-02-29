@@ -3,6 +3,8 @@
 import { lazy } from 'solid-js';
 import { routeInf } from '@/types';
 
+const Home = lazy(() => import('@/components/layout/index'));
+
 const baseRoutes: routeInf[] = [
   {
     path: '/login',
@@ -15,30 +17,75 @@ const baseRoutes: routeInf[] = [
 
 const asyncRoutes: routeInf[] = [
   {
-    path: '/system',
-    component: lazy(() => import('@/components/layout/index')),
+    path: '/',
+    component: Home,
+    meta: {
+      title: '',
+      icon: 'home',
+    },
     children: [
       {
-        path: '/administrator',
-        component: lazy(() => import('@/views/system/administrator')),
+        path: 'home',
+        component: lazy(() => import('@/views/home/index')),
         meta: {
-          login: true,
-          title: '管理员列表',
+          title: '主頁',
+          icon: 'home',
         },
       },
       {
-        path: '/role',
-        component: lazy(() => import('@/views/system/role')),
+        path: 'system',
+        children: [
+          {
+            path: '/administrator',
+            component: lazy(() => import('@/views/system/administrator')),
+            meta: {
+              login: true,
+              title: '管理员列表',
+            },
+          },
+          {
+            path: '/role',
+            component: lazy(() => import('@/views/system/role')),
+            meta: {
+              login: true,
+              title: '人员管理',
+            },
+          },
+        ],
         meta: {
           login: true,
-          title: '第一次菜单',
+          title: '系統管理',
+          icon: 'setting',
+        },
+      },
+      {
+        path: 'equipment',
+        children: [
+          {
+            path: '/list',
+            component: lazy(() => import('@/views/equipment/list')),
+            meta: {
+              login: true,
+              title: '設備列表',
+            },
+          },
+
+          {
+            path: '/region',
+            component: lazy(() => import('@/views/equipment/region')),
+            meta: {
+              login: true,
+              title: '區域配置',
+            },
+          },
+        ],
+        meta: {
+          login: true,
+          title: '設備管理',
+          icon: 'setting',
         },
       },
     ],
-    meta: {
-      login: true,
-      title: '系統管理',
-    },
   },
 ];
 

@@ -1,3 +1,7 @@
 export default function Administrator() {
-  return <></>;
+  return (
+    <>
+      <div>大萨达</div>
+    </>
+  );
 }

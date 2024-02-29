@@ -1,0 +1,21 @@
+.cm-menu-item {
+  color: $base-color-default;
+
+  width: 100%;
+  &.cm-menu-item-active {
+    background-color: $base-bgcolor-default;
+    // border-right: 5px solid $base-bgcolor-default;
+  }
+  &:not(.cm-menu-item-active):hover {
+    color: $base-color-default;
+    background-color: $base-color-base-primary;
+  }
+  .cm-menu-item-icon {
+    margin-right: 8px;
+    height: 20px;
+  }
+}
+
+.cm-dropdown .cm-menu-item {
+  color: $base-color-dark !important;
+}

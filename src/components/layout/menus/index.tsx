@@ -1,41 +1,50 @@
 import { useLocation, useNavigate } from '@solidjs/router';
 import { Icon, Menu, MenuItem, SubMenu } from 'cui-solid';
 
-import type { userStoreState } from '~/src/stores/user';
-import userStore from '~/src/stores/user';
-import { routeInf } from '~/src/types';
+import useCommonStore from '@/stores/common';
+import useUserStore from '@/stores/user';
+
+import { routeInf } from '@/types';
+import SvgIcon from '@/components/common/SvgIcon';
 
 export default function Menus() {
   const location = useLocation();
   const navigate = useNavigate();
-  const menuRoutes = userStore((state: userStoreState) => state.menuRoutes);
+
+  // 拿到第一层的层级
+  const [menuRoutes] = useUserStore().menuRoutes;
+  const [fold] = useCommonStore().fold;
+
+  const baseRoute = menuRoutes()[0].children as routeInf[];
 
   function to(item: string) {
     navigate(item);
   }
 
-  function renderMenu(menus: routeInf[], parent: routeInf | null) {
+  function renderMenu(menus: routeInf[], path: string = '') {
     return menus.map((item) => {
+      // 設置Icon
+      let icon = item.meta.icon ? <SvgIcon name={item.meta.icon} /> : <></>;
+      if (item.children && item.children.length === 1 && item.path === '/') {
+        let children = item.children[0] ? item.children[0] : item;
+        return (
+          <MenuItem icon={icon}>
+            <div onClick={() => to('/' + children.path)}>
+              {children.meta.title}
+            </div>
+          </MenuItem>
+        );
+      }
       if (item.children) {
         return (
-          <SubMenu
-            name={item.path}
-            icon={<Icon name="users" />}
-            title={item.meta.title}
-          >
-            {renderMenu(item.children, item)}
+          <SubMenu name={item.path} icon={icon} title={item.meta.title}>
+            {renderMenu(item.children, path + item.path)}
           </SubMenu>
         );
       } else {
-        console.log(parent!.path + item.path);
         return (
-          <MenuItem
-            name={parent!.path + item.path}
-            icon={<Icon name="users" />}
-          >
-            <div onClick={() => to(parent!.path + item.path)}>
-              {item.meta.title}
-            </div>
+          <MenuItem name={path + item.path} icon={icon}>
+            <div onClick={() => to(path + item.path)}>{item.meta.title}</div>
           </MenuItem>
         );
       }
@@ -44,8 +53,8 @@ export default function Menus() {
 
   return (
     <>
-      <Menu dir="v" activeName={location.pathname} min={false}>
-        {renderMenu(menuRoutes, null)}
+      <Menu dir="v" activeName={location.pathname} min={fold()}>
+        {renderMenu(baseRoute, '')}
       </Menu>
     </>
   );
