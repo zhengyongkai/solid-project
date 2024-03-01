@@ -4,6 +4,7 @@ import Styles from './css/header.module.scss';
 import Logo from '@/assets/img/web-logo.png';
 import Setting from '../Setting/Setting';
 import Lang from '@/components/common/Lang/Lang';
+import locale from '@/locale';
 
 export default function Header() {
   return (
@@ -11,7 +12,7 @@ export default function Header() {
       <div class={Styles['logo']}>
         <img src={Logo} />
       </div>
-      <div>人臉考勤門禁總管理平台</div>
+      <div>{locale.t('title')}</div>
       <div>
         <Lang></Lang>
       </div>

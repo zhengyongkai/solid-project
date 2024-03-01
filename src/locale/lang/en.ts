@@ -1,5 +1,5 @@
 const enLang = {
-  dd: '3123ddas',
+  title: '3123ddas',
 };
 
 export default enLang;

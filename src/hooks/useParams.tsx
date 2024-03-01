@@ -1,5 +1,5 @@
-import { useParams } from "@solidjs/router";
-import { createEffect, createMemo, createSignal } from "solid-js";
+import { useParams } from '@solidjs/router';
+import { createEffect, createMemo, createSignal } from 'solid-js';
 
 export default function useParamsData() {
   const params = useParams();
@@ -8,7 +8,7 @@ export default function useParamsData() {
   const [paramsSigals, setParamsSigals] = createSignal({});
 
   createEffect(() => {
-    console.log("ddd", paramsMeno());
+    // console.log("ddd", paramsMeno());
     setParamsSigals(paramsMeno());
   });
 

@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@solidjs/router": "^0.12.3",
+    "chart.js": "^4.4.2",
     "cui-solid": "^0.1.33",
     "i18next": "^23.10.0",
     "jotai": "^2.7.0",
     "prettier": "^3.2.5",
+    "solid-chartjs": "^1.3.9",
     "solid-i18n": "^1.1.0",
     "solid-jotai": "^0.2.2",
     "solid-js": "^1.8.14",

@@ -1,6 +1,7 @@
 import { createI18n, I18n } from 'solid-i18n';
 import enLang from './lang/en';
-import zhLang from './lang/zh';
+import zhLang from './lang/zhTW';
+import cnLang from './lang/zhCN';
 import { langInf } from '@/types';
 import { M_LANG } from '@/constants';
 
@@ -18,7 +19,7 @@ class locale {
         language,
         locales: {
           'en-US': enLang,
-          'zh-CN': zhLang,
+          'zh-CN': cnLang,
           'zh-TW': zhLang,
         },
       });
