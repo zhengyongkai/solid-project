@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@mbarzda/solid-i18next':
-    specifier: ^1.4.1
-    version: 1.4.1(i18next@23.10.0)(solid-js@1.8.15)
   '@solidjs/router':
     specifier: ^0.12.3
     version: 0.12.3(solid-js@1.8.15)
@@ -23,6 +20,9 @@ dependencies:
   prettier:
     specifier: ^3.2.5
     version: 3.2.5
+  solid-i18n:
+    specifier: ^1.1.0
+    version: 1.1.0(solid-js@1.8.15)
   solid-jotai:
     specifier: ^0.2.2
     version: 0.2.2(jotai@2.7.0)(solid-js@1.8.15)
@@ -519,20 +519,6 @@ packages:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
-
-  /@mbarzda/solid-i18next@1.4.1(i18next@23.10.0)(solid-js@1.8.15):
-    resolution: {integrity: sha512-QC/mrD9aMibcjuSNpdr9uky+JNupVedOB2CLNYJrFrZCMyY8+HXK3q1Lda+P2WoNBWToS+6BCwbB1D9sKBCXSQ==}
-    peerDependencies:
-      html-parse-string: <=1.x
-      i18next: '>=23.x'
-      solid-js: '>=1.8.x'
-    peerDependenciesMeta:
-      html-parse-string:
-        optional: true
-    dependencies:
-      i18next: 23.10.0
-      solid-js: 1.8.15
-    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1530,6 +1516,10 @@ packages:
       readable-stream: 3.6.2
     dev: false
 
+  /i18n-mini@1.1.0:
+    resolution: {integrity: sha512-Y7R8/ITtjYAAklY9a8vizkFpUlgJDFLGWUlppH7Lcx2R3dXQaZXrugJtGXYjL9vK1ym5CzhbN2kU4lj8ELA6vg==}
+    dev: false
+
   /i18next@23.10.0:
     resolution: {integrity: sha512-/TgHOqsa7/9abUKJjdPeydoyDc0oTi/7u9F8lMSj6ufg4cbC1Oj3f/Jja7zj7WRIhEQKB7Q4eN6y68I9RDxxGQ==}
     dependencies:
@@ -2378,6 +2368,15 @@ packages:
       use: 3.1.1
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /solid-i18n@1.1.0(solid-js@1.8.15):
+    resolution: {integrity: sha512-CyIUJSV/DtPNK6PW3DowL4QpWqDuRHjun+n85CZRQiuEkkHIa/j4dglOOcP4q3egqLVdbzbMNQF7OtxI8/CeKw==}
+    peerDependencies:
+      solid-js: 1.x.x
+    dependencies:
+      i18n-mini: 1.1.0
+      solid-js: 1.8.15
     dev: false
 
   /solid-jotai@0.2.2(jotai@2.7.0)(solid-js@1.8.15):

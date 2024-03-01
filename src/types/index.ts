@@ -1,4 +1,4 @@
-import { RouteDefinition } from "@solidjs/router";
+import { RouteDefinition } from '@solidjs/router';
 
 export type routeInf = {
   meta: {
@@ -8,3 +8,5 @@ export type routeInf = {
   };
   children?: routeInf[];
 } & RouteDefinition;
+
+export type langInf = 'zh-TW' | 'zh-CN' | 'en-US';

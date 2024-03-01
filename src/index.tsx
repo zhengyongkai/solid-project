@@ -2,30 +2,25 @@ import { render } from 'solid-js/web';
 import { Router, Route } from '@solidjs/router';
 
 import './index.css';
-import { baseRoutes, asyncRoutes } from '@/router/index';
+import { asyncRoutes } from '@/router/index';
 import 'cui-solid/dist/styles/cui.css';
 import '@/assets/styles/cui.scss';
 
 import 'virtual:svg-icons-register';
 
-import { TransProvider, Trans } from '@mbarzda/solid-i18next';
+import { I18nProvider } from 'solid-i18n';
+import i18n from './locale';
+import useCommonStore from './stores/common/Index';
 
-// function renderRoute() {
-//   return [...baseRoutes, ...asyncRoutes].map((item) => {
-//     return item;
-//   });
-// }
+const [language] = useCommonStore().lang;
 
-const resources = {
-  lt: { hello: '你好' },
-  pl: { hello: 'Hello ' },
-};
+const lang = i18n.getInstance(language());
 
 render(
   () => (
-    <TransProvider options={{ resources }} lng="lt">
+    <I18nProvider i18n={lang}>
       <Router>{asyncRoutes}</Router>
-    </TransProvider>
+    </I18nProvider>
   ),
   document.getElementById('root')!
 );

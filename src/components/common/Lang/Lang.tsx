@@ -1,28 +1,29 @@
-import { Dropdown, DropdownItem, DropdownMenu } from "cui-solid";
-import Styles from "./css/index.module.scss";
-import useCommonStore from "@/stores/common/Index";
+import { Dropdown, DropdownItem, DropdownMenu } from 'cui-solid';
+import Styles from './css/index.module.scss';
+import useCommonStore from '@/stores/common/Index';
+import { useI18n } from 'solid-i18n';
+import locale, { langMap } from '@/locale';
+import { langInf } from '@/types';
 
 export default function Lang() {
-  const [lang, setLang] = useCommonStore().lang;
+  function langMenus() {
+    return [...langMap.entries()].map((res) => {
+      return <DropdownItem name={res[0]}>{res[1]}</DropdownItem>;
+    });
+  }
 
   return (
     <>
-      <div class={Styles["lang"]}>
+      <div class={Styles['lang']}>
         <Dropdown
           trigger="click"
           align="bottom"
-          menu={
-            <DropdownMenu>
-              <DropdownItem name="简体">简体</DropdownItem>
-              <DropdownItem name="繁体">繁体</DropdownItem>
-              <DropdownItem name="English">English</DropdownItem>
-            </DropdownMenu>
-          }
-          onSelect={(name: string) => {
-            setLang(name);
+          menu={<DropdownMenu>{langMenus}</DropdownMenu>}
+          onSelect={(name: langInf) => {
+            locale.setLanguage(name);
           }}
         >
-          <div>{lang()}</div>
+          <div>{locale.getLanguage().name}</div>
         </Dropdown>
       </div>
     </>
