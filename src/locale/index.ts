@@ -19,13 +19,22 @@ class locale {
         locales: {
           'en-US': enLang,
           'zh-CN': zhLang,
+          'zh-TW': zhLang,
         },
       });
     }
     return this.i18n;
   }
-  static t(value: string) {
-    return this.i18n.t(value);
+  // t('something')
+  // t('something',['$1'],[123])
+  static t(value: string, params?: string[], values?: string[]) {
+    let result = this.i18n.t(value) as string;
+    if (result && params && values) {
+      params.map((item, index) => {
+        return result.replace(item, values[index]);
+      });
+    }
+    return result;
   }
   static setLanguage(language: langInf) {
     this.i18n.setLanguage(language);
