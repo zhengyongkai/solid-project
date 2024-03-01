@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mbarzda/solid-i18next": "^1.4.1",
     "@solidjs/router": "^0.12.3",
     "cui-solid": "^0.1.33",
+    "i18next": "^23.10.0",
     "jotai": "^2.7.0",
     "prettier": "^3.2.5",
     "solid-jotai": "^0.2.2",

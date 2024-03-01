@@ -8,14 +8,38 @@
   color: #333333;
   border-bottom: 1px solid #00000029;
   display: flex;
-  justify-content: space-between;
-  & .logo {
-    line-height: 70px;
+  padding: 12px;
+  // justify-content: space-between;
+  align-items: center;
+  .logo {
+    width: 72px;
+    // line-height: 70px;
     display: flex;
     align-items: center;
-    .logoimg {
-      margin-top: 12px;
-      padding: 0 12px;
+    img {
+      margin-top: 18px;
+      margin-right: 10px;
+      width: 72px;
+    }
+  }
+
+  > :nth-child(2) {
+    flex: 1;
+  }
+
+  > :nth-child(3) {
+    margin-right: 12px;
+  }
+
+  > :last-child {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+    font-size: 14px;
+
+    > div {
+      margin-right: 16px;
+      color: $base-color-primary;
     }
   }
 }

@@ -3,7 +3,7 @@
 import { lazy } from 'solid-js';
 import { routeInf } from '@/types';
 
-const Home = lazy(() => import('@/components/layout/index'));
+const Home = lazy(() => import('@/components/layout/BaseLayout'));
 
 const baseRoutes: routeInf[] = [
   {
@@ -11,7 +11,7 @@ const baseRoutes: routeInf[] = [
     meta: {
       title: '登录',
     },
-    component: lazy(() => import('@/views/login/index')),
+    component: lazy(() => import('@/views/Login/Login')),
   },
 ];
 
@@ -20,13 +20,13 @@ const asyncRoutes: routeInf[] = [
     path: '/',
     component: Home,
     meta: {
-      title: '',
+      title: '首页',
       icon: 'home',
     },
     children: [
       {
         path: 'home',
-        component: lazy(() => import('@/views/home/index')),
+        component: lazy(() => import('@/views/Home/Home')),
         meta: {
           title: '主頁',
           icon: 'home',
@@ -37,7 +37,9 @@ const asyncRoutes: routeInf[] = [
         children: [
           {
             path: '/administrator',
-            component: lazy(() => import('@/views/system/administrator')),
+            component: lazy(
+              () => import('@/views/System/Administrator/Administrator')
+            ),
             meta: {
               login: true,
               title: '管理员列表',
@@ -45,7 +47,7 @@ const asyncRoutes: routeInf[] = [
           },
           {
             path: '/role',
-            component: lazy(() => import('@/views/system/role')),
+            component: lazy(() => import('@/views/System/Role/Role')),
             meta: {
               login: true,
               title: '人员管理',
@@ -63,7 +65,7 @@ const asyncRoutes: routeInf[] = [
         children: [
           {
             path: '/list',
-            component: lazy(() => import('@/views/equipment/list')),
+            component: lazy(() => import('@/views/Equipment/list/List')),
             meta: {
               login: true,
               title: '設備列表',
@@ -72,7 +74,7 @@ const asyncRoutes: routeInf[] = [
 
           {
             path: '/region',
-            component: lazy(() => import('@/views/equipment/region')),
+            component: lazy(() => import('@/views/Equipment/region/Region')),
             meta: {
               login: true,
               title: '區域配置',

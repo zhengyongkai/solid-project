@@ -19,3 +19,13 @@
 .cm-dropdown .cm-menu-item {
   color: $base-color-dark !important;
 }
+
+.cm-breadcrumb-item {
+  .cm-space {
+    display: flex;
+    align-items: center;
+    span {
+      display: block;
+    }
+  }
+}

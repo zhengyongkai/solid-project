@@ -1,12 +1,8 @@
-import { SetStateAction } from "jotai";
-import { atom, useAtom } from "solid-jotai";
-
-// interface initDataType {
-//   fold:
-// }
+import { atom, useAtom, createStore } from "solid-jotai";
 
 const initData = {
   fold: useAtom(atom(false)),
+  lang: useAtom(atom("简体")),
 };
 
 const useCommonStore = function () {

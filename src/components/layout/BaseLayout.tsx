@@ -1,13 +1,11 @@
-import Header from "./header";
-import Menus from "./menus";
+import Header from "./Header/Header";
+import Menus from "./Menus/Menus";
 
 import Styles from "./css/index.module.scss";
 import { comBineCss } from "@/utils/css";
-import { Breadcrumb, Icon } from "cui-solid";
-import BreadcrumbLayout from "./breadcrumb";
-import useCommonStore from "@/stores/common";
-import { shallow } from "zustand/shallow";
-import Main from "./main";
+import BreadcrumbLayout from "./Breadcrumb/Breadcrumb";
+import useCommonStore from "@/stores/common/Index";
+import { Suspense } from "solid-js";
 
 interface BaseLayoutInf {
   children: Element;
@@ -36,7 +34,9 @@ export default function BaseLayout(props: BaseLayoutInf) {
             class={Styles["layout_content"]}
             classList={{ [Styles["fold"]]: fold() }}
           >
-            <Main>{props.children}</Main>
+            <Suspense fallback={<div>Loading...</div>}>
+              {props.children}
+            </Suspense>
           </div>
         </div>
       </div>
