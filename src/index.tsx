@@ -1,5 +1,5 @@
 import { render } from 'solid-js/web';
-import { Navigate, Route, Router } from '@solidjs/router';
+import { HashRouter } from '@solidjs/router';
 
 import './index.css';
 import { asyncRoutes } from '@/router/index';
@@ -19,7 +19,7 @@ const lang = i18n.getInstance(language());
 render(
   () => (
     <I18nProvider i18n={lang}>
-      <Router>{asyncRoutes}</Router>
+      <HashRouter>{asyncRoutes}</HashRouter>
     </I18nProvider>
   ),
   document.getElementById('root')!

@@ -46,7 +46,7 @@
     > div {
       // padding: 16px;
       background-color: #fff;
-      padding: 10px;
+      padding: 0 10px;
     }
     &.fold {
       width: calc(100vw - $base-menu-min-width);

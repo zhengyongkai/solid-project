@@ -17,12 +17,12 @@ export default function Row(props: propsInf) {
 
   const style = createMemo(() => {
     const ret = {
-      marginLeft: '',
-      marginRight: '',
+      'margin-left': '',
+      'margin-right': '0',
     };
     if (props.gutter) {
-      ret.marginLeft = `-${props.gutter / 2}px`;
-      ret.marginRight = ret.marginLeft;
+      ret['margin-left'] = `-${props.gutter / 2}px`;
+      ret['margin-right'] = ret['margin-left'];
     }
     return ret;
   });

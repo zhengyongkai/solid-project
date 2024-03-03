@@ -29,25 +29,31 @@ export default function Administrator() {
 
   return (
     <>
-      <Row gutter={20}>
-        <Col span={5}>
+      <div class="table-handle-box">
+        <Row gutter={24}>
           <Button type="error" icon={<Icon name="trash"></Icon>}>
             批量删除
           </Button>
-        </Col>
-        <Col span={5} offset={1}>
-          <Input
-            onChange={(e: string) => {
-              setParams({
-                searchKey: e,
-              });
-            }}
-          ></Input>
-        </Col>
-        <Col span={4}>
-          <Button onClick={() => requestData(params())}>批量删除</Button>
-        </Col>
-      </Row>
+
+          <Col span={4}>
+            <Input
+              onChange={(e: string) => {
+                setParams({
+                  searchKey: e,
+                });
+              }}
+            ></Input>
+          </Col>
+          <Col span={4}>
+            <Button
+              onClick={() => requestData(params())}
+              icon={<Icon name="search"></Icon>}
+            >
+              搜索
+            </Button>
+          </Col>
+        </Row>
+      </div>
       <Table columns={columns} data={tableData()} loading={loading()} />
       <div class="pagination">
         <Pagination

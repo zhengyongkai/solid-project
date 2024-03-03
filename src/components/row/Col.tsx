@@ -22,8 +22,8 @@ export default function Col(props: propsInf) {
 
   let classList: string[] = [];
   let style = {
-    'padding-left': '1px',
-    'padding-right': '4px',
+    'padding-left': '1px0',
+    'padding-right': '0',
   };
 
   if (gutter) {

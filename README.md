@@ -4,6 +4,10 @@
 npm run dev
 ```
 
+## 线上地址
+
+[solid-project](http://134.175.103.137/solid/#/system/administrator)
+
 ## 方法
 
 ### 多语言

@@ -3,7 +3,8 @@
 @import 'tailwindcss/utilities';
 
 .table-handle-box {
-  margin-bottom: 10px;
+  padding: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .pagination {
