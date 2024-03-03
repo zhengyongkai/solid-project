@@ -1,28 +1,78 @@
-## Usage
+## 启动
 
-```bash
-$ npm install # or pnpm install or yarn install
+```
+npm run dev
 ```
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+## 方法
 
-## Available Scripts
+### 多语言
 
-In the project directory, you can run:
+```js
+import locale, { langMap } from '@/locale';
 
-### `npm run dev`
+// 获取多语言列表
+langMap;
+// 设置多语言
+locale.setLanguage(name);
+// 获取当前多语言
+locale.getLanguage().name;
+// 获取某个字段多语言 第二参数为插槽 第三个为需要返回的值
+locale.t('title', ['$1'], [11]);
+```
 
-Runs the app in the development mode.<br>
-Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
+### echarts
 
-### `npm run build`
+```js
+import useCharts from '@/hooks/useCharts';
+// 初始化
+let { chartData, setChartData, chartOptions } =
+  useCharts <
+  LineInf >
+  {
+    labels: [],
+    datasets: [],
+  };
+// 设置 echarts 的值
+setChartData({
+  labels: ['January', 'February', 'March', 'April', 'May'],
+  datasets: [
+    {
+      label: 'Sales',
+      data: [50, 60, 70, 80, 90],
+    },
+  ],
+});
 
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
+<Line data={chartData()} options={chartOptions} width={50} height={200} />;
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### table
 
-## Deployment
+```tsx
+// tableData 为值
+// setTableData 设置值
+// setPages 翻页
+// setPageSize 设置PageSize
+// requestData 请求
+// page 基本参数 pageSize total pageNum
+const { tableData, setTableData, setPages, setPageSize, requestData, page } =
+  useTable < getAdministratorListParams; // params 泛型,
+getAdministratorListResult > // 结果 泛型
+  (getAdministratorList,
+  {
+    searchKey: '',
+  });
 
-Learn more about deploying your application with the [documentations](https://vitejs.dev/guide/static-deploy.html)
+
+<Table columns={columns} data={tableData()} />
+<Pagination
+  current={page().pageNum}
+  pageSize={page().pageSize}
+  total={page().total}
+  onChange={(page: number) => {
+  setPages(page);
+  // console.log();
+  }}
+></Pagination>
+```

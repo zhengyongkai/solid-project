@@ -1,4 +1,4 @@
-import { ResponsePageSize, tableResponse } from '@/types/request';
+import type { tableResponse } from '@/types/request';
 import { AxiosResponse } from 'axios';
 import { createSignal, onMount } from 'solid-js';
 
