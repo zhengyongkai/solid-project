@@ -3,7 +3,6 @@ import { createEffect, createMemo, createSignal } from 'solid-js';
 
 export default function useParamsData() {
   const params = useParams();
-  console.log(params);
   const paramsMeno = createMemo(() => params);
   const [paramsSigals, setParamsSigals] = createSignal({});
 

@@ -24,7 +24,6 @@ export default function BreadcrumbLayout() {
         (res) => res.path === '/' + originalPath || res.path === originalPath
       );
       result.push(arr[0]);
-      console.log(arr[0]);
       if (arr[0]?.children) {
         pathList.shift();
         return routes(result, arr[0].children, pathList[0]);

@@ -1,5 +1,5 @@
 import { render } from 'solid-js/web';
-import { Router } from '@solidjs/router';
+import { Navigate, Route, Router } from '@solidjs/router';
 
 import './index.css';
 import { asyncRoutes } from '@/router/index';

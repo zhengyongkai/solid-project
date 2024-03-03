@@ -2,6 +2,7 @@
 
 import { lazy } from 'solid-js';
 import { routeInf } from '@/types';
+import { redirect } from '@solidjs/router';
 
 const Home = lazy(() => import('@/components/layout/BaseLayout'));
 
@@ -23,6 +24,7 @@ const asyncRoutes: routeInf[] = [
       title: '首页',
       icon: 'home',
     },
+
     children: [
       {
         path: 'home',

@@ -43,7 +43,11 @@
     padding: 10px;
     overflow: auto;
     transition: all 0.3s;
-    background-color: '#f2f3f7';
+    > div {
+      // padding: 16px;
+      background-color: #fff;
+      padding: 10px;
+    }
     &.fold {
       width: calc(100vw - $base-menu-min-width);
       left: $base-menu-min-width;
