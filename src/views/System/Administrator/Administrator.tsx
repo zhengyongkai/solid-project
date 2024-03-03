@@ -3,16 +3,20 @@ import type {
   getAdministratorListParams,
   getAdministratorListResult,
 } from '@/api/types/adminstrator';
+import Col from '@/components/row/Col';
+import Row from '@/components/row/Row';
 import useTable from '@/hooks/useTable';
-import { Button, Icon, Pagination, Table } from 'cui-solid';
+import { Input, Button, Icon, Pagination, Table } from 'cui-solid';
+import { createSignal } from 'solid-js';
 
 export default function Administrator() {
-  const { tableData, setPages, page } = useTable<
-    getAdministratorListParams,
-    getAdministratorListResult
-  >(getAdministratorList, {
+  const [params, setParams] = createSignal<getAdministratorListParams>({
     searchKey: '',
   });
+  const { tableData, setPages, page, requestData } = useTable<
+    getAdministratorListParams,
+    getAdministratorListResult
+  >(getAdministratorList, params());
 
   const columns = [
     { type: 'checkbox', width: '55px' },
@@ -25,20 +29,37 @@ export default function Administrator() {
 
   return (
     <>
-      <Button type="error" icon={<Icon name="trash"></Icon>}>
-        批量删除
-      </Button>
-
+      <Row gutter={20}>
+        <Col span={5}>
+          <Button type="error" icon={<Icon name="trash"></Icon>}>
+            批量删除
+          </Button>
+        </Col>
+        <Col span={5} offset={1}>
+          <Input
+            onChange={(e: string) => {
+              setParams({
+                searchKey: e,
+              });
+            }}
+          ></Input>
+        </Col>
+        <Col span={4}>
+          <Button onClick={() => requestData(params())}>批量删除</Button>
+        </Col>
+      </Row>
       <Table columns={columns} data={tableData()} />
-      <Pagination
-        current={page().pageNum}
-        pageSize={page().pageSize}
-        total={page().total}
-        onChange={(page: number) => {
-          setPages(page);
-          // console.log();
-        }}
-      />
+      <div class="pagination">
+        <Pagination
+          current={page().pageNum}
+          pageSize={page().pageSize}
+          total={page().total}
+          onChange={(page: number) => {
+            setPages(page);
+            // console.log();
+          }}
+        />
+      </div>
     </>
   );
 }

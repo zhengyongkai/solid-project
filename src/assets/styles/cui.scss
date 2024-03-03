@@ -29,3 +29,10 @@
     }
   }
 }
+
+.cm-pagination-num {
+  &.cm-pagination-item-active {
+    background-color: $base-bgcolor-primary;
+    color: $base-color-default;
+  }
+}

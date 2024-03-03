@@ -31,6 +31,7 @@ export default function useTable<U, T>(
         pageNum: 1,
       });
     }
+    setParameter(params as Exclude<U, Function>);
     const {
       data: { pageNum, pageSize, pages, total, list },
     } = await api({
@@ -38,7 +39,7 @@ export default function useTable<U, T>(
       ...params,
     });
     setTableData(list);
-    setParameter(params as Exclude<U, Function>);
+
     setPage({
       pageNum,
       pageSize,
@@ -75,5 +76,7 @@ export default function useTable<U, T>(
     setPageSize,
     requestData,
     page,
+    parameter,
+    setParameter,
   };
 }
