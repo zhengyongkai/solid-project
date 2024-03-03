@@ -13,6 +13,8 @@ export default function useTable<U, T>(
   api: (paramss: pageInf<U>) => Promise<AxiosResponse<tableResponse<T>>>,
   requestParams: U
 ) {
+  const [loading, setLoading] = createSignal(false);
+
   const [tableData, setTableData] = createSignal<T[]>([]);
 
   const [parameter, setParameter] = createSignal<U>(requestParams);
@@ -25,6 +27,7 @@ export default function useTable<U, T>(
   });
 
   async function requestData(params: U, reset: boolean = true) {
+    setLoading(true);
     if (reset) {
       setPage({
         ...page(),
@@ -46,6 +49,7 @@ export default function useTable<U, T>(
       pages,
       total,
     });
+    setLoading(false);
   }
 
   function setPageSize(pageSize: number) {
@@ -78,5 +82,6 @@ export default function useTable<U, T>(
     page,
     parameter,
     setParameter,
+    loading,
   };
 }

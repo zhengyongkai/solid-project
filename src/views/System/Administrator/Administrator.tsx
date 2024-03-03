@@ -13,7 +13,7 @@ export default function Administrator() {
   const [params, setParams] = createSignal<getAdministratorListParams>({
     searchKey: '',
   });
-  const { tableData, setPages, page, requestData } = useTable<
+  const { tableData, setPages, page, requestData, loading } = useTable<
     getAdministratorListParams,
     getAdministratorListResult
   >(getAdministratorList, params());
@@ -48,7 +48,7 @@ export default function Administrator() {
           <Button onClick={() => requestData(params())}>批量删除</Button>
         </Col>
       </Row>
-      <Table columns={columns} data={tableData()} />
+      <Table columns={columns} data={tableData()} loading={loading()} />
       <div class="pagination">
         <Pagination
           current={page().pageNum}
