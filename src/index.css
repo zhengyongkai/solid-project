@@ -2,11 +2,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-.table-handle-box {
-  padding: 10px;
-  /* margin-bottom: 10px; */
-}
-
 .pagination {
   margin-top: 16px;
   text-align: right;

@@ -5,6 +5,7 @@ import './index.css';
 import { asyncRoutes } from '@/router/index';
 import 'cui-solid/dist/styles/cui.css';
 import '@/assets/styles/cui.scss';
+import '@/assets/styles/index.scss';
 
 import 'virtual:svg-icons-register';
 
