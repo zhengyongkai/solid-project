@@ -1,11 +1,13 @@
-import { asyncRoutes } from '@/router/index';
-import { atom, useAtom } from 'solid-jotai';
+import { M_TOKEN } from "@/constants";
+import { asyncRoutes } from "@/router/index";
+import { getStorage } from "@/utils/storage";
+import { atom, useAtom } from "solid-jotai";
 
 const initData = {
   menuRoutes: useAtom(atom(asyncRoutes)),
   userInfo: useAtom(atom({})),
-  token: useAtom(atom('')),
-  avatar: useAtom(atom('')),
+  token: useAtom(atom(getStorage(M_TOKEN))),
+  avatar: useAtom(atom("")),
 };
 
 const userStoreState = function () {

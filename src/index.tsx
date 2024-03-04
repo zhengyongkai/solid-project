@@ -10,7 +10,7 @@ import 'virtual:svg-icons-register';
 
 import { I18nProvider } from 'solid-i18n';
 import i18n from './locale';
-import useCommonStore from './stores/common/Index';
+import useCommonStore from '@/stores/common/index';
 
 const [language] = useCommonStore().lang;
 

@@ -1,5 +1,5 @@
-export interface getAdministratorListParams {
-  searchKey: string;
+export interface getAccountListParams {
+  account: string;
 }
 
 export interface getAdministratorListResult {

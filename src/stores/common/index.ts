@@ -1,11 +1,11 @@
-import { M_LANG } from '@/constants';
-import { langInf } from '@/types';
-import { getStorage } from '@/utils/storage';
-import { atom, useAtom } from 'solid-jotai';
+import { M_LANG } from "@/constants";
+import { langInf } from "@/types";
+import { getStorage } from "@/utils/storage";
+import { atom, useAtom } from "solid-jotai";
 
 const initData = {
   fold: useAtom(atom(false)),
-  lang: useAtom<langInf>(atom(getStorage<langInf>(M_LANG) || 'zh-CN')),
+  lang: useAtom<langInf>(atom(getStorage<langInf>(M_LANG) || "zh-CN")),
 };
 
 const useCommonStore = function () {

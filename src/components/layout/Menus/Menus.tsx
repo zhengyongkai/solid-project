@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from "@solidjs/router";
 import { Menu, MenuItem, SubMenu } from "cui-solid";
 
-import useCommonStore from "@/stores/common/Index";
-import useUserStore from "@/stores/user/Index";
+import useCommonStore from "@/stores/common/index";
+import useUserStore from "@/stores/user/index";
 
 import { routeInf } from "@/types";
-import SvgIcon from "@/components/common/SvgIcon/Index";
+import SvgIcon from "@/components/common/SvgIcon/index";
 
 export default function Menus() {
   const location = useLocation();
@@ -30,10 +30,13 @@ export default function Menus() {
       if (item.children && item.children.length === 1 && item.path === "/") {
         let children = item.children ? item.children[0] : item;
         return (
-          <MenuItem icon={icon}>
-            <div onClick={() => to("/" + children.path)}>
-              {children.meta.title}
-            </div>
+          <MenuItem
+            icon={icon}
+            onSelect={() => {
+              console.log("d");
+            }}
+          >
+            {children.meta.title}
           </MenuItem>
         );
       }
@@ -55,6 +58,10 @@ export default function Menus() {
   return (
     <>
       <Menu
+        onSelect={(path: string) => {
+          console.log(path);
+          path && to(path);
+        }}
         dir="v"
         activeName={location.pathname}
         min={fold()}

@@ -1,8 +1,14 @@
 import request from '@/utils/request';
-import { getAdministratorListParams } from './types/adminstrator';
+import { getAccountListParams } from './types/adminstrator';
 
-export function getAdministratorList(params: getAdministratorListParams) {
-  return request.get('/mock/administrator.json', {
-    params,
-  });
+const API = {
+  ACCOUNTLIST_URL: 'account/list/',
+};
+
+const MOCK_API = {
+  ACCOUNTLIST_URL: '/mock/administrator.json',
+};
+
+export function getAdministratorList(data: getAccountListParams) {
+  return request.post(MOCK_API.ACCOUNTLIST_URL, data);
 }

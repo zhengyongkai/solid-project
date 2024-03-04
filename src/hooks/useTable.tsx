@@ -1,6 +1,6 @@
-import type { tableResponse } from '@/types/request';
-import { AxiosResponse } from 'axios';
-import { createSignal, onMount } from 'solid-js';
+import type { tableResponse } from "@/types/request";
+import { AxiosResponse } from "axios";
+import { Accessor, createSignal, onMount } from "solid-js";
 
 type pageInf<U> = U & {
   pageNum: number;
@@ -10,20 +10,22 @@ type pageInf<U> = U & {
 };
 
 export default function useTable<U, T>(
-  api: (paramss: pageInf<U>) => Promise<AxiosResponse<tableResponse<T>>>,
-  requestParams: U
+  api: (
+    params: Omit<pageInf<U>, "pages" | "total">
+  ) => Promise<AxiosResponse<tableResponse<T>>>,
+  requestParams: Accessor<U>
 ) {
   const [loading, setLoading] = createSignal(false);
 
   const [tableData, setTableData] = createSignal<T[]>([]);
 
-  const [parameter, setParameter] = createSignal<U>(requestParams);
+  const [parameter, setParameter] = createSignal<U>(requestParams());
 
   const [page, setPage] = createSignal({
     pageNum: 1,
     pageSize: 10,
-    total: 0,
-    pages: 0,
+    total: 10,
+    pages: 1,
   });
 
   async function requestData(params: U, reset: boolean = true) {
@@ -34,13 +36,17 @@ export default function useTable<U, T>(
         pageNum: 1,
       });
     }
+
     setParameter(params as Exclude<U, Function>);
+
     const {
       data: { pageNum, pageSize, pages, total, list },
     } = await api({
-      ...page(),
+      pageNum: page().pageNum,
+      pageSize: page().pageSize,
       ...params,
-    });
+    } as Omit<pageInf<U>, "pages" | "total">);
+
     setTableData(list);
 
     setPage({
@@ -65,12 +71,11 @@ export default function useTable<U, T>(
       ...page(),
       pageNum,
     });
-
     requestData(parameter(), false);
   }
 
   onMount(() => {
-    requestData(requestParams, true);
+    requestData(requestParams(), true);
   });
 
   return {
