@@ -1,8 +1,8 @@
-import type { tableResponse } from "@/types/request";
-import { AxiosResponse } from "axios";
-import { useForm } from "cui-solid";
+import type { tableResponse } from '@/types/request';
+import { AxiosResponse } from 'axios';
+import { useForm } from 'cui-solid';
 
-import { Accessor, createSignal, onMount } from "solid-js";
+import { createSignal, onMount } from 'solid-js';
 
 export function useSearchForm<T>(props: T) {
   const form = useForm({
