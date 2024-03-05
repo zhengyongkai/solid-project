@@ -1,14 +1,19 @@
-import type { tableResponse } from '@/types/request';
-import { AxiosResponse } from 'axios';
-import { useFormProps } from 'cui-solid/types/utils/useForm';
-import { Accessor, createSignal, onMount } from 'solid-js';
+import type { tableResponse } from "@/types/request";
+import { AxiosResponse } from "axios";
+import { useForm } from "cui-solid";
 
-type pageInf = useFormProps & {
-  pageNum: number;
-  pageSize: number;
-  pages: number;
-  total: number;
-};
+import { Accessor, createSignal, onMount } from "solid-js";
+
+export function useSearchForm<T>(props: T) {
+  const form = useForm({
+    data: {
+      pageNum: 1,
+      pageSize: 10,
+      ...props,
+    },
+  });
+  return [form];
+}
 
 export default function useTable<T>(
   api: () => Promise<AxiosResponse<tableResponse<T>>>
@@ -24,7 +29,7 @@ export default function useTable<T>(
     pages: 1,
   });
 
-  async function requestData(reset: boolean = true) {
+  async function requestData(reset: boolean = false) {
     setLoading(true);
     if (reset) {
       setPage({
@@ -48,31 +53,14 @@ export default function useTable<T>(
     setLoading(false);
   }
 
-  function setPageSize(pageSize: number) {
-    setPage({
-      ...page(),
-      pageSize,
-    });
-    requestData();
-  }
-
-  function setPages(pageNum: number) {
-    setPage({
-      ...page(),
-      pageNum,
-    });
-    requestData();
-  }
-
   onMount(() => {
-    requestData();
+    requestData(true);
   });
 
   return {
     tableData,
     setTableData,
-    setPages,
-    setPageSize,
+
     requestData,
     page,
     loading,

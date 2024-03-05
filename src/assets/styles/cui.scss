@@ -41,3 +41,16 @@
   white-space: nowrap;
   display: block;
 }
+
+.cm-button {
+  &.cm-button-text {
+    padding: 0 4px;
+  }
+
+  &.cui-text-button-danger {
+    color: #f56c6c;
+  }
+  &.cui-text-button-primary {
+    color: #1890ff;
+  }
+}

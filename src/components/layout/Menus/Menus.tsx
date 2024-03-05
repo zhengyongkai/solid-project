@@ -20,6 +20,8 @@ export default function Menus() {
     navigate(item);
   }
 
+  console.log(location.pathname);
+
   function renderMenu(menus: routeInf[], path: string = ""): any {
     return menus.map((item) => {
       // 設置Icon
@@ -29,16 +31,7 @@ export default function Menus() {
       }
       if (item.children && item.children.length === 1 && item.path === "/") {
         let children = item.children ? item.children[0] : item;
-        return (
-          <MenuItem
-            icon={icon}
-            onSelect={() => {
-              console.log("d");
-            }}
-          >
-            {children.meta.title}
-          </MenuItem>
-        );
+        return <MenuItem icon={icon}>{children.meta.title}</MenuItem>;
       }
       if (item.children) {
         return (
@@ -48,7 +41,7 @@ export default function Menus() {
         );
       }
       return (
-        <MenuItem name={path + item.path} icon={icon}>
+        <MenuItem name={"/" + path + item.path} icon={icon}>
           <div onClick={() => to(path + item.path)}>{item.meta.title}</div>
         </MenuItem>
       );
@@ -59,7 +52,6 @@ export default function Menus() {
     <>
       <Menu
         onSelect={(path: string) => {
-          console.log(path);
           path && to(path);
         }}
         dir="v"

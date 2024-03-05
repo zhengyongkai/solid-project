@@ -11,7 +11,7 @@ interface BaseLayoutInf {
   children: Element;
 }
 
-export default function BaseLayout(props: BaseLayoutInf) {
+export default function BaseLayout(props: any) {
   const [fold] = useCommonStore().fold;
   return (
     <>

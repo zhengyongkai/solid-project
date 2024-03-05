@@ -14,51 +14,51 @@ export default function BreadcrumbLayout() {
   const pathname = createMemo(() => location.pathname);
 
   createEffect(() => {
-    let pathList = pathname().split("/");
+    let pathList = pathname().split("/").splice(1);
+
     function routes(
       result: routeInf[],
       originalRoutes: routeInf[],
       originalPath: string
     ) {
-      let arr = originalRoutes.filter(
-        (res) => res.path === "/" + originalPath || res.path === originalPath
-      );
+      let arr = originalRoutes.filter((res) => {
+        return res.path === originalPath || res.path === "/" + originalPath;
+      });
       result.push(arr[0]);
       if (arr[0]?.children) {
         pathList.shift();
         return routes(result, arr[0].children, pathList[0]);
       }
-      result.shift();
+      pathList.shift();
       return result;
     }
-    setPath(routes([], asyncRoutes, ""));
-  });
-
-  const isFold = createMemo(() => {
-    let icon = fold() ? "fold" : "expand";
-    return (
-      <span style={{ "margin-right": "10px" }}>
-        <SvgIcon name={icon} onClick={() => setFold(!fold())}></SvgIcon>
-      </span>
-    );
+    setPath(routes([], asyncRoutes, pathList[0]));
   });
 
   return (
     <>
-      {isFold()}
+      <span style={{ "margin-right": "10px" }}>
+        <SvgIcon
+          name={fold() ? "fold" : "expand"}
+          onClick={() => setFold(!fold())}
+        ></SvgIcon>
+      </span>
+
       <Breadcrumb>
         <For each={path()}>
           {(item) => {
-            if (item.meta.icon) {
-              return (
-                <Breadcrumb.Item
-                  icon={<SvgIcon name={item.meta.icon}></SvgIcon>}
-                >
-                  {item.meta.title}
-                </Breadcrumb.Item>
-              );
+            if (item) {
+              if (item.meta.icon) {
+                return (
+                  <Breadcrumb.Item
+                    icon={<SvgIcon name={item.meta.icon}></SvgIcon>}
+                  >
+                    {item.meta.title}
+                  </Breadcrumb.Item>
+                );
+              }
+              return <Breadcrumb.Item>{item.meta.title}</Breadcrumb.Item>;
             }
-            return <Breadcrumb.Item>{item.meta.title}</Breadcrumb.Item>;
           }}
         </For>
       </Breadcrumb>

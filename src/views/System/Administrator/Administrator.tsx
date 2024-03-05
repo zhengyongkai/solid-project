@@ -1,12 +1,12 @@
-import { getAdministratorList } from '@/api/administrator';
+import { getAdministratorList } from "@/api/administrator";
 import type {
   getAccountListParams,
   getAdministratorListResult,
-} from '@/api/types/adminstrator';
-import Col from '@/components/row/Col';
-import Row from '@/components/row/Row';
-import TableTooltip from '@/components/table/Tooltip';
-import useTable from '@/hooks/useTable';
+} from "@/api/types/adminstrator";
+import Col from "@/components/row/Col";
+import Row from "@/components/row/Row";
+import TableTooltip from "@/components/table/Tooltip";
+import useTable, { useSearchForm } from "@/hooks/useTable";
 import {
   Input,
   Button,
@@ -17,17 +17,15 @@ import {
   useForm,
   Form,
   FormItem,
-} from 'cui-solid';
-import { createSignal } from 'solid-js';
+} from "cui-solid";
+import { createSignal } from "solid-js";
 
 export default function Administrator() {
-  const form = useForm({
-    data: {
-      account: '',
-    },
+  const [form] = useSearchForm({
+    account: "",
   });
 
-  const { tableData, setPages, page, requestData, loading, setPageSize } =
+  const { tableData, page, requestData, loading } =
     useTable<getAdministratorListResult>(() =>
       getAdministratorList({
         ...form.getFormData(),
@@ -35,26 +33,66 @@ export default function Administrator() {
     );
 
   const columns = [
-    { type: 'checkbox', width: '55px' },
+    { type: "checkbox", width: "55px" },
     {
-      type: 'account',
-      title: '账号',
-      width: '120px',
+      type: "account",
+      title: "账号",
       render: (_c: any, _v: any, d: getAdministratorListResult) => {
         return d.account;
       },
     },
     {
-      name: 'deparmentName',
-      title: '使用单位',
-      width: '150px',
+      name: "deparmentName",
+      title: "使用单位",
       render: (_c: any, _v: any, d: getAdministratorListResult) => {
         return d.deparmentName;
       },
     },
-    { name: 'x', title: 'X', width: '300px' },
-    { name: 'y', title: 'Y', width: '300px' },
-    { name: 'date', title: '日期', width: '200px' },
+    { name: "bgName", title: "事业群" },
+    { name: "buName", title: "事业处" },
+    { name: "empno", title: "負責人工號" },
+    { name: "name", title: "負責人姓名" },
+    { name: "phone", title: "負責人電話" },
+    { name: "email", title: "負責人郵箱" },
+    {
+      name: "isvalid",
+      title: "是否有效",
+      render: (_c: any, _v: any, d: getAdministratorListResult) => {
+        return d.isvalid ? "有效" : "无效";
+      },
+    },
+    { name: "roleName", title: "負責人郵箱" },
+    {
+      title: "操作",
+      width: "250px",
+      render: (_c: any, _v: any, d: getAdministratorListResult) => {
+        return (
+          <div>
+            <Button
+              type="text"
+              class="cui-text-button-primary"
+              icon={<Icon name="edit"></Icon>}
+            >
+              编辑
+            </Button>
+            <Button
+              type="text"
+              class="cui-text-button-danger"
+              icon={<Icon name="delete"></Icon>}
+            >
+              删除
+            </Button>
+            <Button
+              type="text"
+              class="cui-text-button-danger"
+              icon={<Icon name="stop-circle"></Icon>}
+            >
+              禁用
+            </Button>
+          </div>
+        );
+      },
+    },
   ];
 
   const [visible2, setVisible2] = createSignal(false);
@@ -67,11 +105,13 @@ export default function Administrator() {
             console.log(name, v);
             console.log(form.getFormData());
           }}
+          labelWidth={0}
         >
           <Row gutter={24}>
             <Col span={4}>
-              <FormItem name="account" label="用户名：">
+              <FormItem name="account">
                 <Input
+                  placeholder="请输入用户名"
                   onChange={(e: string) => {
                     form.account = e;
                   }}
@@ -100,7 +140,7 @@ export default function Administrator() {
               <Button
                 onClick={() => {
                   form.setFormData({
-                    account: '',
+                    account: "",
                   });
                   requestData();
                 }}
@@ -131,10 +171,12 @@ export default function Administrator() {
           pageSize={page().pageSize}
           total={page().total}
           onChange={(page: number) => {
-            setPages(page);
+            form.pageNum = page;
+            requestData();
           }}
           onChangePageSize={(pageSize: number) => {
-            setPageSize(pageSize);
+            form.pageSize = pageSize;
+            requestData();
           }}
         />
       </div>
