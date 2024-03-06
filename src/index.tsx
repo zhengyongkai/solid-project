@@ -17,14 +17,15 @@ import { lazy } from "solid-js";
 
 const Home = lazy(() => import("@/components/layout/BaseLayout"));
 
-const [language] = useCommonStore().lang;
+const {
+  lang: [language],
+} = useCommonStore().data;
 
 const lang = i18n.getInstance(language());
 
 const renderRouter = (route: routeInf[]) => {
   return route.map((i) => {
     if (i.children?.length) {
-      console.log(i.children);
       return (
         <Route path={i.path} component={i.component}>
           {renderRouter(i.children)}

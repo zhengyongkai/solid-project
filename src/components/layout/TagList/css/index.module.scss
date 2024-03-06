@@ -1,0 +1,9 @@
+.layout_tagList {
+  padding: 4px 10px;
+  background-color: $base-bgcolor-default;
+  height: $base-tagList-height;
+
+  span + span {
+    margin-left: 10px;
+  }
+}

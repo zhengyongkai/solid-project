@@ -1,18 +1,26 @@
-import { Dropdown, DropdownItem, DropdownMenu } from 'cui-solid';
-import Styles from './css/header.module.scss';
+import { Dropdown, DropdownItem, DropdownMenu } from "cui-solid";
+import Styles from "./css/header.module.scss";
 
-import Logo from '@/assets/img/web-logo.png';
-import Setting from '../Setting/Setting';
-import Lang from '@/components/common/Lang/Lang';
-import locale from '@/locale';
+import Setting from "../Setting/Setting";
+import Lang from "@/components/common/Lang/Lang";
+import locale from "@/locale";
+import BreadcrumbLayout from "../Breadcrumb/Breadcrumb";
+import useCommonStore from "@/stores/common/index";
 
 export default function Header() {
+  const {
+    fold: [fold],
+  } = useCommonStore().data;
+
   return (
-    <div class={Styles['layout_header']}>
-      <div class={Styles['logo']}>
-        <img src={Logo} />
+    <div class={Styles["layout_header"]}>
+      <div
+        class={Styles["layout_tabbar"]}
+        classList={{ [Styles["fold"]]: fold() }}
+      >
+        <BreadcrumbLayout></BreadcrumbLayout>
       </div>
-      <div>{locale.t('title')}</div>
+
       <div>
         <Lang></Lang>
       </div>

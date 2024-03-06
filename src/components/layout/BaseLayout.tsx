@@ -1,34 +1,44 @@
-import Header from "./Header/Header";
+import Header from "./header/Header";
 import Menus from "./Menus/Menus";
 
 import Styles from "./css/index.module.scss";
 import { comBineCss } from "@/utils/css";
 import BreadcrumbLayout from "./Breadcrumb/Breadcrumb";
 import useCommonStore from "@/stores/common/index";
-import { Suspense } from "solid-js";
+import { Show, Suspense } from "solid-js";
+import locale from "@/locale";
+import Logo from "@/assets/img/web-logo.png";
+import TagList from "./TagList/TagList";
 
 interface BaseLayoutInf {
   children: Element;
 }
 
 export default function BaseLayout(props: any) {
-  const [fold] = useCommonStore().fold;
+  const {
+    fold: [fold],
+  } = useCommonStore().data;
   return (
     <>
-      <Header></Header>
       <div class={comBineCss([Styles["layout_container"], "flex"])}>
         <div
           class={Styles["layout_slider"]}
           classList={{ [Styles["fold"]]: fold() }}
         >
+          <div>
+            <div class={Styles["logo"]}>
+              <img src={Logo} />
+            </div>
+            <Show when={!fold()}>
+              <div>{locale.t("title")}</div>
+            </Show>
+          </div>
           <Menus></Menus>
         </div>
         <div class={"flex-1"}>
-          <div
-            class={Styles["layout_tabbar"]}
-            classList={{ [Styles["fold"]]: fold() }}
-          >
-            <BreadcrumbLayout></BreadcrumbLayout>
+          <Header></Header>
+          <div>
+            <TagList></TagList>
           </div>
           <div
             class={Styles["layout_content"]}

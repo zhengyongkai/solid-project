@@ -23,6 +23,7 @@ const asyncRoutes: routeInf[] = [
     meta: {
       title: "主頁",
       icon: "home",
+      path: "home",
     },
   },
   {
@@ -36,6 +37,7 @@ const asyncRoutes: routeInf[] = [
         meta: {
           login: true,
           title: "管理员列表",
+          path: "system/administrator",
         },
       },
       {
@@ -44,6 +46,7 @@ const asyncRoutes: routeInf[] = [
         meta: {
           login: true,
           title: "人员管理",
+          path: "system/role",
         },
       },
     ],
@@ -62,6 +65,7 @@ const asyncRoutes: routeInf[] = [
         meta: {
           login: true,
           title: "設備列表",
+          path: "equipment/list",
         },
       },
 
@@ -71,6 +75,36 @@ const asyncRoutes: routeInf[] = [
         meta: {
           login: true,
           title: "區域配置",
+          path: "equipment/region",
+        },
+      },
+    ],
+    meta: {
+      login: true,
+      title: "設備管理",
+      icon: "setting",
+    },
+  },
+  {
+    path: "equipment1",
+    children: [
+      {
+        path: "/list",
+        component: lazy(() => import("@/views/Equipment/list/List")),
+        meta: {
+          login: true,
+          title: "設備列表",
+          path: "equipment1/list",
+        },
+      },
+
+      {
+        path: "/region",
+        component: lazy(() => import("@/views/Equipment/region/Region")),
+        meta: {
+          login: true,
+          title: "區域配置",
+          path: "equipment1/region",
         },
       },
     ],

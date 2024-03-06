@@ -1,57 +1,50 @@
 .layout_container {
   display: flex;
   width: 100%;
-  height: calc(100vh - $base-header-height);
+  // height: calc(100vh - $base-header-height);
   background-color: #f2f3f7;
 
   .layout_slider {
     color: white;
     width: $base-menu-width;
-    height: calc(100vh - 70px);
+    height: 100vh;
     background: $base-color-primary;
-    transition: all 0.3s;
+    transition: all 0.2s;
     &.fold {
       width: $base-menu-min-width;
       left: $base-menu-min-width;
     }
-  }
-
-  .layout_tabbar {
-    position: fixed;
-    width: calc(100% - $base-menu-width);
-    height: $base-tabbar-height;
-    top: $base-header-height;
-    left: $base-menu-width;
-    transition: all 0.3s;
-    background-color: #fff;
-    box-shadow: 0 5px 10px #ddd;
-    padding-left: 16px;
-    display: flex;
-    align-items: center;
-    &.fold {
-      width: calc(100vw - $base-menu-min-width);
-      left: $base-menu-min-width;
+    .logo {
+      width: 36px;
+      display: flex;
+      align-items: center;
+    }
+    > div {
+      height: $base-header-height;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
   .layout_content {
-    position: absolute;
-    width: calc(100% - $base-menu-width);
-    height: calc(100vh - $base-header-height - $base-tabbar-height);
-    left: $base-menu-width;
-    top: $base-header-height + $base-tabbar-height;
-    padding: 10px;
-    overflow: auto;
+    height: calc(100vh - $base-header-height - 20px - $base-tagList-height);
+    overflow: hidden;
+    overflow-y: auto;
+    margin: 10px;
+
     transition: all 0.3s;
     > div {
-      // padding: 16px;
+      // padding: 0 4px;
       background-color: #fff;
-      padding: 0 10px;
-      padding-bottom: 10px;
+      padding: 10px;
+
+      // padding-bottom: 10px;
     }
     &.fold {
-      width: calc(100vw - $base-menu-min-width);
+      // width: calc(100vw - $base-menu-min-width);
       left: $base-menu-min-width;
+      height: 100%;
     }
   }
 }

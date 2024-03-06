@@ -1,18 +1,33 @@
 import { M_LANG } from "@/constants";
-import { langInf } from "@/types";
+import { langInf, routeInf, simpleRouteInf } from "@/types";
 import { getStorage } from "@/utils/storage";
 import { atom, useAtom } from "solid-jotai";
 
 const initData = {
   fold: useAtom(atom(false)),
   lang: useAtom<langInf>(atom(getStorage<langInf>(M_LANG) || "zh-CN")),
+  tagList: useAtom(atom<simpleRouteInf[]>([])),
 };
 
 const useCommonStore = function () {
   return {
-    ...initData,
-    setSomething(payload: boolean) {
-      return initData.fold[1](payload);
+    data: {
+      ...initData,
+    },
+    action: {
+      setTagList(payload: simpleRouteInf) {
+        let [tagList, setTagList] = initData.tagList;
+        if (tagList().filter((item) => item.path === payload.path).length) {
+          return tagList;
+        } else {
+          setTagList([...tagList(), payload]);
+          return tagList;
+        }
+      },
+      delTagList(payload: string) {
+        let [tagList, setTagList] = initData.tagList;
+        setTagList(tagList().filter((item) => item.path !== payload));
+      },
     },
   };
 };

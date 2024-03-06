@@ -1,12 +1,12 @@
-import { getAdministratorList } from '@/api/administrator';
+import { getAdministratorList } from "@/api/administrator";
 import type {
   getAccountListParams,
   getAdministratorListResult,
-} from '@/api/types/adminstrator';
-import Col from '@/components/row/Col';
-import Row from '@/components/row/Row';
-import TableTooltip from '@/components/table/Tooltip';
-import useTable, { useSearchForm } from '@/hooks/useTable';
+} from "@/api/types/adminstrator";
+import Col from "@/components/row/Col";
+import Row from "@/components/row/Row";
+import TableTooltip from "@/components/table/Tooltip";
+import useTable, { useSearchForm } from "@/hooks/useTable";
 import {
   Input,
   Button,
@@ -17,12 +17,12 @@ import {
   useForm,
   Form,
   FormItem,
-} from 'cui-solid';
-import { createSignal } from 'solid-js';
+} from "cui-solid";
+import { createSignal } from "solid-js";
 
 export default function Administrator() {
   const [form] = useSearchForm({
-    account: '',
+    account: "",
   });
 
   const { tableData, page, requestData, loading } =
@@ -33,38 +33,38 @@ export default function Administrator() {
     );
 
   const columns = [
-    { type: 'checkbox', width: '55px' },
+    { type: "checkbox", width: "55px" },
     {
-      type: 'account',
-      title: '账号',
+      type: "account",
+      title: "账号",
       render: (_c: any, _v: any, d: getAdministratorListResult) => {
         return d.account;
       },
     },
     {
-      name: 'deparmentName',
-      title: '使用单位',
+      name: "deparmentName",
+      title: "使用单位",
       render: (_c: any, _v: any, d: getAdministratorListResult) => {
         return d.deparmentName;
       },
     },
-    { name: 'bgName', title: '事业群' },
-    { name: 'buName', title: '事业处' },
-    { name: 'empno', title: '負責人工號' },
-    { name: 'name', title: '負責人姓名' },
-    { name: 'phone', title: '負責人電話' },
-    { name: 'email', title: '負責人郵箱' },
+    { name: "bgName", title: "事业群" },
+    { name: "buName", title: "事业处" },
+    { name: "empno", title: "負責人工號" },
+    { name: "name", title: "負責人姓名" },
+    { name: "phone", title: "負責人電話" },
+    { name: "email", title: "負責人郵箱" },
     {
-      name: 'isvalid',
-      title: '是否有效',
+      name: "isvalid",
+      title: "是否有效",
       render: (_c: any, _v: any, d: getAdministratorListResult) => {
-        return d.isvalid ? '有效' : '无效';
+        return d.isvalid ? "有效" : "无效";
       },
     },
-    { name: 'roleName', title: '負責人郵箱' },
+    { name: "roleName", title: "負責人郵箱" },
     {
-      title: '操作',
-      width: '250px',
+      title: "操作",
+      width: "250px",
       render: (_c: any, _v: any, d: getAdministratorListResult) => {
         return (
           <div>
@@ -141,7 +141,7 @@ export default function Administrator() {
                 onClick={() => {
                   form.setFormData({
                     ...form,
-                    account: '',
+                    account: "",
                   });
                   requestData();
                 }}

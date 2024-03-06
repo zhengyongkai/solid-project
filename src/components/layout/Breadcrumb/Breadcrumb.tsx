@@ -1,20 +1,23 @@
-import SvgIcon from '@/components/common/SvgIcon/index';
-import useCommonStore from '@/stores/common/index';
-import { useLocation } from '@solidjs/router';
-import { Breadcrumb } from 'cui-solid';
-import { For, createEffect, createMemo, createSignal } from 'solid-js';
-import { asyncRoutes } from '@/router';
-import { routeInf } from '@/types';
+import SvgIcon from "@/components/common/SvgIcon/index";
+import useCommonStore from "@/stores/common/index";
+import { useLocation } from "@solidjs/router";
+import { Breadcrumb } from "cui-solid";
+import { For, createEffect, createMemo, createSignal } from "solid-js";
+import { asyncRoutes } from "@/router";
+import { routeInf } from "@/types";
 
 export default function BreadcrumbLayout() {
   const location = useLocation();
 
-  const [fold, setFold] = useCommonStore().fold;
+  const {
+    fold: [fold, setFold],
+  } = useCommonStore().data;
+
   const [path, setPath] = createSignal<routeInf[]>([]);
   const pathname = createMemo(() => location.pathname);
 
   createEffect(() => {
-    let pathList = pathname().split('/').splice(1);
+    let pathList = pathname().split("/").splice(1);
 
     function routes(
       result: routeInf[],
@@ -22,7 +25,7 @@ export default function BreadcrumbLayout() {
       originalPath: string
     ) {
       let arr = originalRoutes.filter((res) => {
-        return res.path === originalPath || res.path === '/' + originalPath;
+        return res.path === originalPath || res.path === "/" + originalPath;
       });
       result.push(arr[0]);
       if (arr[0]?.children) {
@@ -32,16 +35,22 @@ export default function BreadcrumbLayout() {
       pathList.shift();
       return result;
     }
+
     setPath(routes([], asyncRoutes, pathList[0]));
   });
 
+  const foldIcon = () => {
+    if (fold()) {
+      return <SvgIcon name="fold"></SvgIcon>;
+    } else {
+      return <SvgIcon name="expand"></SvgIcon>;
+    }
+  };
+
   return (
     <>
-      <span style={{ 'margin-right': '10px' }}>
-        <SvgIcon
-          name={fold() ? 'fold' : 'expand'}
-          onClick={() => setFold(!fold())}
-        ></SvgIcon>
+      <span style={{ "margin-right": "10px" }} onClick={() => setFold(!fold())}>
+        {foldIcon()}
       </span>
 
       {path().length ? (

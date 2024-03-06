@@ -6,60 +6,78 @@ import useUserStore from "@/stores/user/index";
 
 import { routeInf } from "@/types";
 import SvgIcon from "@/components/common/SvgIcon/index";
+import { getMenuItemInMenuListByPath } from "@/utils";
+import { createEffect, createMemo, createSignal, on, onMount } from "solid-js";
 
 export default function Menus() {
   const location = useLocation();
   const navigate = useNavigate();
 
   // 拿到第一层的层级
-  const [menuRoutes] = useUserStore().menuRoutes;
-  const [fold] = useCommonStore().fold;
+
+  const { setTagList } = useCommonStore().action;
+  const {
+    menuRoutes: [menuRoutes],
+  } = useUserStore().data;
+  const {
+    fold: [fold],
+  } = useCommonStore().data;
   const baseRoute = menuRoutes();
 
-  function to(item: string) {
+  function onSelectMenu(item: string = "home") {
     navigate(item);
+
+    let menuItem = getMenuItemInMenuListByPath(menuRoutes(), item);
+    setTagList(menuItem!);
   }
 
-  console.log(location.pathname);
-
-  function renderMenu(menus: routeInf[], path: string = ""): any {
-    return menus.map((item) => {
+  function renderMenu(menus: routeInf[]): any {
+    return [...menus].map((item) => {
       // 設置Icon
       let icon = item.meta.icon ? <SvgIcon name={item.meta.icon} /> : <></>;
-      if (item.path === "/") {
-        return <>{renderMenu(item.children as routeInf[], "/")}</>;
-      }
-      if (item.children && item.children.length === 1 && item.path === "/") {
-        let children = item.children ? item.children[0] : item;
-        return <MenuItem icon={icon}>{children.meta.title}</MenuItem>;
-      }
       if (item.children) {
         return (
           <SubMenu name={item.path} icon={icon} title={item.meta.title}>
-            {renderMenu(item.children, path + item.path)}
+            {renderMenu(item.children)}
           </SubMenu>
         );
       }
+      console.log("/" + item.meta.path);
       return (
-        <MenuItem name={"/" + path + item.path} icon={icon}>
-          <div onClick={() => to(path + item.path)}>{item.meta.title}</div>
+        <MenuItem name={"/" + item.meta.path} icon={icon}>
+          {item.meta.title}
         </MenuItem>
       );
     });
   }
 
+  const pathname = createMemo(() => location.pathname);
+
+  const [activeName, setActiveName] = createSignal(pathname());
+
+  createEffect(
+    on(pathname, () => {
+      setActiveName(pathname());
+    })
+  );
+
+  onMount(() => {
+    setTagList({ path: "home", title: "主頁" });
+    // onSelectMenu("/home");
+    onSelectMenu(location.pathname);
+  });
+
   return (
     <>
       <Menu
         onSelect={(path: string) => {
-          path && to(path);
+          path && onSelectMenu(path);
         }}
         dir="v"
-        activeName={location.pathname}
+        activeName={[activeName, setActiveName]}
         min={fold()}
-        accordion={true}
       >
-        {renderMenu(baseRoute, "")}
+        {renderMenu(baseRoute)}
       </Menu>
     </>
   );

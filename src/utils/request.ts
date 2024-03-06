@@ -1,6 +1,6 @@
-import userStoreState from '@/stores/user';
-import axios from 'axios';
-import { message } from 'cui-solid';
+import userStoreState from "@/stores/user";
+import axios from "axios";
+import { message } from "cui-solid";
 
 const request = axios.create({
   //基础路径
@@ -10,12 +10,14 @@ const request = axios.create({
   timeout: 15000,
 });
 
-const [token] = userStoreState().token;
+const {
+  token: [token],
+} = userStoreState().data;
 
 request.interceptors.request.use((config) => {
-  config.headers['Content-Type'] = 'application/json';
+  config.headers["Content-Type"] = "application/json";
   if (token()) {
-    config.headers['Authorization'] = token();
+    config.headers["Authorization"] = token();
   }
   return config;
 });
@@ -30,7 +32,7 @@ request.interceptors.response.use(
     return response.data;
   },
   (reject) => {
-    message.error('网络错误，请联系管理员');
+    message.error("网络错误，请联系管理员");
     return Promise.reject(reject);
   }
 );
