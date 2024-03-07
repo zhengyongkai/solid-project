@@ -16,22 +16,9 @@ export default function TagList() {
   } = useCommonStore().data;
   const { delTagList } = useCommonStore().action;
 
-  const onCloseTag = (e: MouseEvent, item: simpleRouteInf) => {
-    e.stopPropagation();
-    const list = tagList();
-    if (list.length && list[list.length - 1].title === item.title) {
-      navigate(list[list.length - 2].path);
-    }
-    delTagList(item.path!);
-  };
-
-  const onChooseTag = (path: string) => {
-    navigate(path);
-  };
-
   const activeTag = createMemo(() => location.pathname);
 
-  const tagLists = () => {
+  const getTagLists = () => {
     return tagList().map((item) => {
       return (
         <span onClick={() => onChooseTag(item.path)}>
@@ -47,9 +34,22 @@ export default function TagList() {
     });
   };
 
+  const onCloseTag = (e: MouseEvent, item: simpleRouteInf) => {
+    e.stopPropagation();
+    const list = tagList();
+    if (list.length && list[list.length - 1].title === item.title) {
+      navigate(list[list.length - 2].path);
+    }
+    delTagList(item.path!);
+  };
+
+  const onChooseTag = (path: string) => {
+    navigate(path);
+  };
+
   return (
     <div class={Styles["layout_tagList"]}>
-      <Scrollbars>{tagLists()}</Scrollbars>
+      <Scrollbars>{getTagLists()}</Scrollbars>
     </div>
   );
 }

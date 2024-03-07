@@ -1,8 +1,23 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 .pagination {
   margin-top: 16px;
   text-align: right;
+}
+
+.slide-fade-enter-active,
+.slide-fade-exit-active {
+  transition:
+    opacity 1s,
+    transform 1s;
+}
+.slide-fade-enter,
+.slide-fade-exit-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+.slide-fade-enter {
+  transform: translateX(-10px);
 }

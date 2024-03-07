@@ -1,0 +1,21 @@
+.login-wrapper {
+  background-image: url("../../../assets/img/login.png");
+  background-size: 100% 100%;
+  //   width: 100vh;
+  height: 100vh;
+  .login-content {
+    background-color: $base-bgcolor-default;
+    position: absolute;
+    right: 200px;
+    top: 160px;
+    width: 360px;
+    // height: 400px;
+    border-radius: 8px;
+    padding: 16px;
+    h1 {
+      font-size: 18px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+  }
+}

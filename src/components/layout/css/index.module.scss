@@ -13,6 +13,10 @@
     &.fold {
       width: $base-menu-min-width;
       left: $base-menu-min-width;
+      > div {
+        justify-content: center;
+        padding: 0;
+      }
     }
     .logo {
       width: 36px;
@@ -20,10 +24,11 @@
       align-items: center;
     }
     > div {
+      padding-left: 16px;
       height: $base-header-height;
       display: flex;
       align-items: center;
-      justify-content: center;
+      // justify-content: center;
     }
   }
 
@@ -36,8 +41,9 @@
     transition: all 0.3s;
     > div {
       // padding: 0 4px;
-      background-color: #fff;
+      // background-color: #fff;
       padding: 10px;
+      border-radius: 4px;
 
       // padding-bottom: 10px;
     }

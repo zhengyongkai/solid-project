@@ -1,5 +1,5 @@
-import { createSignal, onMount } from 'solid-js';
-import { Chart, Title, Tooltip, Legend, Colors } from 'chart.js';
+import { createSignal, onMount } from "solid-js";
+import { Chart, Title, Tooltip, Legend, Colors } from "chart.js";
 
 export default function useCharts<T>(params: T) {
   onMount(() => {
@@ -9,7 +9,7 @@ export default function useCharts<T>(params: T) {
 
   const chartOptions = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
   };
 
   return { chartData, setChartData, chartOptions };

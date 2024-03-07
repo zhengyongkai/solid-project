@@ -1,5 +1,4 @@
-const zhLang = {
-  title: '人臉考勤門禁總管理平台',
+import system from "./tw/system";
+export default {
+  ...system,
 };
-
-export default zhLang;

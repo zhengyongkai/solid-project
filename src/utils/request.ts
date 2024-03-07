@@ -17,7 +17,7 @@ const {
 request.interceptors.request.use((config) => {
   config.headers["Content-Type"] = "application/json";
   if (token()) {
-    config.headers["Authorization"] = token();
+    config.headers["Authorization"] = token() as string;
   }
   return config;
 });
@@ -26,7 +26,10 @@ request.interceptors.response.use(
   (response) => {
     let { data } = response;
     if (data.status !== 200) {
-      message.error(data.message);
+      let { clearUserInfo } = userStoreState().action;
+      clearUserInfo();
+      location.href = "/login";
+      message.error("登录状态已经过期");
       return Promise.reject(response.data);
     }
     return response.data;

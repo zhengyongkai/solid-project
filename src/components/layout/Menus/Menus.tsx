@@ -26,7 +26,6 @@ export default function Menus() {
 
   function onSelectMenu(item: string = "home") {
     navigate(item);
-
     let menuItem = getMenuItemInMenuListByPath(menuRoutes(), item);
     setTagList(menuItem!);
   }
@@ -42,7 +41,6 @@ export default function Menus() {
           </SubMenu>
         );
       }
-      console.log("/" + item.meta.path);
       return (
         <MenuItem name={"/" + item.meta.path} icon={icon}>
           {item.meta.title}

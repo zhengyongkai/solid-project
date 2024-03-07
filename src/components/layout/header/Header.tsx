@@ -1,11 +1,12 @@
-import { Dropdown, DropdownItem, DropdownMenu } from "cui-solid";
+import { Avatar, Dropdown, DropdownItem, DropdownMenu } from "cui-solid";
 import Styles from "./css/header.module.scss";
 
 import Setting from "../Setting/Setting";
 import Lang from "@/components/common/Lang/Lang";
-import locale from "@/locale";
 import BreadcrumbLayout from "../Breadcrumb/Breadcrumb";
 import useCommonStore from "@/stores/common/index";
+
+import AvatarImg from "@/assets/img/avatar.png";
 
 export default function Header() {
   const {
@@ -41,7 +42,9 @@ export default function Header() {
             console.log(name);
           }}
         >
-          <div>鄭永楷</div>
+          <div>
+            <Avatar src={AvatarImg}></Avatar>
+          </div>
         </Dropdown>
       </div>
     </div>

@@ -1,18 +1,13 @@
-import Header from "./header/Header";
+import Header from "./Header/Header";
 import Menus from "./Menus/Menus";
 
 import Styles from "./css/index.module.scss";
 import { comBineCss } from "@/utils/css";
-import BreadcrumbLayout from "./Breadcrumb/Breadcrumb";
 import useCommonStore from "@/stores/common/index";
 import { Show, Suspense } from "solid-js";
 import locale from "@/locale";
 import Logo from "@/assets/img/web-logo.png";
 import TagList from "./TagList/TagList";
-
-interface BaseLayoutInf {
-  children: Element;
-}
 
 export default function BaseLayout(props: any) {
   const {
@@ -45,7 +40,7 @@ export default function BaseLayout(props: any) {
             classList={{ [Styles["fold"]]: fold() }}
           >
             <Suspense fallback={<div>Loading...</div>}>
-              <div>{props.children}</div>
+              {props.children}
             </Suspense>
           </div>
         </div>

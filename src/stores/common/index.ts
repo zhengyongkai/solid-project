@@ -1,5 +1,5 @@
 import { M_LANG } from "@/constants";
-import { langInf, routeInf, simpleRouteInf } from "@/types";
+import { langInf, simpleRouteInf } from "@/types";
 import { getStorage } from "@/utils/storage";
 import { atom, useAtom } from "solid-jotai";
 
@@ -16,12 +16,15 @@ const useCommonStore = function () {
     },
     action: {
       setTagList(payload: simpleRouteInf) {
-        let [tagList, setTagList] = initData.tagList;
-        if (tagList().filter((item) => item.path === payload.path).length) {
-          return tagList;
-        } else {
-          setTagList([...tagList(), payload]);
-          return tagList;
+        if (payload) {
+          let [tagList, setTagList] = initData.tagList;
+          console.log(tagList().filter((item) => item.path === payload.path));
+          if (tagList().filter((item) => item.path === payload.path).length) {
+            return tagList;
+          } else {
+            setTagList([...tagList(), payload]);
+            return tagList;
+          }
         }
       },
       delTagList(payload: string) {

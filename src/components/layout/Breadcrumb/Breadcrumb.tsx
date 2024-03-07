@@ -39,7 +39,7 @@ export default function BreadcrumbLayout() {
     setPath(routes([], asyncRoutes, pathList[0]));
   });
 
-  const foldIcon = () => {
+  const getFoldIcon = () => {
     if (fold()) {
       return <SvgIcon name="fold"></SvgIcon>;
     } else {
@@ -47,34 +47,29 @@ export default function BreadcrumbLayout() {
     }
   };
 
+  function getBreadCrumbList() {
+    return path().map((item) => {
+      if (item) {
+        if (item.meta.icon) {
+          return (
+            <Breadcrumb.Item icon={<SvgIcon name={item.meta.icon}></SvgIcon>}>
+              {item.meta.title}
+            </Breadcrumb.Item>
+          );
+        }
+        return <Breadcrumb.Item>{item.meta.title}</Breadcrumb.Item>;
+      } else {
+        return <></>;
+      }
+    });
+  }
+
   return (
     <>
       <span style={{ "margin-right": "10px" }} onClick={() => setFold(!fold())}>
-        {foldIcon()}
+        {getFoldIcon()}
       </span>
-
-      {path().length ? (
-        <Breadcrumb>
-          <For each={path()}>
-            {(item) => {
-              if (item) {
-                if (item.meta.icon) {
-                  return (
-                    <Breadcrumb.Item
-                      icon={<SvgIcon name={item.meta.icon}></SvgIcon>}
-                    >
-                      {item.meta.title}
-                    </Breadcrumb.Item>
-                  );
-                }
-                return <Breadcrumb.Item>{item.meta.title}</Breadcrumb.Item>;
-              }
-            }}
-          </For>
-        </Breadcrumb>
-      ) : (
-        <></>
-      )}
+      <Breadcrumb>{getBreadCrumbList()}</Breadcrumb>
     </>
   );
 }

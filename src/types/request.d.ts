@@ -10,3 +10,5 @@ export type ResponsePageSize<T> = {
   data: tableResponse<T>;
   message: string;
 };
+
+export type Response<T> = Promise<{ data: T; msg: string }>;

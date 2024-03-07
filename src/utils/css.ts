@@ -1,3 +1,3 @@
 export function comBineCss(cssList: string[]) {
-  return cssList.join(' ');
+  return cssList.join(" ");
 }

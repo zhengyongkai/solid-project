@@ -3,9 +3,9 @@ import type {
   getAccountListParams,
   getAdministratorListResult,
 } from "@/api/types/adminstrator";
-import Col from "@/components/row/Col";
-import Row from "@/components/row/Row";
-import TableTooltip from "@/components/table/Tooltip";
+import Col from "@/components/Row/Col";
+import Row from "@/components/Row/Row";
+
 import useTable, { useSearchForm } from "@/hooks/useTable";
 import {
   Input,
@@ -65,7 +65,7 @@ export default function Administrator() {
     {
       title: "操作",
       width: "250px",
-      render: (_c: any, _v: any, d: getAdministratorListResult) => {
+      render: (_c: any, _v: any) => {
         return (
           <div>
             <Button
@@ -118,44 +118,40 @@ export default function Administrator() {
                 ></Input>
               </FormItem>
             </Col>
-            <Col span={2}>
-              <Button
-                onClick={() => requestData()}
-                type="primary"
-                icon={<Icon name="search"></Icon>}
-              >
-                搜索
-              </Button>
-            </Col>
-            <Col span={2}>
-              <Button
-                onClick={() => setVisible2(true)}
-                type="primary"
-                icon={<Icon name="user"></Icon>}
-              >
-                新增
-              </Button>
-            </Col>
-            <Col span={2}>
-              <Button
-                onClick={() => {
-                  form.setFormData({
-                    ...form,
-                    account: "",
-                  });
-                  requestData();
-                }}
-                type="warning"
-                icon={<Icon name="refresh-cw"></Icon>}
-              >
-                重置
-              </Button>
-            </Col>
-            <Col span={2}>
-              <Button type="error" icon={<Icon name="trash"></Icon>}>
-                批量删除
-              </Button>
-            </Col>
+
+            <Button
+              onClick={() => requestData()}
+              type="primary"
+              icon={<Icon name="search"></Icon>}
+            >
+              搜索
+            </Button>
+
+            <Button
+              onClick={() => setVisible2(true)}
+              type="primary"
+              icon={<Icon name="user"></Icon>}
+            >
+              新增
+            </Button>
+
+            <Button
+              onClick={() => {
+                form.setFormData({
+                  ...form,
+                  account: "",
+                });
+                requestData();
+              }}
+              type="warning"
+              icon={<Icon name="refresh-cw"></Icon>}
+            >
+              重置
+            </Button>
+
+            <Button type="error" icon={<Icon name="trash"></Icon>}>
+              批量删除
+            </Button>
           </Row>
         </Form>
       </div>
@@ -164,6 +160,7 @@ export default function Administrator() {
         data={tableData()}
         loading={loading()}
         height={500}
+        size="small"
       />
       <div class="pagination">
         <Pagination
