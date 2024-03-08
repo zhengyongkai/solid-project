@@ -17,6 +17,12 @@ dependencies:
   cui-solid:
     specifier: ^0.1.33
     version: 0.1.33
+  echarts:
+    specifier: ^5.5.0
+    version: 5.5.0
+  echarts-solid:
+    specifier: ^0.1.0
+    version: 0.1.0(echarts@5.5.0)(solid-js@1.8.15)
   i18next:
     specifier: ^23.10.0
     version: 23.10.0
@@ -26,9 +32,6 @@ dependencies:
   prettier:
     specifier: ^3.2.5
     version: 3.2.5
-  solid-chartjs:
-    specifier: ^1.3.9
-    version: 1.3.9(@solid-primitives/refs@1.0.7)(chart.js@4.4.2)(solid-js@1.8.15)
   solid-custom-scrollbars:
     specifier: ^0.1.7
     version: 0.1.7(solid-js@1.8.15)
@@ -655,8 +658,47 @@ packages:
     requiresBuild: true
     optional: true
 
+  /@solid-primitives/event-listener@2.3.3(solid-js@1.8.15):
+    resolution: {integrity: sha512-DAJbl+F0wrFW2xmcV8dKMBhk9QLVLuBSW+TR4JmIfTaObxd13PuL7nqaXnaYKDWOYa6otB00qcCUIGbuIhSUgQ==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/utils': 6.2.3(solid-js@1.8.15)
+      solid-js: 1.8.15
+    dev: false
+
   /@solid-primitives/refs@1.0.7(solid-js@1.8.15):
     resolution: {integrity: sha512-+znJbpqqA0pK9XtTiJfyQfJp8ikIvvq5yNifMVPTmg/8fZMEc+p3cxGegRghYRZ4ATfknL1ySHegrdpUqgeLHw==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/utils': 6.2.3(solid-js@1.8.15)
+      solid-js: 1.8.15
+    dev: false
+
+  /@solid-primitives/resize-observer@2.0.25(solid-js@1.8.15):
+    resolution: {integrity: sha512-jVDXkt2MiriYRaz4DYs62185d+6jQ+1DCsR+v7f6XMsIJJuf963qdBRFjtZtKXBaxdPNMyuPeDgf5XQe3EoDJg==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/event-listener': 2.3.3(solid-js@1.8.15)
+      '@solid-primitives/rootless': 1.4.5(solid-js@1.8.15)
+      '@solid-primitives/static-store': 0.0.8(solid-js@1.8.15)
+      '@solid-primitives/utils': 6.2.3(solid-js@1.8.15)
+      solid-js: 1.8.15
+    dev: false
+
+  /@solid-primitives/rootless@1.4.5(solid-js@1.8.15):
+    resolution: {integrity: sha512-GFJE9GC3ojx0aUKqAUZmQPyU8fOVMtnVNrkdk2yS4kd17WqVSpXpoTmo9CnOwA+PG7FTzdIkogvfLQSLs4lrww==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/utils': 6.2.3(solid-js@1.8.15)
+      solid-js: 1.8.15
+    dev: false
+
+  /@solid-primitives/static-store@0.0.8(solid-js@1.8.15):
+    resolution: {integrity: sha512-ZecE4BqY0oBk0YG00nzaAWO5Mjcny8Fc06CdbXadH9T9lzq/9GefqcSe/5AtdXqjvY/DtJ5C6CkcjPZO0o/eqg==}
     peerDependencies:
       solid-js: ^1.6.12
     dependencies:
@@ -1284,6 +1326,26 @@ packages:
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
+
+  /echarts-solid@0.1.0(echarts@5.5.0)(solid-js@1.8.15):
+    resolution: {integrity: sha512-PSrsf7vmKZlf5I3tI7bZfHOw2+2wX/G5NTayVzb+ByFV38OiTH/+baU4nHyobsb1FCZvt6FUICcbfJq0ez/pPQ==}
+    engines: {node: '>=18', pnpm: '>=8.6.0'}
+    peerDependencies:
+      echarts: ^5.4.3
+      solid-js: ^1.6.0
+    dependencies:
+      '@solid-primitives/refs': 1.0.7(solid-js@1.8.15)
+      '@solid-primitives/resize-observer': 2.0.25(solid-js@1.8.15)
+      echarts: 5.5.0
+      solid-js: 1.8.15
+    dev: false
+
+  /echarts@5.5.0:
+    resolution: {integrity: sha512-rNYnNCzqDAPCr4m/fqyUFv7fD9qIsd50S6GDFgO1DxZhncCsNsG7IfUlAlvZe5oSEQxtsjnHiUuppzccry93Xw==}
+    dependencies:
+      tslib: 2.3.0
+      zrender: 5.5.0
+    dev: false
 
   /electron-to-chromium@1.4.676:
     resolution: {integrity: sha512-uHt4FB8SeYdhcOsj2ix/C39S7sPSNFJpzShjxGOm1KdF4MHyGqGi389+T5cErsodsijojXilYaHIKKqJfqh7uQ==}
@@ -2497,18 +2559,6 @@ packages:
       - supports-color
     dev: false
 
-  /solid-chartjs@1.3.9(@solid-primitives/refs@1.0.7)(chart.js@4.4.2)(solid-js@1.8.15):
-    resolution: {integrity: sha512-Sd1nEyyutuKTdJqx6Nbz/4ewj9IFSBbXxW8qgsN2JJ380ksOkh3Sa28oMPYwDiUeQRYCmk7MFAULFFwNffihMg==}
-    peerDependencies:
-      '@solid-primitives/refs': ^1.0.3
-      chart.js: ^4.3.0
-      solid-js: ^1.7.5
-    dependencies:
-      '@solid-primitives/refs': 1.0.7(solid-js@1.8.15)
-      chart.js: 4.4.2
-      solid-js: 1.8.15
-    dev: false
-
   /solid-custom-scrollbars@0.1.7(solid-js@1.8.15):
     resolution: {integrity: sha512-hG5mZKEa97zlDNYiatHvhdchUWcjUef3yA85s6XEx6ja8JqLIaEdtfopdNXgOkaK07N38ofDv/heyHHNcqwY4g==}
     peerDependencies:
@@ -2837,6 +2887,10 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
+  /tslib@2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+    dev: false
+
   /typescript@5.3.3:
     resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
     engines: {node: '>=14.17'}
@@ -3023,3 +3077,9 @@ packages:
     resolution: {integrity: sha512-8aAvwVUSHpfEqTQ4w/KMlf3HcRdt50E5ODIQJBw1fQ5RL34xabzxtUlzTXVqc4rkZsPbvrXKWnABCD7kWSmocA==}
     engines: {node: '>= 14'}
     dev: true
+
+  /zrender@5.5.0:
+    resolution: {integrity: sha512-O3MilSi/9mwoovx77m6ROZM7sXShR/O/JIanvzTwjN3FORfLSr81PsUGd7jlaYOeds9d8tw82oP44+3YucVo+w==}
+    dependencies:
+      tslib: 2.3.0
+    dev: false

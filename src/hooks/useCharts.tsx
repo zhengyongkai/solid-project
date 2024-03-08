@@ -1,16 +1,27 @@
-import { createSignal, onMount } from "solid-js";
-import { Chart, Title, Tooltip, Legend, Colors } from "chart.js";
+import * as echarts from 'echarts';
+import { onMount } from 'solid-js';
 
-export default function useCharts<T>(params: T) {
+const useEcharts = function () {
+  let myChart;
+  const echart = null;
   onMount(() => {
-    Chart.register(Title, Tooltip, Legend, Colors);
+    setTimeout(() => {
+      console.log(myChart);
+    }, 3000);
+    function resize() {
+      console.log('dsad', myChart);
+      myChart?.resize();
+    }
+    window.addEventListener('resize', resize);
   });
-  const [chartData, setChartData] = createSignal<T>(params);
 
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: true,
-  };
+  function setOptions(options: echarts.EChartsOption) {
+    setTimeout(() => {
+      myChart?.setOption(options);
+    }, 200);
+  }
 
-  return { chartData, setChartData, chartOptions };
-}
+  return [myChart, setOptions];
+};
+
+export default useEcharts;

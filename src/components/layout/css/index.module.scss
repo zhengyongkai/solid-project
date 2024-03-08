@@ -10,6 +10,7 @@
     height: 100vh;
     background: $base-color-primary;
     transition: all 0.2s;
+    flex-shrink: 0;
     &.fold {
       width: $base-menu-min-width;
       left: $base-menu-min-width;
