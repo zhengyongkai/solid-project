@@ -1,3 +1,3 @@
 export default function region() {
-  return <>region</>;
+  return <div>region</div>;
 }

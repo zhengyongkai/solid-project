@@ -1,22 +1,22 @@
-import { render } from 'solid-js/web';
-import { HashRouter, Navigate, Route, Router } from '@solidjs/router';
+import { render } from "solid-js/web";
+import { HashRouter, Navigate, Route, Router } from "@solidjs/router";
 
-import './index.css';
-import { asyncRoutes, baseRoutes } from '@/router/index';
-import 'cui-solid/dist/styles/cui.css';
+import "./index.css";
+import { asyncRoutes, baseRoutes } from "@/router/index";
+import "cui-solid/dist/styles/cui.css";
 
-import '@/assets/styles/index.scss';
-import '@/assets/styles/cui.scss';
+import "@/assets/styles/index.scss";
+import "@/assets/styles/cui.scss";
 
-import 'virtual:svg-icons-register';
+import "virtual:svg-icons-register";
 
-import { I18nProvider } from 'solid-i18n';
-import i18n from './locale';
-import useCommonStore from '@/stores/common/index';
-import { routeInf } from './types';
-import { lazy } from 'solid-js';
+import { I18nProvider } from "solid-i18n";
+import i18n from "./locale";
+import useCommonStore from "@/stores/common/index";
+import { routeInf } from "./types";
+import { lazy } from "solid-js";
 
-const Home = lazy(() => import('@/components/layout/BaseLayout'));
+const Home = lazy(() => import("@/components/layout/BaseLayout"));
 
 const [language] = useCommonStore().data.lang;
 
@@ -40,15 +40,15 @@ render(
     <I18nProvider i18n={lang}>
       <Router>
         {renderRouter(baseRoutes)}
-        <Route component={Home} path={'/'}>
+        <Route component={Home} path={"/"}>
           <Route
-            path={'*'}
-            component={() => <Navigate href={'/home'}></Navigate>}
+            path={"*"}
+            component={() => <Navigate href={"/home"}></Navigate>}
           ></Route>
           {renderRouter(asyncRoutes)}
         </Route>
       </Router>
     </I18nProvider>
   ),
-  document.getElementById('root')!
+  document.getElementById("root")!
 );

@@ -1,9 +1,8 @@
 .layout_container {
   display: flex;
   width: 100%;
-  // height: calc(100vh - $base-header-height);
   background-color: #f2f3f7;
-
+  overflow: hidden;
   .layout_slider {
     color: white;
     width: $base-menu-width;
@@ -29,6 +28,7 @@
       height: $base-header-height;
       display: flex;
       align-items: center;
+      text-align: center;
       // justify-content: center;
     }
   }
@@ -37,22 +37,20 @@
     height: calc(100vh - $base-header-height - 20px - $base-tagList-height);
     overflow: hidden;
     overflow-y: auto;
-    margin: 10px;
-
+    padding: 10px;
     transition: all 0.3s;
+    // background-color: #fff;
     > div {
-      // padding: 0 4px;
-      // background-color: #fff;
-      padding: 10px;
+      // padding: 10px;
       border-radius: 4px;
-      background-color: #fff;
-
-      // padding-bottom: 10px;
     }
     &.fold {
-      // width: calc(100vw - $base-menu-min-width);
       left: $base-menu-min-width;
       height: 100%;
     }
+
+    // &::-webkit-scrollbar {
+    //   display: none;
+    // }
   }
 }

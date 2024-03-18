@@ -1,7 +1,8 @@
-import { getAdministratorList } from '@/api/administrator';
-import type { getAdministratorListResult } from '@/api/types/adminstrator';
+import { getAdministratorList } from "@/api/administrator";
+import type { getAdministratorListResult } from "@/api/types/adminstrator";
+import Card from "@/components/layout/Card/Card";
 
-import useTable, { useSearchForm } from '@/hooks/useTable';
+import useTable, { useSearchForm } from "@/hooks/useTable";
 import {
   Input,
   Button,
@@ -14,12 +15,13 @@ import {
   FormItem,
   Col,
   Row,
-} from 'cui-solid';
-import { createSignal } from 'solid-js';
+} from "cui-solid";
+import { createSignal } from "solid-js";
+import AddAdForm from "./form/AddAdForm";
 
 export default function Administrator() {
-  const [form] = useSearchForm({
-    account: '',
+  const { form } = useSearchForm({
+    account: "",
   });
 
   const { tableData, page, requestData, loading } =
@@ -29,39 +31,41 @@ export default function Administrator() {
       })
     );
 
+  const [visible, setVisible] = createSignal(false);
+
   const columns = [
-    { type: 'checkbox', width: '55px' },
+    { type: "checkbox", width: "55px" },
     {
-      type: 'account',
-      title: '账号',
+      type: "account",
+      title: "账号",
       render: (_c: any, _v: any, d: getAdministratorListResult) => {
         return d.account;
       },
     },
     {
-      name: 'deparmentName',
-      title: '使用单位',
+      name: "deparmentName",
+      title: "使用单位",
       render: (_c: any, _v: any, d: getAdministratorListResult) => {
         return d.deparmentName;
       },
     },
-    { name: 'bgName', title: '事业群' },
-    { name: 'buName', title: '事业处' },
-    { name: 'empno', title: '負責人工號' },
-    { name: 'name', title: '負責人姓名' },
-    { name: 'phone', title: '負責人電話' },
-    { name: 'email', title: '負責人郵箱' },
+    { name: "bgName", title: "事业群" },
+    { name: "buName", title: "事业处" },
+    { name: "empno", title: "負責人工號" },
+    { name: "name", title: "負責人姓名" },
+    { name: "phone", title: "負責人電話" },
+    { name: "email", title: "負責人郵箱" },
     {
-      name: 'isvalid',
-      title: '是否有效',
+      name: "isvalid",
+      title: "是否有效",
       render: (_c: any, _v: any, d: getAdministratorListResult) => {
-        return d.isvalid ? '有效' : '无效';
+        return d.isvalid ? "有效" : "无效";
       },
     },
-    { name: 'roleName', title: '負責人郵箱' },
+    { name: "roleName", title: "負責人郵箱" },
     {
-      title: '操作',
-      width: '250px',
+      title: "操作",
+      width: "250px",
       render: (_c: any, _v: any) => {
         return (
           <div>
@@ -92,10 +96,18 @@ export default function Administrator() {
     },
   ];
 
-  const [visible2, setVisible2] = createSignal(false);
+  function onHandleClose() {
+    setVisible(false);
+  }
+
+  function onAddUser() {
+    alert("dd");
+    return false;
+  }
+
   return (
-    <>
-      <div class="table-handle-box">
+    <div>
+      <Card class="table-handle-box">
         <Form
           form={form}
           onChange={(name: string, v: any) => {
@@ -125,7 +137,7 @@ export default function Administrator() {
             </Button>
 
             <Button
-              onClick={() => setVisible2(true)}
+              onClick={() => setVisible(true)}
               type="primary"
               icon={<Icon name="user"></Icon>}
             >
@@ -136,7 +148,7 @@ export default function Administrator() {
               onClick={() => {
                 form.setFormData({
                   ...form,
-                  account: '',
+                  account: "",
                 });
                 requestData();
               }}
@@ -151,14 +163,16 @@ export default function Administrator() {
             </Button>
           </Row>
         </Form>
-      </div>
-      <Table
-        columns={columns}
-        data={tableData()}
-        loading={loading()}
-        height={500}
-        size="small"
-      />
+      </Card>
+      <Card>
+        <Table
+          columns={columns}
+          data={tableData()}
+          loading={loading()}
+          height={500}
+          size="small"
+        />
+      </Card>
       <div class="pagination">
         <Pagination
           startEndShowNum={0}
@@ -175,24 +189,11 @@ export default function Administrator() {
           }}
         />
       </div>
-      <Modal disabled title="提示" visible={[visible2, setVisible2]}>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-        <div>modal 内容</div>
-      </Modal>
-    </>
+      <AddAdForm
+        visable={visible()}
+        onClosed={onHandleClose}
+        onOk={onAddUser}
+      ></AddAdForm>
+    </div>
   );
 }

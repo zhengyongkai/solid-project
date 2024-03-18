@@ -61,7 +61,7 @@ export default function Menus() {
 
   onMount(() => {
     setTagList({ path: "home", title: "主頁" });
-    // onSelectMenu("/home");
+
     onSelectMenu(location.pathname);
   });
 

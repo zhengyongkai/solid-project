@@ -1,0 +1,12 @@
+.modal_content_wrapper {
+  overflow-y: auto;
+}
+
+.modal_footer_wrapper {
+  margin: 0 auto;
+  text-align: center;
+
+  button + button {
+    margin-left: 16px;
+  }
+}

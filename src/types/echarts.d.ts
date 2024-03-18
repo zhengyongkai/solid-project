@@ -1,3 +1,4 @@
+import { Accessor } from "solid-js";
 // series 基本数据类型
 export interface seriesInf {
   name: string;

@@ -6,16 +6,17 @@ import type { lineOptionsInf } from "@/types/echarts";
 import PanelGroup from "./components/PanelGroup/PanelGroup";
 
 import Styles from "./css/home.module.scss";
+import Card from "@/components/layout/Card/Card";
 
 export default function Administrator() {
   // let [echart, setOptions] = useCharts();
-  let ref: any;
 
-  let [options] = createSignal<lineOptionsInf>({
+  let [options, setOption] = createSignal<lineOptionsInf>({
     xAxis: {
       type: "category",
       data: ["xx", "dd", "ee", "ll"],
     },
+
     series: [
       {
         name: "Email",
@@ -27,36 +28,35 @@ export default function Administrator() {
 
   onMount(() => {
     setTimeout(() => {
-      ref?.increment([
-        {
-          name: "Email",
-          type: "bar",
-          data: [30, 0, 40, 40],
-        },
-        {
-          name: "xvdieo",
-          type: "bar",
-          data: [344, 0, 40, 40],
-        },
-      ]);
-    }, 200);
+      setOption({
+        ...options(),
+        series: [
+          {
+            name: "Email",
+            type: "bar",
+            data: [30, 0, 40, 40],
+          },
+          {
+            name: "xvdieo",
+            type: "bar",
+            data: [344, 0, 40, 40],
+          },
+        ],
+      });
+    }, 3000);
   });
   return (
-    <>
+    <div>
       <div class={Styles["home_panel_wrapper"]}>
         <PanelGroup></PanelGroup>
       </div>
-      <div>
+      <Card>
         <Row>
           <Col grid={1}>
-            <LineEcharts
-              options={options()}
-              height={300}
-              ref={ref}
-            ></LineEcharts>
+            <LineEcharts options={options()} height={300}></LineEcharts>
           </Col>
         </Row>
-      </div>
-    </>
+      </Card>
+    </div>
   );
 }

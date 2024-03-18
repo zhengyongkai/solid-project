@@ -21,7 +21,7 @@ export default function TagList() {
   const getTagLists = () => {
     return tagList().map((item) => {
       return (
-        <span onClick={() => onChooseTag(item.path)}>
+        <div onClick={() => onChooseTag(item.path)}>
           <Tag
             closable={item.path !== "home"}
             theme={activeTag() === "/" + item.path ? "warning" : "primary"}
@@ -29,7 +29,7 @@ export default function TagList() {
           >
             {item.title}
           </Tag>
-        </span>
+        </div>
       );
     });
   };
@@ -49,7 +49,9 @@ export default function TagList() {
 
   return (
     <div class={Styles["layout_tagList"]}>
-      <Scrollbars>{getTagLists()}</Scrollbars>
+      <Scrollbars universal={true}>
+        <div class={Styles["layout_tagList_wrapper"]}>{getTagLists()}</div>
+      </Scrollbars>
     </div>
   );
 }

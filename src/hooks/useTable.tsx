@@ -1,8 +1,8 @@
-import type { tableResponse } from '@/types/request';
-import { AxiosResponse } from 'axios';
-import { useForm } from 'cui-solid';
+import type { tableResponse } from "@/types/request";
+import { AxiosResponse } from "axios";
+import { useForm } from "cui-solid";
 
-import { createSignal, onMount } from 'solid-js';
+import { createSignal, onMount } from "solid-js";
 
 export function useSearchForm<T>(props: T) {
   const form = useForm({
@@ -12,7 +12,8 @@ export function useSearchForm<T>(props: T) {
       ...props,
     },
   });
-  return [form];
+
+  return { form };
 }
 
 export default function useTable<T>(
@@ -37,13 +38,10 @@ export default function useTable<T>(
         pageNum: 1,
       });
     }
-
     const {
       data: { pageNum, pageSize, pages, total, list },
     } = await api();
-
     setTableData(list);
-
     setPage({
       pageNum,
       pageSize,
@@ -60,7 +58,6 @@ export default function useTable<T>(
   return {
     tableData,
     setTableData,
-
     requestData,
     page,
     loading,

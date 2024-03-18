@@ -24,6 +24,8 @@
 
   .panel_group_item_wrapper {
     background-color: $base-bgcolor-default;
+    box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.05);
     padding: 16px;
     border-radius: 8px;
     display: flex;
@@ -36,12 +38,14 @@
     .panel_group_item_content {
       // text-align: center;
       > :first-child {
-        font-size: 18px;
+        color: rgba(0, 0, 0, 0.45);
+        font-weight: 600;
+        font-size: 16px;
         margin-bottom: 8px;
       }
 
       > :last-child {
-        font-size: 16px;
+        font-size: 18px;
       }
     }
   }

@@ -18,7 +18,6 @@ const useCommonStore = function () {
       setTagList(payload: simpleRouteInf) {
         if (payload) {
           let [tagList, setTagList] = initData.tagList;
-          console.log(tagList().filter((item) => item.path === payload.path));
           if (tagList().filter((item) => item.path === payload.path).length) {
             return tagList;
           } else {

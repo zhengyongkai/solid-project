@@ -8,6 +8,9 @@ import { Show, Suspense } from "solid-js";
 import locale from "@/locale";
 import Logo from "@/assets/img/web-logo.png";
 import TagList from "./TagList/TagList";
+import { Dynamic } from "solid-js/web";
+
+import { Transition } from "solid-transition-group";
 
 export default function BaseLayout(props: any) {
   const {
@@ -39,9 +42,11 @@ export default function BaseLayout(props: any) {
             class={Styles["layout_content"]}
             classList={{ [Styles["fold"]]: fold() }}
           >
-            <Suspense fallback={<div>Loading...</div>}>
-              {props.children}
-            </Suspense>
+            <Transition name="slide-fade">
+              <Suspense>
+                <Dynamic component={() => props.children}></Dynamic>
+              </Suspense>
+            </Transition>
           </div>
         </div>
       </div>

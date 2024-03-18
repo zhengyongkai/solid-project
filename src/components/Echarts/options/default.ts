@@ -16,4 +16,6 @@ const tooltipOptions = {
     },
   },
 };
-export { xAxis, gridOptions, tooltipOptions };
+
+const yAxisOptions = { type: "value" };
+export { xAxis, gridOptions, tooltipOptions, yAxisOptions };
