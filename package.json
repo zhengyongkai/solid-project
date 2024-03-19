@@ -9,11 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@antv/g6": "^4.8.24",
     "@solid-primitives/destructure": "^0.1.17",
     "@solidjs/router": "^0.12.3",
     "axios": "^1.6.7",
     "chart.js": "^4.4.2",
-    "cui-solid": "^0.1.33",
+    "cui-solid": "^0.1.36",
     "echarts": "^5.5.0",
     "echarts-solid": "^0.1.0",
     "i18next": "^23.10.0",

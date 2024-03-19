@@ -99,11 +99,11 @@ export default function AddAdForm(props: AddAdFormProps) {
               </Col>
               <Col grid={1 / 2}>
                 <FormItem name="p" label="角色身份">
-                  <Input type="select" clearable placeholder="请选择">
+                  <Input type="select" clearable placeholder="请选择" transfer>
                     <Option value={"1"} label="北京"></Option>
-                    <Option value={"1"} label="北京"></Option>
-                    <Option value={"1"} label="北京"></Option>
-                    <Option value={"1"} label="北京"></Option>
+                    <Option value={"2"} label="南京"></Option>
+                    <Option value={"3"} label="廣州"></Option>
+                    <Option value={"4"} label="深圳"></Option>
                   </Input>
                 </FormItem>
               </Col>

@@ -27,6 +27,10 @@ export default function Modal(props: ModalPropsInf) {
     return width ? width() + "px" : "600px";
   });
 
+  let containerHeight = createMemo(() => {
+    return height ? height() + "px" : "600px";
+  });
+
   return (
     <CModal
       footer={false}
@@ -36,7 +40,12 @@ export default function Modal(props: ModalPropsInf) {
       defaultPosition={{ top: offsetTop() }}
       disabled
     >
-      <div class={Styles["modal_content_wrapper"]}>{children()}</div>
+      <div
+        class={Styles["modal_content_wrapper"]}
+        style={{ "max-height": containerHeight() }}
+      >
+        {children()}
+      </div>
       <div class={Styles["modal_footer_wrapper"]}>
         <Button type="primary" onClick={onOk()}>
           确定
