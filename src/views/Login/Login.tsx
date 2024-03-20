@@ -1,9 +1,9 @@
-import { Login, Password, Submit, UserName } from "cui-solid";
-import Styles from "./css/login.module.scss";
-import { reqLogin } from "@/api/user";
-import { loginRequestParamsInf } from "@/api/types/user";
-import useUserStore from "@/stores/user";
-import { useNavigate } from "@solidjs/router";
+import { Login, Password, Submit, UserName } from 'cui-solid';
+import Styles from './css/login.module.scss';
+import { reqLogin } from '@/api/user';
+import { loginRequestParamsInf } from '@/api/types/user';
+import useUserStore from '@/stores/user';
+import { useNavigate } from '@solidjs/router';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function LoginPage() {
     } = await reqLogin(params);
     setUserInfo(userInfo);
     setToken(token);
-    navigate("/home");
+    navigate('/home');
   };
 
   return (
@@ -26,8 +26,8 @@ export default function LoginPage() {
         }
       }}
     >
-      <div class={Styles["login-wrapper"]}>
-        <div class={Styles["login-content"]}>
+      <div class={Styles['login-wrapper']}>
+        <div class={Styles['login-content']}>
           <h1>用戶登錄</h1>
           <UserName name="account" />
           <Password name="password" />

@@ -1,29 +1,25 @@
-import LogicFlow from "@logicflow/core";
-import { Menu } from "@logicflow/extension";
+import LogicFlow from '@logicflow/core';
+import { Menu } from '@logicflow/extension';
 import {
   DndPanel,
   SelectionSelect,
   MiniMap,
   Snapshot,
   Control,
-} from "@logicflow/extension";
+} from '@logicflow/extension';
 
-import "@logicflow/extension/lib/style/index.css";
-import "@logicflow/core/dist/style/index.css";
+import '@logicflow/extension/lib/style/index.css';
+import '@logicflow/core/dist/style/index.css';
 
-import { menuConfig } from "./config/index";
+import { menuConfig } from './config/index';
 
-import { createEffect, createSignal, on, onMount } from "solid-js";
+import { createEffect, createSignal, on, onMount } from 'solid-js';
 
-import UserTaskModel from "./Node/UserTaskModel";
-import { Button } from "cui-solid";
-import Card from "@/components/layout/Card/Card";
-
-import Style from "./css/loginFlow.module.scss";
-import Drawer from "./Components/Drawer";
-import useUserStore from "@/stores/user";
-import useCommonStore from "@/stores/common/index";
-import useResize from "@/hooks/useResize";
+import UserTaskModel from './Node/UserTaskModel';
+import Card from '@/components/layout/Card/Card';
+import Drawer from './Components/Drawer';
+import useResize from '@/hooks/useResize';
+import { Form, FormItem, Input, useForm } from 'cui-solid';
 
 LogicFlow.use(Menu);
 LogicFlow.use(DndPanel);
@@ -36,6 +32,8 @@ export default function G6Topo() {
   let a: HTMLDivElement | undefined = undefined;
   let lf: LogicFlow | undefined = undefined;
 
+  useResize(resize);
+
   const data = {
     // node data
     nodes: [],
@@ -43,13 +41,33 @@ export default function G6Topo() {
     edges: [],
   };
 
-  const [visible, setVisible] = createSignal(false);
+  const [visible, setVisible] = createSignal(true);
 
-  useResize(resize);
+  const form = useForm({
+    data: {
+      text: 'dasd',
+    },
+  });
+
+  function onExport() {
+    lf?.getSnapshot();
+  }
+
+  function onClear() {
+    lf?.clearData();
+  }
+  function onDrawerClose() {
+    setVisible(false);
+  }
+
+  function resize() {
+    const width = a?.getBoundingClientRect().width || 600;
+    lf?.extension.miniMap.hide();
+    lf?.extension.miniMap.show(width - 200, 0);
+    lf?.resize();
+  }
 
   onMount(() => {
-    const width = a?.getBoundingClientRect().width || 600;
-    const height = a?.scrollHeight;
     lf = new LogicFlow({
       grid: true,
       container: a as HTMLElement,
@@ -61,37 +79,33 @@ export default function G6Topo() {
 
     const { eventCenter } = lf.graphModel;
 
-    eventCenter.on("history:change", function (e, v) {
-      console.log(e, v);
+    eventCenter.on('node:click', function (e) {
       setVisible(true);
+      form.setFormData({
+        text: e.data.text.value,
+      });
     });
 
     resize();
   });
 
-  function onExport() {
-    console.log(data);
-    lf?.getSnapshot();
-  }
-
-  function onClear() {
-    lf?.clearData();
-  }
-
-  function resize() {
-    const width = a?.getBoundingClientRect().width || 600;
-    lf?.extension.miniMap.hide();
-    lf?.extension.miniMap.show(width - 200, 0);
-    lf?.resize();
-  }
   return (
     <div>
-      <div style={{ height: "100%" }}>
+      <div style={{ height: '100%' }}>
         <Card>
-          <div style={{ height: "70vh", width: "100%" }} ref={a}></div>
+          <div style={{ height: '70vh', width: '100%' }} ref={a}></div>
         </Card>
-        <Drawer visible={visible()} top={48} title="彈窗">
-          dasdasd
+        <Drawer
+          visible={visible()}
+          onClose={onDrawerClose}
+          top={48}
+          title="彈窗"
+        >
+          <Form form={form}>
+            <FormItem name="text">
+              <Input></Input>
+            </FormItem>
+          </Form>
         </Drawer>
       </div>
     </div>

@@ -3,9 +3,23 @@
   top: 0;
   width: 300px;
   bottom: 0;
-  background-color: red;
+  background-color: $base-color-default;
   right: 0;
   //   transition: all 0.25s ease-in-out;
-  transition: all 3s ease-in-out;
+  border: 0.5px solid $base-border-info;
+  transition: all 0.2s ease-in-out;
   z-index: 4000;
+  .drawer-title {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    border-bottom: 0.5px solid $base-border-info;
+    > :first-child {
+      flex: 1;
+    }
+  }
+  .drawer-content {
+    padding: 10px 16px;
+  }
 }
