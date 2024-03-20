@@ -89,18 +89,18 @@ const asyncRoutes: routeInf[] = [
     path: "tools",
     children: [
       {
-        path: "/G6",
-        component: lazy(() => import("@/views/Tools/G6/G6")),
+        path: "/LoginFlow",
+        component: lazy(() => import("@/views/Tools/LoginFlow/LoginFlow")),
         meta: {
           login: true,
-          title: "G6 拓補圖",
-          path: "tools/G6",
+          title: "LoginFlow 流程圖",
+          path: "tools/LoginFlow",
         },
       },
     ],
     meta: {
       login: true,
-      title: "設備管理",
+      title: "工具庫",
       icon: "setting",
     },
   },

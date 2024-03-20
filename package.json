@@ -9,7 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@antv/g6": "^4.8.24",
+    "@logicflow/core": "^1.2.22",
+    "@logicflow/extension": "^1.2.22",
     "@solid-primitives/destructure": "^0.1.17",
     "@solidjs/router": "^0.12.3",
     "axios": "^1.6.7",

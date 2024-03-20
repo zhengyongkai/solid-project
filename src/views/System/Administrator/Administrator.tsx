@@ -101,13 +101,12 @@ export default function Administrator() {
   }
 
   function onAddUser() {
-    alert("dd");
     return false;
   }
 
   return (
     <div>
-      <Card class="table-handle-box">
+      <Card class="button-handle-box ">
         <Form
           form={form}
           onChange={(name: string, v: any) => {

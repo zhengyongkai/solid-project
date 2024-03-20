@@ -15,7 +15,7 @@ export default function Card(props: propsInf) {
   let { children } = props;
 
   let classes = createMemo(() => {
-    return props.class + " " + Styles["layout_module_title"];
+    return (props.class || "") + " " + Styles["layout_module_title"];
   });
 
   return (

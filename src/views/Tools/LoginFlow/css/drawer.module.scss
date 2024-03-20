@@ -1,0 +1,11 @@
+.drawer-wrapper {
+  position: fixed;
+  top: 0;
+  width: 300px;
+  bottom: 0;
+  background-color: red;
+  right: 0;
+  //   transition: all 0.25s ease-in-out;
+  transition: all 3s ease-in-out;
+  z-index: 4000;
+}
