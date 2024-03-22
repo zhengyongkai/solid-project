@@ -1,9 +1,8 @@
-import { Dropdown, DropdownItem, DropdownMenu } from 'cui-solid';
-import Styles from './css/index.module.scss';
-import useCommonStore from '@/stores/common/Index';
-import { useI18n } from 'solid-i18n';
-import locale, { langMap } from '@/locale';
-import { langInf } from '@/types';
+import { Dropdown, DropdownItem, DropdownMenu } from "cui-solid";
+import Styles from "./css/index.module.scss";
+import { useI18n } from "solid-i18n";
+import locale, { langMap } from "@/locale";
+import { langInf } from "@/types";
 
 export default function Lang() {
   function langMenus() {
@@ -14,7 +13,7 @@ export default function Lang() {
 
   return (
     <>
-      <div class={Styles['lang']}>
+      <div class={Styles["lang"]}>
         <Dropdown
           trigger="click"
           align="bottom"

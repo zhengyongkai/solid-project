@@ -1,5 +1,5 @@
-import { destructure } from '@solid-primitives/destructure';
-import Styles from '../css/drawer.module.scss';
+import { destructure } from "@solid-primitives/destructure";
+import Styles from "../css/drawer.module.scss";
 import {
   Accessor,
   Setter,
@@ -7,8 +7,8 @@ import {
   createEffect,
   createMemo,
   createSignal,
-} from 'solid-js';
-import { Icon } from 'cui-solid';
+} from "solid-js";
+import { Icon } from "cui-solid";
 
 interface drawerPropsInf {
   visible: boolean;
@@ -24,7 +24,7 @@ export default function Drawer(props: drawerPropsInf) {
   const { visible, children } = destructure(props);
 
   const offsetWidth = createMemo<string>(() => {
-    return visible() ? width + 'px' : '0';
+    return visible() ? width + "px" : "0";
   });
 
   const childrens = createMemo<string>(() => {
@@ -37,19 +37,19 @@ export default function Drawer(props: drawerPropsInf) {
 
   return (
     <div
-      class={Styles['drawer-wrapper']}
+      class={Styles["drawer-wrapper"]}
       style={{
         width: offsetWidth(),
-        top: top + 'px',
+        top: top + "px",
       }}
     >
-      <div class={Styles['drawer-title']}>
+      <div class={Styles["drawer-title"]}>
         <div>{title}</div>
-        <div onclick={() => onCloseDrawer}>
+        <div onclick={() => onCloseDrawer()}>
           <Icon name="x"></Icon>
         </div>
       </div>
-      <div class={Styles['drawer-content']}>{childrens()}</div>
+      <div class={Styles["drawer-content"]}>{childrens()}</div>
     </div>
   );
 }
