@@ -1,4 +1,4 @@
-import { Login, Password, Submit, UserName } from 'cui-solid';
+import { Login, Password, Submit, UserName } from 'cui-solid-better';
 import Styles from './css/login.module.scss';
 import { reqLogin } from '@/api/user';
 import { loginRequestParamsInf } from '@/api/types/user';

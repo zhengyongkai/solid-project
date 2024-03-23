@@ -121,6 +121,7 @@ function useForm<T>({
       set(prop, value);
 
       let check = elementsChecks[prop];
+
       check && check(value);
       return true;
     },

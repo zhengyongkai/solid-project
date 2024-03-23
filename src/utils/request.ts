@@ -1,6 +1,6 @@
-import userStoreState from "@/stores/user";
-import axios from "axios";
-import { message } from "cui-solid";
+import userStoreState from '@/stores/user';
+import axios from 'axios';
+import { message } from 'cui-solid-better';
 
 const request = axios.create({
   //基础路径
@@ -15,9 +15,9 @@ const {
 } = userStoreState().data;
 
 request.interceptors.request.use((config) => {
-  config.headers["Content-Type"] = "application/json";
+  config.headers['Content-Type'] = 'application/json';
   if (token()) {
-    config.headers["Authorization"] = token() as string;
+    config.headers['Authorization'] = token() as string;
   }
   return config;
 });
@@ -28,14 +28,14 @@ request.interceptors.response.use(
     if (data.status !== 200) {
       let { clearUserInfo } = userStoreState().action;
       clearUserInfo();
-      location.href = "/login";
-      message.error("登录状态已经过期");
+      location.href = '/login';
+      message.error('登录状态已经过期');
       return Promise.reject(response.data);
     }
     return response.data;
   },
   (reject) => {
-    message.error("网络错误，请联系管理员");
+    message.error('网络错误，请联系管理员');
     return Promise.reject(reject);
   }
 );

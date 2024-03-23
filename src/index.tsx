@@ -3,7 +3,7 @@ import { HashRouter, Navigate, Route, Router } from '@solidjs/router';
 
 import './index.css';
 import { asyncRoutes, baseRoutes } from '@/router/index';
-import 'cui-solid/dist/styles/cui.css';
+import 'cui-solid-better/dist/styles/cui.css';
 
 import '@/assets/styles/index.scss';
 import '@/assets/styles/cui.scss';

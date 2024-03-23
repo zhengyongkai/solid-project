@@ -1,7 +1,7 @@
 import SvgIcon from '@/components/common/SvgIcon';
 
 import Styles from '../css/parnelGroup.module.scss';
-import { Col, CountUp, Row } from 'cui-solid';
+import { Col, CountUp, Row } from 'cui-solid-better';
 
 export default function PanelGroup() {
   const chartList = [

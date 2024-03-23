@@ -1,8 +1,8 @@
-import { destructure } from "@solid-primitives/destructure";
-import { Button, Modal as CModal } from "cui-solid";
-import { createMemo, createSignal, onMount, splitProps } from "solid-js";
+import { destructure } from '@solid-primitives/destructure';
+import { Button, Modal as CModal } from 'cui-solid-better';
+import { createMemo, createSignal, onMount, splitProps } from 'solid-js';
 
-import Styles from "./css/modal.module.scss";
+import Styles from './css/modal.module.scss';
 
 interface ModalPropsInf {
   visible: boolean;
@@ -20,15 +20,15 @@ export default function Modal(props: ModalPropsInf) {
     destructure(props);
 
   let offsetTop = createMemo(() => {
-    return top ? top() + "px" : "30px";
+    return top ? top() + 'px' : '30px';
   });
 
   let offsetWidth = createMemo(() => {
-    return width ? width() + "px" : "600px";
+    return width ? width() + 'px' : '600px';
   });
 
   let containerHeight = createMemo(() => {
-    return height ? height() + "px" : "600px";
+    return height ? height() + 'px' : '600px';
   });
 
   return (
@@ -41,12 +41,12 @@ export default function Modal(props: ModalPropsInf) {
       disabled
     >
       <div
-        class={Styles["modal_content_wrapper"]}
-        style={{ "max-height": containerHeight() }}
+        class={Styles['modal_content_wrapper']}
+        style={{ 'max-height': containerHeight() }}
       >
         {children()}
       </div>
-      <div class={Styles["modal_footer_wrapper"]}>
+      <div class={Styles['modal_footer_wrapper']}>
         <Button type="primary" onClick={onOk()}>
           确定
         </Button>

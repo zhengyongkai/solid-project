@@ -20,9 +20,7 @@ import Card from '@/components/layout/Card/Card';
 import Drawer from './Components/Drawer';
 import useResize from '@/hooks/useResize';
 
-import { Form, Input } from 'cui-solid';
-import useForm from '@/hooks/useForm';
-import { FormItem } from '@/components/Form';
+import { Form, Input, FormItem, useForm } from 'cui-solid-better';
 
 LogicFlow.use(Menu);
 LogicFlow.use(DndPanel);
