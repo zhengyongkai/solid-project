@@ -13,6 +13,7 @@
     "@logicflow/extension": "^1.2.22",
     "@solid-primitives/destructure": "^0.1.17",
     "@solidjs/router": "^0.12.3",
+    "async-validator": "^4.2.5",
     "axios": "^1.6.7",
     "chart.js": "^4.4.2",
     "cui-solid": "^0.1.36",

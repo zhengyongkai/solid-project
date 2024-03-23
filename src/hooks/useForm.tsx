@@ -1,4 +1,4 @@
-import { Accessor, Signal, createEffect, createSignal } from "solid-js";
+import { Accessor, createSignal } from 'solid-js';
 
 export interface useFormProps {
   isValid(): boolean;
@@ -10,21 +10,20 @@ export interface useFormProps {
   bindController(name: string, v: any, setV: Accessor<any>): void;
   setClearValid(name: string, clearFn: Function): void;
   clearValidates(name?: string): void;
-  current: Accessor<any>;
   [key: string]: any;
 }
 
-export interface useFormParams {
-  data: Object;
+export interface useFormParams<T> {
+  data: T;
   validation?: any;
   message?: any;
 }
 
-function useForm({
+function useForm<T>({
   data: current,
   validation = {},
   message = {},
-}: useFormParams): useFormProps {
+}: useFormParams<T>): useFormProps {
   const elementsChecks: any = {};
   const elementsClears: any = {};
   const controllers: Map<string, any> = new Map<string, any>();
@@ -86,11 +85,11 @@ function useForm({
 
   const set = (name: string, value: any) => {
     if (controllers.has(name)) {
-      const [v, setV] = controllers.get(name);
+      const [_v, setV] = controllers.get(name);
       setData({
         ...data(),
         [name]: value,
-      });
+      } as Exclude<T & {}, Function>);
       setV(value);
     }
   };

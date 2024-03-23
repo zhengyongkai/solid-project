@@ -1,27 +1,28 @@
-import LogicFlow from "@logicflow/core";
-import { Menu } from "@logicflow/extension";
+import LogicFlow from '@logicflow/core';
+import { Menu } from '@logicflow/extension';
 import {
   DndPanel,
   SelectionSelect,
   MiniMap,
   Snapshot,
   Control,
-} from "@logicflow/extension";
+} from '@logicflow/extension';
 
-import "@logicflow/extension/lib/style/index.css";
-import "@logicflow/core/dist/style/index.css";
+import '@logicflow/extension/lib/style/index.css';
+import '@logicflow/core/dist/style/index.css';
 
-import { menuConfig } from "./config/index";
+import { menuConfig } from './config/index';
 
-import { createEffect, createSignal, from, on, onMount } from "solid-js";
+import { createEffect, createSignal, on, onMount } from 'solid-js';
 
-import UserTaskModel from "./Node/UserTaskModel";
-import Card from "@/components/layout/Card/Card";
-import Drawer from "./Components/Drawer";
-import useResize from "@/hooks/useResize";
+import UserTaskModel from './Node/UserTaskModel';
+import Card from '@/components/layout/Card/Card';
+import Drawer from './Components/Drawer';
+import useResize from '@/hooks/useResize';
 
-import { Form, FormItem, Input } from "cui-solid";
-import useForm from "@/hooks/useForm";
+import { Form, Input } from 'cui-solid';
+import useForm from '@/hooks/useForm';
+import { FormItem } from '@/components/Form';
 
 LogicFlow.use(Menu);
 LogicFlow.use(DndPanel);
@@ -45,13 +46,26 @@ export default function G6Topo() {
 
   const [visible, setVisible] = createSignal(false);
 
-  function onExport() {
-    lf?.getSnapshot();
-  }
+  const form = useForm<{
+    text: string;
+  }>({
+    data: {
+      text: '3123',
+    },
+  });
 
-  function onClear() {
-    lf?.clearData();
-  }
+  createEffect(
+    on(form.data, () => {
+      console.log('dd', form.data().text);
+    })
+  );
+  // function onExport() {
+  //   lf?.getSnapshot();
+  // }
+
+  // function onClear() {
+  //   lf?.clearData();
+  // }
   function onDrawerClose() {
     setVisible(false);
   }
@@ -75,31 +89,19 @@ export default function G6Topo() {
 
     const { eventCenter } = lf.graphModel;
 
-    eventCenter.on("node:click", function (e) {
+    eventCenter.on('node:click', function (e) {
       setVisible(true);
-      form.text = "text";
+      form.text = 'text';
     });
 
     resize();
   });
 
-  const form = useForm({
-    data: {
-      text: "3123",
-    },
-  });
-
-  createEffect(
-    on(form.data, () => {
-      console.log("dd", form.data().text);
-    })
-  );
-
   return (
     <div>
-      <div style={{ height: "100%" }}>
+      <div style={{ height: '100%' }}>
         <Card>
-          <div style={{ height: "70vh", width: "100%" }} ref={a}></div>
+          <div style={{ height: '70vh', width: '100%' }} ref={a}></div>
         </Card>
         <Drawer
           visible={visible()}
