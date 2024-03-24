@@ -46,9 +46,11 @@ export default function G6Topo() {
 
   const form = useForm<{
     text: string;
+    id: string;
   }>({
     data: {
-      text: '3123',
+      text: '',
+      id: '',
     },
   });
 
@@ -57,13 +59,7 @@ export default function G6Topo() {
       console.log('dd', form.data().text);
     })
   );
-  // function onExport() {
-  //   lf?.getSnapshot();
-  // }
 
-  // function onClear() {
-  //   lf?.clearData();
-  // }
   function onDrawerClose() {
     setVisible(false);
   }
@@ -88,8 +84,15 @@ export default function G6Topo() {
     const { eventCenter } = lf.graphModel;
 
     eventCenter.on('node:click', function (e) {
+      let obj = {
+        text: '',
+      };
+      if (e.data.text) {
+        obj.text = e.data.text.value;
+        lf?.updateText(form.id, e.data.text.value);
+      }
+      form.setFormData(obj);
       setVisible(true);
-      form.text = 'text';
     });
 
     resize();
@@ -107,6 +110,7 @@ export default function G6Topo() {
           top={48}
           title="彈窗"
         >
+          {form.text}
           <Form form={form}>
             <FormItem name="text" label="標題：">
               <Input></Input>

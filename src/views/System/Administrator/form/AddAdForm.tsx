@@ -44,8 +44,8 @@ export default function AddAdForm(props: AddAdFormProps) {
       email: '',
       empno: '',
       phone: '',
-      isvalid: false,
-      roleName: '',
+      isvalid: true,
+      roleName: '1',
       comfirmPassword: '',
     },
     validation: {
@@ -53,6 +53,30 @@ export default function AddAdForm(props: AddAdFormProps) {
         required: true,
       },
       password: {
+        required: true,
+      },
+      empno: {
+        required: true,
+      },
+      name: {
+        required: true,
+      },
+      bgName: {
+        required: true,
+      },
+      buName: {
+        required: true,
+      },
+      deparmentName: {
+        required: true,
+      },
+      phone: {
+        required: true,
+      },
+      email: {
+        required: true,
+      },
+      roleName: {
         required: true,
       },
     },
@@ -63,11 +87,36 @@ export default function AddAdForm(props: AddAdFormProps) {
       password: {
         required: '请填写账号',
       },
+      empno: {
+        required: '请填写负责人工号',
+      },
+      name: {
+        required: '请填写负责人姓名',
+      },
+      bgName: {
+        required: '请填写事业群',
+      },
+      buName: {
+        required: '请填写事业处',
+      },
+      deparmentName: {
+        required: '请填写使用单位(部门)',
+      },
+      phone: {
+        required: '请填写负责人电话',
+      },
+      email: {
+        required: '请填写负责人邮箱',
+      },
+      roleName: {
+        required: '请填写角色身份',
+      },
     },
   });
 
   async function onSubmit() {
     if (await form.isValid()) {
+      console.log(form.getFormData());
     }
   }
 
@@ -174,10 +223,8 @@ export default function AddAdForm(props: AddAdFormProps) {
               <Col grid={1 / 2}>
                 <FormItem name="roleName" label="角色身份">
                   <Input type="select" clearable placeholder="请选择" transfer>
-                    <Option value={'1'} label="北京"></Option>
-                    <Option value={'2'} label="南京"></Option>
-                    <Option value={'3'} label="廣州"></Option>
-                    <Option value={'4'} label="深圳"></Option>
+                    <Option value={'1'} label="管理员"></Option>
+                    <Option value={'2'} label="用户"></Option>
                   </Input>
                 </FormItem>
               </Col>
