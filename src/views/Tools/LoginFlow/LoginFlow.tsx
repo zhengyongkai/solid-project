@@ -56,7 +56,7 @@ export default function G6Topo() {
 
   createEffect(
     on(form.data, () => {
-      console.log('dd', form.data().text);
+      // console.log('dd', form.data().text);
     })
   );
 

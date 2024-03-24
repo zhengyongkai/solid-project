@@ -110,8 +110,8 @@ export default function Administrator() {
         <Form
           form={form}
           onChange={(name: string, v: any) => {
-            console.log(name, v);
-            console.log(form.getFormData());
+            // console.log(name, v);
+            // console.log(form.getFormData());
           }}
           labelWidth={0}
         >
