@@ -1,24 +1,23 @@
-import type { tableResponse } from '@/types/request';
-import { AxiosResponse } from 'axios';
-import { useForm } from 'cui-solid-better';
+import type {
+  Response,
+  ResponsePageSize,
+  tableResponse,
+} from "@/types/request";
+import { AxiosResponse } from "axios";
+import { useForm } from "cui-solid-better";
 
-import { createSignal, onMount } from 'solid-js';
+import { Accessor, createSignal, onMount } from "solid-js";
+import { useFormProps } from "./useForm";
+import { pageInf } from "@/types";
 
-export function useSearchForm<T>(props: T) {
-  const form = useForm({
-    data: {
-      pageNum: 1,
-      pageSize: 10,
-      ...props,
-    },
-  });
+// interface apiInf = (params: getAccountListParams) => Promise<AxiosResponse<any, any>>
 
-  return { form };
-}
-
-export default function useTable<T>(
-  api: () => Promise<AxiosResponse<tableResponse<T>>>
+export default function useTable<T, U>(
+  api: (params: pageInf & U) => ResponsePageSize<T>,
+  form: U
 ) {
+  const [searchForm, setSearchForm] = createSignal<U>(form);
+
   const [loading, setLoading] = createSignal(false);
 
   const [tableData, setTableData] = createSignal<T[]>([]);
@@ -40,10 +39,16 @@ export default function useTable<T>(
     }
     const {
       data: { pageNum, pageSize, pages, total, list },
-    } = await api();
+    } = await api({
+      ...searchForm(),
+      pageNum: page().pageNum,
+      pageSize: page().pageSize,
+      pages: page().pages,
+      total: page().total,
+    });
     setTableData(list);
     setPage({
-      pageNum,
+      pageNum: Number(pageNum),
       pageSize,
       pages,
       total,
@@ -55,11 +60,31 @@ export default function useTable<T>(
     requestData(true);
   });
 
+  function onChange(pageNum: number) {
+    setPage({
+      ...page(),
+      pageNum,
+    });
+    requestData();
+  }
+
+  function onChangePageSize(pageSize: number) {
+    setPage({
+      ...page(),
+      pageSize,
+    });
+    requestData();
+  }
+
   return {
     tableData,
     setTableData,
     requestData,
     page,
     loading,
+    onChange,
+    onChangePageSize,
+    searchForm,
+    setSearchForm,
   };
 }

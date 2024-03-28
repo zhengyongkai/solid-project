@@ -2,11 +2,16 @@ import { userInfoInf } from "@/api/types/user";
 import { M_TOKEN, M_USERNAME } from "@/constants";
 import { asyncRoutes } from "@/router/index";
 import { clearStorage, getStorage, setStorage } from "@/utils/storage";
+import { PrimitiveAtom } from "jotai/vanilla";
 import { atom, useAtom } from "solid-jotai";
 
 const initData = {
   menuRoutes: useAtom(atom(asyncRoutes)),
-  userInfo: useAtom(atom(getStorage(M_USERNAME, true))),
+  userInfo: useAtom(
+    atom<userInfoInf>(
+      getStorage(M_USERNAME, true)
+    ) as PrimitiveAtom<userInfoInf>
+  ),
   token: useAtom(atom(getStorage(M_TOKEN) || "")),
   avatar: useAtom(atom("")),
 };
@@ -31,7 +36,11 @@ const useUserStore = function () {
         let [, setToken] = initData.token;
         let [, setUserInfo] = initData.userInfo;
         setToken("");
-        setUserInfo({});
+        setUserInfo({
+          avatar: "",
+          account: "",
+          password: "",
+        });
         clearStorage(M_TOKEN);
         clearStorage(M_USERNAME);
       },

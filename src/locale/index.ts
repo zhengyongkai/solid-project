@@ -50,6 +50,7 @@ class locale {
   }
   static setLanguage(language: langInf) {
     this.i18n.setLanguage(language);
+    location.reload();
     window.localStorage.setItem(M_LANG, language);
   }
   static getLanguage() {

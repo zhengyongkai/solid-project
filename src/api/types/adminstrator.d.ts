@@ -1,6 +1,8 @@
-export interface getAccountListParams {
+import { pageInf } from "@/hooks/useTable";
+
+export type getAccountListParams = {
   account: string;
-}
+};
 
 export interface getAdministratorListResult {
   account: string;

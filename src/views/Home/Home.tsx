@@ -1,29 +1,23 @@
-import { Col, Row } from 'cui-solid-better';
+import { Col, Row } from "cui-solid-better";
 
-import { createSignal, onMount } from 'solid-js';
-import LineEcharts from '@/components/Echarts/Echarts';
-import type { lineOptionsInf } from '@/types/echarts';
-import PanelGroup from './components/PanelGroup/PanelGroup';
+import { createSignal, onMount } from "solid-js";
 
-import Styles from './css/home.module.scss';
-import Card from '@/components/layout/Card/Card';
+import type { lineOptionsInf } from "@/types/echarts";
+import PanelGroup from "./components/PanelGroup/PanelGroup";
+
+import Styles from "./css/home.module.scss";
+import Card from "@/components/layout/Card/Card";
+import Online from "./components/Statistics/Online";
 
 export default function Administrator() {
   // let [echart, setOptions] = useCharts();
 
   let [options, setOption] = createSignal<lineOptionsInf>({
     xAxis: {
-      type: 'category',
-      data: ['xx', 'dd', 'ee', 'll'],
+      type: "category",
+      data: [],
     },
-
-    series: [
-      {
-        name: 'Email',
-        type: 'bar',
-        data: [1, 3, 4, 5],
-      },
-    ],
+    series: [],
   });
 
   onMount(() => {
@@ -32,13 +26,13 @@ export default function Administrator() {
         ...options(),
         series: [
           {
-            name: 'Email',
-            type: 'bar',
+            name: "Email",
+            type: "bar",
             data: [30, 0, 40, 40],
           },
           {
-            name: 'xvdieo',
-            type: 'bar',
+            name: "xvdieo",
+            type: "bar",
             data: [344, 0, 40, 40],
           },
         ],
@@ -47,13 +41,13 @@ export default function Administrator() {
   });
   return (
     <div>
-      <div class={Styles['home_panel_wrapper']}>
+      <div class={Styles["home_panel_wrapper"]}>
         <PanelGroup></PanelGroup>
       </div>
       <Card>
         <Row>
           <Col grid={1}>
-            <LineEcharts options={options()} height={300}></LineEcharts>
+            <Online></Online>
           </Col>
         </Row>
       </Card>

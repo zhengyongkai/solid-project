@@ -19,3 +19,11 @@ export type simpleRouteInf = {
 
 // 语言列表
 export type langInf = "zh-TW" | "zh-CN" | "en-US";
+
+// 翻页
+export interface pageInf {
+  pageNum: number;
+  pageSize: number;
+  pages: number;
+  total: number;
+}

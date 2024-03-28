@@ -6,9 +6,9 @@ export type tableResponse<T> = {
   list: Array<T>;
 };
 
-export type ResponsePageSize<T> = {
+export type ResponsePageSize<T> = Promise<{
   data: tableResponse<T>;
   message: string;
-};
+}>;
 
-export type Response<T> = Promise<{ data: T; msg: string }>;
+export type Response<T> = Promise<{ data: T; message: string }>;

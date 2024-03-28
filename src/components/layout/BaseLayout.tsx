@@ -16,6 +16,7 @@ export default function BaseLayout(props: any) {
   const {
     fold: [fold],
   } = useCommonStore().data;
+
   return (
     <>
       <div class={comBineCss([Styles["layout_container"], "flex"])}>

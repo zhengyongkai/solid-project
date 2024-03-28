@@ -3,6 +3,7 @@ export interface menuInf {}
 export interface userInfoInf {
   account: string;
   password: string;
+  avatar: string;
 }
 
 export interface loginRequestParamsInf {

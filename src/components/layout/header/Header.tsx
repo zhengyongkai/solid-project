@@ -1,23 +1,27 @@
-import { Avatar, Dropdown, DropdownItem, DropdownMenu } from 'cui-solid-better';
-import Styles from './css/header.module.scss';
+import { Avatar, Dropdown, DropdownItem, DropdownMenu } from "cui-solid-better";
+import Styles from "./css/header.module.scss";
 
-import Setting from '../Setting/Setting';
-import Lang from '@/components/common/Lang/Lang';
-import BreadcrumbLayout from '../Breadcrumb/Breadcrumb';
-import useCommonStore from '@/stores/common/index';
+import Setting from "../Setting/Setting";
+import Lang from "@/components/common/Lang/Lang";
+import BreadcrumbLayout from "../Breadcrumb/Breadcrumb";
+import useCommonStore from "@/stores/common/index";
 
-import AvatarImg from '@/assets/img/avatar.png';
+import useUserStore from "@/stores/user";
 
 export default function Header() {
   const {
     fold: [fold],
   } = useCommonStore().data;
 
+  const {
+    userInfo: [userInfo],
+  } = useUserStore().data;
+
   return (
-    <div class={Styles['layout_header']}>
+    <div class={Styles["layout_header"]}>
       <div
-        class={Styles['layout_tabbar']}
-        classList={{ [Styles['fold']]: fold() }}
+        class={Styles["layout_tabbar"]}
+        classList={{ [Styles["fold"]]: fold() }}
       >
         <BreadcrumbLayout></BreadcrumbLayout>
       </div>
@@ -34,6 +38,7 @@ export default function Header() {
           align="bottom"
           menu={
             <DropdownMenu>
+              <DropdownItem disabled>{userInfo().account}</DropdownItem>
               <DropdownItem>修改密碼</DropdownItem>
               <DropdownItem>退出登錄</DropdownItem>
             </DropdownMenu>
@@ -43,7 +48,7 @@ export default function Header() {
           }}
         >
           <div>
-            <Avatar src={AvatarImg}></Avatar>
+            <Avatar src={userInfo().avatar}></Avatar>
           </div>
         </Dropdown>
       </div>

@@ -20,3 +20,5 @@ export interface lineOptionsInf {
 export type echartsInf = {
   options: lineOptionsInf;
 };
+
+

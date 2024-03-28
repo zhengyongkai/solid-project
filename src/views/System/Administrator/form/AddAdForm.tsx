@@ -1,5 +1,5 @@
-import Modal from '@/components/common/Modal/Modal';
-import { destructure } from '@solid-primitives/destructure';
+import Modal from "@/components/common/Modal/Modal";
+import { destructure } from "@solid-primitives/destructure";
 import {
   Col,
   Form,
@@ -8,7 +8,7 @@ import {
   Option,
   FormItem,
   useForm,
-} from 'cui-solid-better';
+} from "cui-solid-better";
 
 interface AddAdFormProps {
   visable: boolean;
@@ -35,18 +35,18 @@ export default function AddAdForm(props: AddAdFormProps) {
   const { visable, onClosed, onOk } = destructure(props);
   const form = useForm<AddAdFormData>({
     data: {
-      name: '',
-      account: '',
-      password: '',
-      deparmentName: '',
-      bgName: '',
-      buName: '',
-      email: '',
-      empno: '',
-      phone: '',
+      name: "",
+      account: "",
+      password: "",
+      deparmentName: "",
+      bgName: "",
+      buName: "",
+      email: "",
+      empno: "",
+      phone: "",
       isvalid: true,
-      roleName: '1',
-      comfirmPassword: '',
+      roleName: "1",
+      comfirmPassword: "",
     },
     validation: {
       account: {
@@ -82,34 +82,34 @@ export default function AddAdForm(props: AddAdFormProps) {
     },
     message: {
       account: {
-        required: '请填写账号',
+        required: "请填写账号",
       },
       password: {
-        required: '请填写账号',
+        required: "请填写账号",
       },
       empno: {
-        required: '请填写负责人工号',
+        required: "请填写负责人工号",
       },
       name: {
-        required: '请填写负责人姓名',
+        required: "请填写负责人姓名",
       },
       bgName: {
-        required: '请填写事业群',
+        required: "请填写事业群",
       },
       buName: {
-        required: '请填写事业处',
+        required: "请填写事业处",
       },
       deparmentName: {
-        required: '请填写使用单位(部门)',
+        required: "请填写使用单位(部门)",
       },
       phone: {
-        required: '请填写负责人电话',
+        required: "请填写负责人电话",
       },
       email: {
-        required: '请填写负责人邮箱',
+        required: "请填写负责人邮箱",
       },
       roleName: {
-        required: '请填写角色身份',
+        required: "请填写角色身份",
       },
     },
   });
@@ -127,12 +127,12 @@ export default function AddAdForm(props: AddAdFormProps) {
         visible={visable()}
         onClosed={onClosed()}
         onOk={onSubmit}
+        width={700}
       >
         <div>
-          <Form form={form} labelWidth={110}>
+          <Form form={form} labelWidth={120}>
             <Row>
               <Col grid={1}>
-                {form.account}
                 <FormItem name="account" label="账号：">
                   <Input type="text" />
                 </FormItem>
@@ -150,14 +150,14 @@ export default function AddAdForm(props: AddAdFormProps) {
                   rules={[
                     {
                       required: true,
-                      message: '请填写确认密码',
+                      message: "请填写确认密码",
                     },
                     {
                       required: true,
                       asyncValidator: (_rule: any, value: string) => {
                         return new Promise<void>((resolve, reject) => {
                           if (value !== form.password) {
-                            reject('密码不一致'); // reject with error message
+                            reject("密码不一致"); // reject with error message
                           } else {
                             resolve();
                           }
@@ -223,8 +223,8 @@ export default function AddAdForm(props: AddAdFormProps) {
               <Col grid={1 / 2}>
                 <FormItem name="roleName" label="角色身份">
                   <Input type="select" clearable placeholder="请选择" transfer>
-                    <Option value={'1'} label="管理员"></Option>
-                    <Option value={'2'} label="用户"></Option>
+                    <Option value={"1"} label="管理员"></Option>
+                    <Option value={"2"} label="用户"></Option>
                   </Input>
                 </FormItem>
               </Col>
