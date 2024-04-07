@@ -1,6 +1,6 @@
 import userStoreState from "@/stores/user";
 import axios from "axios";
-import { message as Message } from "cui-solid-better";
+import { message as Message } from "cui-solid";
 
 const request = axios.create({
   //基础路径
@@ -27,7 +27,6 @@ request.interceptors.response.use(
     let {
       data: { code, message },
     } = response;
-    console.log(message);
     switch (code) {
       case 500:
         Message.error(message);

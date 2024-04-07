@@ -1,13 +1,13 @@
-import { useLocation, useNavigate } from '@solidjs/router';
-import { Menu, MenuItem, SubMenu } from 'cui-solid-better';
+import { useLocation, useNavigate } from "@solidjs/router";
+import { Menu, MenuItem, SubMenu } from "cui-solid";
 
-import useCommonStore from '@/stores/common/index';
-import useUserStore from '@/stores/user/index';
+import useCommonStore from "@/stores/common/index";
+import useUserStore from "@/stores/user/index";
 
-import { routeInf } from '@/types';
-import SvgIcon from '@/components/common/SvgIcon/index';
-import { getMenuItemInMenuListByPath } from '@/utils';
-import { createEffect, createMemo, createSignal, on, onMount } from 'solid-js';
+import { routeInf } from "@/types";
+import SvgIcon from "@/components/common/SvgIcon/index";
+import { getMenuItemInMenuListByPath } from "@/utils";
+import { createEffect, createMemo, createSignal, on, onMount } from "solid-js";
 
 export default function Menus() {
   const location = useLocation();
@@ -24,7 +24,7 @@ export default function Menus() {
   } = useCommonStore().data;
   const baseRoute = menuRoutes();
 
-  function onSelectMenu(item: string = 'home') {
+  function onSelectMenu(item: string = "home") {
     navigate(item);
     let menuItem = getMenuItemInMenuListByPath(menuRoutes(), item);
     setTagList(menuItem!);
@@ -42,7 +42,7 @@ export default function Menus() {
         );
       }
       return (
-        <MenuItem name={'/' + item.meta.path} icon={icon}>
+        <MenuItem name={"/" + item.meta.path} icon={icon}>
           {item.meta.title}
         </MenuItem>
       );
@@ -60,7 +60,7 @@ export default function Menus() {
   );
 
   onMount(() => {
-    setTagList({ path: 'home', title: '主頁' });
+    setTagList({ path: "home", title: "主頁" });
 
     onSelectMenu(location.pathname);
   });

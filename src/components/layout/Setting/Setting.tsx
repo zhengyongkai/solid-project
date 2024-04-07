@@ -1,7 +1,7 @@
-import { Button } from 'cui-solid-better';
+import { Button } from "cui-solid";
 
-import Styles from './css/setting.module.scss';
-import SvgIcon from '@/components/common/SvgIcon/index';
+import Styles from "./css/setting.module.scss";
+import SvgIcon from "@/components/common/SvgIcon/index";
 
 export default function Setting() {
   function onFullScreen() {
@@ -14,7 +14,7 @@ export default function Setting() {
   }
 
   return (
-    <div class={Styles['layout_setting']}>
+    <div class={Styles["layout_setting"]}>
       <div>
         <Button
           type="dashed"

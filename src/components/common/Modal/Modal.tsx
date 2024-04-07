@@ -1,5 +1,5 @@
 import { destructure } from "@solid-primitives/destructure";
-import { Button, Modal as CModal } from "cui-solid-better";
+import { Button, Modal as CModal } from "cui-solid";
 import { createMemo, createSignal, onMount, splitProps } from "solid-js";
 
 import Styles from "./css/modal.module.scss";

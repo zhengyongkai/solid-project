@@ -1,5 +1,5 @@
-import { useFormProps } from 'cui-solid-better/types/utils/useForm';
-import { createSignal } from 'solid-js';
+import { useFormProps } from "cui-solid/types/utils/useForm";
+import { createSignal } from "solid-js";
 
 function formSet(form: useFormProps) {
   const [value, setFormValue] = createSignal<any>(form.getFormData());

@@ -36,23 +36,23 @@ const asyncRoutes: routeInf[] = [
         ),
         meta: {
           login: true,
-          title: "管理员列表",
+          title: "Table",
           path: "system/administrator",
         },
       },
-      {
-        path: "/role",
-        component: lazy(() => import("@/views/System/Role/Role")),
-        meta: {
-          login: true,
-          title: "人员管理",
-          path: "system/role",
-        },
-      },
+      // {
+      //   path: "/role",
+      //   component: lazy(() => import("@/views/System/Role/Role")),
+      //   meta: {
+      //     login: true,
+      //     title: "人员管理",
+      //     path: "system/role",
+      //   },
+      // },
     ],
     meta: {
       login: true,
-      title: "系統管理",
+      title: "表单",
       icon: "setting",
     },
   },

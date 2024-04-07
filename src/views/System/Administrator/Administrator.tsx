@@ -15,7 +15,7 @@ import {
   FormItem,
   Col,
   Row,
-} from "cui-solid-better";
+} from "cui-solid";
 import { createSignal } from "solid-js";
 import AddAdForm from "./form/AddAdForm";
 
@@ -50,6 +50,7 @@ export default function Administrator() {
     {
       type: "account",
       title: "账号",
+      fixed: "left",
       render: (_c: any, _v: any, d: getAdministratorListResult) => {
         return d.account;
       },
@@ -114,6 +115,10 @@ export default function Administrator() {
     return false;
   }
 
+  function onRowSelect(value: getAdministratorListResult[]) {
+    console.log(value);
+  }
+
   return (
     <div>
       <Card class="button-handle-box ">
@@ -148,10 +153,7 @@ export default function Administrator() {
 
             <Button
               onClick={() => {
-                form.setFormData({
-                  ...form,
-                  account: "",
-                });
+                form.resetFields();
                 setSearchForm({
                   account: form.account,
                 });
@@ -171,6 +173,7 @@ export default function Administrator() {
       </Card>
       <Card>
         <Table
+          onRowChecked={onRowSelect}
           columns={columns}
           data={tableData()}
           loading={loading()}

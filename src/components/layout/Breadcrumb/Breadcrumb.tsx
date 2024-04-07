@@ -1,10 +1,10 @@
-import SvgIcon from '@/components/common/SvgIcon/index';
-import useCommonStore from '@/stores/common/index';
-import { useLocation } from '@solidjs/router';
-import { Breadcrumb } from 'cui-solid-better';
-import { For, createEffect, createMemo, createSignal } from 'solid-js';
-import { asyncRoutes } from '@/router';
-import { routeInf } from '@/types';
+import SvgIcon from "@/components/common/SvgIcon/index";
+import useCommonStore from "@/stores/common/index";
+import { useLocation } from "@solidjs/router";
+import { Breadcrumb } from "cui-solid";
+import { For, createEffect, createMemo, createSignal } from "solid-js";
+import { asyncRoutes } from "@/router";
+import { routeInf } from "@/types";
 
 export default function BreadcrumbLayout() {
   const location = useLocation();
@@ -17,7 +17,7 @@ export default function BreadcrumbLayout() {
   const pathname = createMemo(() => location.pathname);
 
   createEffect(() => {
-    let pathList = pathname().split('/').splice(1);
+    let pathList = pathname().split("/").splice(1);
 
     function routes(
       result: routeInf[],
@@ -25,7 +25,7 @@ export default function BreadcrumbLayout() {
       originalPath: string
     ) {
       let arr = originalRoutes.filter((res) => {
-        return res.path === originalPath || res.path === '/' + originalPath;
+        return res.path === originalPath || res.path === "/" + originalPath;
       });
       result.push(arr[0]);
       if (arr[0]?.children) {
@@ -66,7 +66,7 @@ export default function BreadcrumbLayout() {
 
   return (
     <>
-      <span style={{ 'margin-right': '10px' }} onClick={() => setFold(!fold())}>
+      <span style={{ "margin-right": "10px" }} onClick={() => setFold(!fold())}>
         {getFoldIcon()}
       </span>
       <Breadcrumb>{getBreadCrumbList()}</Breadcrumb>

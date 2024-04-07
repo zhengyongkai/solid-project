@@ -20,7 +20,7 @@ import Card from "@/components/layout/Card/Card";
 import Drawer from "./Components/Drawer";
 import useResize from "@/hooks/useResize";
 
-import { Form, Input, FormItem, useForm, ColorPicker } from "cui-solid-better";
+import { Form, Input, FormItem, useForm, ColorPicker, Option } from "cui-solid";
 import Circle from "./Node/RectNewModel";
 
 LogicFlow.use(Menu);
@@ -45,26 +45,25 @@ export default function G6Topo() {
 
   const [visible, setVisible] = createSignal(false);
 
-  const form = useForm<{
-    text: string;
-    id: string;
-    borderStyle: string;
-  }>({
+  const form = useForm({
     data: {
       text: "",
       id: "",
-      borderStyle: "#000",
+      borderColor: "#000",
+      gradientColor: "#000",
     },
   });
 
-  createEffect(
-    on(form.data, () => {
-      lf?.updateText(form.id, form.data().text);
+  function onFormChange(f: string, value: string) {
+    console.log(f, value);
+    if (f === "text") {
+      lf?.updateText(form.id, value);
+    } else {
       setStyle(form.id, {
-        borderColor: form.borderStyle,
+        [f]: value,
       });
-    })
-  );
+    }
+  }
 
   function onDrawerClose() {
     setVisible(false);
@@ -113,6 +112,7 @@ export default function G6Topo() {
   return (
     <div>
       <div style={{ height: "100%" }}>
+        <div class="text-sm mb-2">双击可以直接打开控件修改</div>
         <Card>
           <div style={{ height: "70vh", width: "100%" }} ref={a}></div>
         </Card>
@@ -122,11 +122,23 @@ export default function G6Topo() {
           top={48}
           title="彈窗"
         >
-          <Form form={form}>
+          <Form form={form} onChange={onFormChange}>
             <FormItem name="text" label="標題：">
               <Input></Input>
             </FormItem>
-            <FormItem name="borderStyle" label="邊距顏色：">
+            <FormItem name="fontSize" label="字体大小：">
+              <Input type="select">
+                <Option value={"12px"} label="12px"></Option>
+                <Option value={"14px"} label="14px"></Option>
+                <Option value={"16px"} label="16px"></Option>
+                <Option value={"18px"} label="18px"></Option>
+                <Option value={"20px"} label="20px"></Option>
+              </Input>
+            </FormItem>
+            <FormItem name="borderColor" label="邊距顏色：">
+              <ColorPicker />
+            </FormItem>
+            <FormItem name="gradientColor" label="背景颜色：">
               <ColorPicker />
             </FormItem>
           </Form>

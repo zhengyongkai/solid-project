@@ -1,11 +1,16 @@
 import SvgIcon from "@/components/common/SvgIcon";
 
 import Styles from "../css/parnelGroup.module.scss";
-import { Col, CountUp, Row } from "cui-solid-better";
+import { Col, CountUp, Row } from "cui-solid";
 
 import locale from "@/locale";
 
-export default function PanelGroup() {
+interface PanelGroupProps {
+  onClick: Function;
+}
+
+export default function PanelGroup(props: PanelGroupProps) {
+  const { onClick } = props;
   const chartList = [
     {
       type: locale.t("home.visit"),
@@ -39,8 +44,11 @@ export default function PanelGroup() {
         <Row gutter={16}>
           {chartList.map((item) => {
             return (
-              <Col grid={1 / 4}>
-                <div class={Styles["panel_group_item_wrapper"]}>
+              <Col xs={{ grid: 1 }} xl={{ grid: 1 / 4 }} md={{ grid: 1 / 2 }}>
+                <div
+                  class={Styles["panel_group_item_wrapper"]}
+                  onClick={() => onClick()}
+                >
                   <div>
                     <SvgIcon size={48} name={item.icon} />
                   </div>

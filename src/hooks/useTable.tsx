@@ -1,13 +1,7 @@
-import type {
-  Response,
-  ResponsePageSize,
-  tableResponse,
-} from "@/types/request";
-import { AxiosResponse } from "axios";
-import { useForm } from "cui-solid-better";
+import type { ResponsePageSize } from "@/types/request";
 
-import { Accessor, createSignal, onMount } from "solid-js";
-import { useFormProps } from "./useForm";
+import { createSignal, onMount } from "solid-js";
+
 import { pageInf } from "@/types";
 
 // interface apiInf = (params: getAccountListParams) => Promise<AxiosResponse<any, any>>

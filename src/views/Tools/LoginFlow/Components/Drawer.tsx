@@ -8,7 +8,7 @@ import {
   createMemo,
   createSignal,
 } from "solid-js";
-import { Icon } from "cui-solid-better";
+import { Icon } from "cui-solid";
 
 interface drawerPropsInf {
   visible: boolean;

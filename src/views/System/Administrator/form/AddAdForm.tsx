@@ -1,14 +1,7 @@
 import Modal from "@/components/common/Modal/Modal";
 import { destructure } from "@solid-primitives/destructure";
-import {
-  Col,
-  Form,
-  Input,
-  Row,
-  Option,
-  FormItem,
-  useForm,
-} from "cui-solid-better";
+import { Col, Form, Input, Row, Option, FormItem, useForm } from "cui-solid";
+import { formDataInf } from "../types/form";
 
 interface AddAdFormProps {
   visable: boolean;
@@ -32,8 +25,8 @@ interface AddAdFormData {
 }
 
 export default function AddAdForm(props: AddAdFormProps) {
-  const { visable, onClosed, onOk } = destructure(props);
-  const form = useForm<AddAdFormData>({
+  const { visable, onClosed } = destructure(props);
+  const form = useForm<formDataInf>({
     data: {
       name: "",
       account: "",
@@ -115,7 +108,7 @@ export default function AddAdForm(props: AddAdFormProps) {
   });
 
   async function onSubmit() {
-    if (await form.isValid()) {
+    if (await form.validate()) {
       console.log(form.getFormData());
     }
   }

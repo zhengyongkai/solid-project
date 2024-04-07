@@ -1,4 +1,4 @@
-import { Avatar, Dropdown, DropdownItem, DropdownMenu } from "cui-solid-better";
+import { Avatar, Dropdown, DropdownItem, DropdownMenu } from "cui-solid";
 import Styles from "./css/header.module.scss";
 
 import Setting from "../Setting/Setting";

@@ -1,9 +1,15 @@
-import { lineOptionsInf } from "@/types/echarts";
-import { createSignal, onMount } from "solid-js";
+import { lineOptionsInf, seriesInf } from "@/types/echarts";
+import { createEffect, createSignal, on, onMount } from "solid-js";
 import Echarts from "@/components/Echarts/Echarts";
 import { getOnLineStatistics } from "@/api/home";
+import { destructure } from "@solid-primitives/destructure";
 
-export default function Online() {
+interface OnlineProps {
+  data: seriesInf[];
+}
+
+export default function Online(props: OnlineProps) {
+  let { data } = destructure(props);
   let [options, setOption] = createSignal<lineOptionsInf>({
     xAxis: {
       type: "category",
@@ -12,18 +18,14 @@ export default function Online() {
     series: [],
   });
 
-  async function loadOnlineData() {
-    let {
-      data: { list },
-    } = await getOnLineStatistics();
-    setOption({
-      ...options(),
-      series: list,
-    });
-  }
+  createEffect(
+    on(data, () => {
+      setOption({
+        ...options(),
+        series: data(),
+      });
+    })
+  );
 
-  onMount(() => {
-    loadOnlineData();
-  });
   return <Echarts options={options()} height={300}></Echarts>;
 }

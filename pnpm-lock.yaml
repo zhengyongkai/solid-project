@@ -26,9 +26,9 @@ dependencies:
   chart.js:
     specifier: ^4.4.2
     version: 4.4.2
-  cui-solid-better:
-    specifier: ^0.1.8
-    version: 0.1.8
+  cui-solid:
+    specifier: ^0.1.38
+    version: 0.1.38
   echarts:
     specifier: ^5.5.0
     version: 5.5.0
@@ -1826,10 +1826,9 @@ packages:
   /csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
 
-  /cui-solid-better@0.1.8:
-    resolution: {integrity: sha512-+UOXsMWFQl9AxZI7b0cHTT9c7irUoqCeUEOuXTEf8viictHYGC91Ukd+99sAc8n5Yh/i2i+BRCV+HKyNSGctiw==}
+  /cui-solid@0.1.38:
+    resolution: {integrity: sha512-+vNtSCYS4Vx1RLOUaoI/nSAqOHnN1qUYMAplTS6AP3KmB16WhE5CjYsO+QXZ1c5MvnZA5LpTW+7IxVwF3EUNMA==}
     dependencies:
-      async-validator: 4.2.5
       countup.js: 2.8.0
       cui-virtual-list: 1.0.7
       dayjs: 1.11.10

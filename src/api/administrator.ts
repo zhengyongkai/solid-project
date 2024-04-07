@@ -1,5 +1,8 @@
 import request from "@/utils/request";
-import { getAccountListParams } from "./types/adminstrator";
+import {
+  getAccountListParams,
+  getAdministratorListResult,
+} from "./types/adminstrator";
 import { ResponsePageSize, tableResponse } from "@/types/request";
 
 const API = {
@@ -12,7 +15,7 @@ const API = {
 
 export function getAdministratorList(
   params: getAccountListParams
-): ResponsePageSize<any> {
+): ResponsePageSize<getAdministratorListResult> {
   return request.get(API.ACCOUNTLIST_URL, {
     params,
   });
