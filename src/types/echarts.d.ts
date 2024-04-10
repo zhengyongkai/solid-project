@@ -1,24 +1,23 @@
 import { Accessor } from "solid-js";
 // series 基本数据类型
-export interface seriesInf {
-  name: string;
-  type: string;
-  data: number[];
-}
+
+export type BarSeries = echarts.BarSeriesOption;
+export type PieSeries = echarts.PieSeriesOption;
+export type LineSeries = echarts.LineSeriesOption;
+export type MapSeries = echarts.MapSeriesOption;
 
 // echarts 基本数据类型
-export interface lineOptionsInf {
+export interface LineOptionsInf<T> {
   xAxis: echarts.XAXisComponentOption;
-  series: seriesInf[];
+  series: T;
   legend?: echarts.LegendComponentOption;
   yAxis?: echarts.YAXisComponentOption;
   grid?: echarts.GridComponentOption;
   tooltip?: echarts.TooltipComponentOption;
+  calculable?: boolean;
 }
 
 // echarts 组件基本设置
-export type echartsInf = {
+export type EchartsInf = {
   options: lineOptionsInf;
 };
-
-

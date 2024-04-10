@@ -1,12 +1,16 @@
-import type { echartsInf } from "@/types/echarts";
+import type { EchartsInf } from "@/types/echarts";
 import * as echarts from "echarts";
 import { destructure } from "@solid-primitives/destructure";
 
 import { createEffect, on, onCleanup, onMount } from "solid-js";
 
-import { gridOptions, tooltipOptions, yAxisOptions } from "./options/default";
+import {
+  defaultGridOptions,
+  defaultTooltipOptions,
+  yAxisOptions,
+} from "./options/default";
 
-export interface linePropsInf extends echartsInf {
+export interface linePropsInf extends EchartsInf {
   height: number;
 }
 
@@ -32,8 +36,8 @@ export default function LineEcharts(props: linePropsInf) {
       series,
       legend,
       yAxis = yAxisOptions,
-      grid = gridOptions,
-      tooltip = tooltipOptions,
+      grid = defaultGridOptions,
+      tooltip = defaultTooltipOptions,
     } = options();
 
     charts?.setOption({

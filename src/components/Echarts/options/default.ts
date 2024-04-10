@@ -1,16 +1,14 @@
-const xAxis = {};
-
-const gridOptions = {
+const defaultGridOptions = {
   left: "1%",
   right: "1%",
   bottom: "3%",
   containLabel: true,
 };
 
-const tooltipOptions = {
+const defaultTooltipOptions: echarts.TooltipComponentOption = {
   trigger: "axis",
   axisPointer: {
-    type: "cross",
+    type: "none",
     label: {
       backgroundColor: "#6a7985",
     },
@@ -18,4 +16,4 @@ const tooltipOptions = {
 };
 
 const yAxisOptions = { type: "value" };
-export { xAxis, gridOptions, tooltipOptions, yAxisOptions };
+export { defaultGridOptions, defaultTooltipOptions, yAxisOptions };

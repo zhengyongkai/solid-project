@@ -4,6 +4,7 @@ import Styles from "../css/parnelGroup.module.scss";
 import { Col, CountUp, Row } from "cui-solid";
 
 import locale from "@/locale";
+import Loading from "@/components/common/Loading/Loading";
 
 interface PanelGroupProps {
   onClick: Function;

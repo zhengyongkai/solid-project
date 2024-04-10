@@ -1,0 +1,26 @@
+$loading-height: 32px;
+
+.loading-mask {
+  position: relative;
+
+  inset: 0;
+  width: 100%;
+  z-index: 100;
+  height: 100%;
+  .loading-wrapper {
+    height: 100%;
+    // top: calc((0px - $loading-height) / 2);
+    // margin-top: calc((0px - $loading-height) / 2);
+    z-index: 99;
+    position: absolute;
+    background-color: $base-bgcolor-default;
+    text-align: center;
+    width: 100%;
+    > svg {
+      margin: 0 auto;
+      position: relative;
+      top: 50%;
+      margin-top: calc((0px - $loading-height) / 2);
+    }
+  }
+}

@@ -1,13 +1,6 @@
 import { destructure } from "@solid-primitives/destructure";
 import Styles from "../css/drawer.module.scss";
-import {
-  Accessor,
-  Setter,
-  createComputed,
-  createEffect,
-  createMemo,
-  createSignal,
-} from "solid-js";
+import { createMemo } from "solid-js";
 import { Icon } from "cui-solid";
 
 interface drawerPropsInf {

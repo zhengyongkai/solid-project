@@ -27,6 +27,25 @@ const asyncRoutes: routeInf[] = [
     },
   },
   {
+    path: "css",
+    children: [
+      {
+        path: "/tailwindcss",
+        component: lazy(() => import("@/views/Tailwindcss/Tailwindcss")),
+        meta: {
+          login: true,
+          title: "Tailwindcss",
+          path: "css/tailwindcss",
+        },
+      },
+    ],
+    meta: {
+      login: true,
+      title: "样式",
+      icon: "setting",
+    },
+  },
+  {
     path: "system",
     children: [
       {
@@ -40,15 +59,6 @@ const asyncRoutes: routeInf[] = [
           path: "system/administrator",
         },
       },
-      // {
-      //   path: "/role",
-      //   component: lazy(() => import("@/views/System/Role/Role")),
-      //   meta: {
-      //     login: true,
-      //     title: "人员管理",
-      //     path: "system/role",
-      //   },
-      // },
     ],
     meta: {
       login: true,

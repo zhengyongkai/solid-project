@@ -1,13 +1,12 @@
 .button-handle-box {
-  // padding: 10px;
-  // box-sizing: border-box;
-  // background-color: #fff;
-  margin-bottom: 10px;
   .cm-form-item {
     margin-bottom: 0;
   }
-
   .cm-button + .cm-button {
     margin-left: 12px;
   }
+}
+
+.card-wrapper {
+  margin-bottom: 16px;
 }

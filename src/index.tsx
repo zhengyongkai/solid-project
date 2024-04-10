@@ -8,6 +8,7 @@ import "cui-solid/dist/styles/cui.css";
 import "@/assets/styles/index.scss";
 import "@/assets/styles/cui.scss";
 import "@/assets/styles/flow.scss";
+import "@/assets/styles/svg.scss";
 
 import "virtual:svg-icons-register";
 
