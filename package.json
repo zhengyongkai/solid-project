@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": " vite build",
+    "build": " vite build  --mode mock",
     "dev": "vite --mode dev --port 3333",
     "mock": "vite --mode mock --port 3333",
     "preview": "vite preview"
