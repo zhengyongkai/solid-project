@@ -9,17 +9,18 @@ interface propsInf {
   width?: string;
   height?: string;
   class?: string;
+  style?: any;
 }
 
 export default function Card(props: propsInf) {
-  let { children } = props;
+  let { children, style } = props;
 
   let classes = createMemo(() => {
     return (props.class || "") + " " + Styles["layout_module_title"];
   });
 
   return (
-    <div class={classes()}>
+    <div class={classes()} style={style}>
       <div>{children}</div>
     </div>
   );

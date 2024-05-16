@@ -1,6 +1,5 @@
 import useUserStore from "@/stores/user";
 import { Card, Col, Progress, Row } from "cui-solid";
-import { For } from "solid-js";
 
 export default function Tailwindcss() {
   const {
@@ -137,6 +136,7 @@ export default function Tailwindcss() {
             </Col>
           </Row>
         </div>
+        <div></div>
       </div>
     </>
   );

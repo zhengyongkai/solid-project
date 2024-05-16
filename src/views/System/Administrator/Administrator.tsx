@@ -1,5 +1,5 @@
 import { getAdministratorList } from "@/api/administrator";
-import type { getAdministratorListResult } from "@/api/types/adminstrator";
+import type { getAdministratorListResult as adminInf } from "@/api/types/adminstrator";
 import Card from "@/components/layout/Card/Card";
 
 import useTable from "@/hooks/useTable";
@@ -15,11 +15,16 @@ import {
   FormItem,
   Col,
   Row,
+  modal,
+  message,
 } from "cui-solid";
 import { createSignal } from "solid-js";
-import AddAdForm from "./form/AddAdForm";
+import HandleAdForm from "./form/HandleAdForm";
+import { initalData } from "./data/data";
 
 export default function Administrator() {
+  const initalCurrent = Object.assign({}, initalData);
+
   const form = useForm({
     data: {
       account: "",
@@ -34,8 +39,10 @@ export default function Administrator() {
     onChange,
     onChangePageSize,
     setSearchForm,
+    selectedRowKeys,
+    setSelectedRowKeys,
   } = useTable<
-    getAdministratorListResult,
+    adminInf,
     {
       account: string;
     }
@@ -43,7 +50,9 @@ export default function Administrator() {
     account: form.account,
   });
 
-  const [visible, setVisible] = createSignal(false);
+  const [addVisabled, setAddVisabled] = createSignal(false);
+  const [current, setCurrent] = createSignal<adminInf>(initalCurrent);
+  const [handleType, setHandleType] = createSignal("add");
 
   const columns = [
     { type: "checkbox", width: "55px" },
@@ -51,14 +60,14 @@ export default function Administrator() {
       type: "account",
       title: "账号",
       fixed: "left",
-      render: (_c: any, _v: any, d: getAdministratorListResult) => {
+      render: (_c: any, _v: any, d: adminInf) => {
         return d.account;
       },
     },
     {
       name: "deparmentName",
       title: "使用单位",
-      render: (_c: any, _v: any, d: getAdministratorListResult) => {
+      render: (_c: any, _v: any, d: adminInf) => {
         return d.deparmentName;
       },
     },
@@ -69,7 +78,7 @@ export default function Administrator() {
     {
       name: "isvalid",
       title: "是否有效",
-      render: (_c: any, _v: any, d: getAdministratorListResult) => {
+      render: (_c: any, _v: any, d: adminInf) => {
         return d.isvalid ? "有效" : "无效";
       },
     },
@@ -77,12 +86,17 @@ export default function Administrator() {
     {
       title: "操作",
       width: "250px",
-      render: (_c: any, _v: any) => {
+      render: (_c: any, _v: any, d: adminInf) => {
         return (
           <div>
             <Button
               type="text"
               class="cui-text-button-primary"
+              onClick={() => {
+                setCurrent(d);
+                setAddVisabled(true);
+                setHandleType("edit");
+              }}
               icon={<Icon name="edit"></Icon>}
             >
               编辑
@@ -90,6 +104,7 @@ export default function Administrator() {
             <Button
               type="text"
               class="cui-text-button-danger"
+              onClick={() => onDelete(d)}
               icon={<Icon name="delete"></Icon>}
             >
               删除
@@ -108,15 +123,33 @@ export default function Administrator() {
   ];
 
   function onHandleClose() {
-    setVisible(false);
+    setAddVisabled(false);
   }
 
   function onAddUser() {
     return false;
   }
 
-  function onRowSelect(value: getAdministratorListResult[]) {
-    console.log(value);
+  function onDelete(data?: adminInf) {
+    let deleteData = [];
+    if (data) {
+      deleteData.push(data.id);
+    } else {
+      if (selectedRowKeys().length === 0) {
+        return message.warning("请选择要清除的数据");
+      }
+      deleteData = selectedRowKeys();
+    }
+    modal.confirm({
+      title: `是否删除这${deleteData.length}条数据`,
+      content: "删除后不可恢复！",
+      onOk: () => {
+        setSelectedRowKeys([]);
+        message.success({
+          content: "删除成功",
+        });
+      },
+    });
   }
 
   return (
@@ -144,7 +177,11 @@ export default function Administrator() {
             </Button>
 
             <Button
-              onClick={() => setVisible(true)}
+              onClick={() => {
+                setCurrent(initalCurrent);
+                setAddVisabled(true);
+                setHandleType("add");
+              }}
               type="primary"
               icon={<Icon name="user"></Icon>}
             >
@@ -165,7 +202,11 @@ export default function Administrator() {
               重置
             </Button>
 
-            <Button type="error" icon={<Icon name="trash"></Icon>}>
+            <Button
+              type="error"
+              onClick={() => onDelete()}
+              icon={<Icon name="trash"></Icon>}
+            >
               批量删除
             </Button>
           </Row>
@@ -173,7 +214,8 @@ export default function Administrator() {
       </Card>
       <Card>
         <Table
-          onRowChecked={onRowSelect}
+          rowKey="id"
+          selectedRowKeys={[selectedRowKeys, setSelectedRowKeys]}
           columns={columns}
           data={tableData()}
           loading={loading()}
@@ -191,11 +233,13 @@ export default function Administrator() {
           onChangePageSize={onChangePageSize}
         />
       </div>
-      <AddAdForm
-        visable={visible()}
+      <HandleAdForm
+        visable={addVisabled()}
         onClosed={onHandleClose}
         onOk={onAddUser}
-      ></AddAdForm>
+        currentData={current()}
+        handleType={handleType()}
+      />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 export default {
-  title: "Solidjs 管理系统",
+  title: "Kathy",
   system: {
     username: "用户名",
   },

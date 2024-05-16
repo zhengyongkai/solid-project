@@ -45,6 +45,7 @@ const asyncRoutes: routeInf[] = [
       icon: "setting",
     },
   },
+
   {
     path: "system",
     children: [
@@ -77,6 +78,24 @@ const asyncRoutes: routeInf[] = [
           login: true,
           title: "LoginFlow 流程圖",
           path: "tools/LoginFlow",
+        },
+      },
+      {
+        path: "/code",
+        component: lazy(() => import("@/views/Tools/Code/Code")),
+        meta: {
+          login: true,
+          title: "代码编辑器",
+          path: "tools/code",
+        },
+      },
+      {
+        path: "/pdf",
+        component: lazy(() => import("@/views/Tools/Pdf/Pdf")),
+        meta: {
+          login: true,
+          title: "pdf",
+          path: "tools/pdf",
         },
       },
     ],

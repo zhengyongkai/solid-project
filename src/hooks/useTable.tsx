@@ -6,11 +6,14 @@ import { pageInf } from "@/types";
 
 // interface apiInf = (params: getAccountListParams) => Promise<AxiosResponse<any, any>>
 
+type KeyType = string | number;
+
 export default function useTable<T, U>(
   api: (params: pageInf & U) => ResponsePageSize<T>,
   form: U
 ) {
   const [searchForm, setSearchForm] = createSignal<U>(form);
+  const [selectedRowKeys, setSelectedRowKeys] = createSignal<KeyType[]>([]);
 
   const [loading, setLoading] = createSignal(false);
 
@@ -80,5 +83,7 @@ export default function useTable<T, U>(
     onChangePageSize,
     searchForm,
     setSearchForm,
+    selectedRowKeys,
+    setSelectedRowKeys,
   };
 }

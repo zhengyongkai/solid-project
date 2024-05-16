@@ -5,6 +5,7 @@ export type getAccountListParams = {
 };
 
 export interface getAdministratorListResult {
+  id: string;
   account: string;
   bgName: string;
   buName: string;
@@ -22,4 +23,5 @@ export interface getAdministratorListResult {
   phone: string;
   roleId: number;
   roleName: string;
+  password: string;
 }

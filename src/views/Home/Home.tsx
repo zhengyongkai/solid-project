@@ -11,11 +11,11 @@ import { getOnLineStatistics } from "@/api/home";
 import Loading from "@/components/common/Loading/Loading";
 import OnlinePie from "./components/Statistics/OnLinePie";
 
-import type { barSeries } from "@/types/echarts";
+import type { BarSeries } from "@/types/echarts";
 import OnLineLine from "./components/Statistics/OnLineLine";
 
 export default function Administrator() {
-  const [onLineData, setOnLineData] = createSignal<barSeries[]>([]);
+  const [onLineData, setOnLineData] = createSignal<BarSeries[]>([]);
   const [loading, setLoading] = createSignal(false);
 
   async function loadOnlineData() {
