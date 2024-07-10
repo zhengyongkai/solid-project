@@ -1,127 +1,121 @@
-import Modal from "@/components/common/Modal/Modal";
-import { destructure } from "@solid-primitives/destructure";
-import { Col, Form, Input, Row, Option, FormItem, useForm } from "cui-solid";
-import { formDataInf } from "../types/form";
+import Modal from '@/components/common/Modal/Modal'
+import { destructure } from '@solid-primitives/destructure'
+import { Col, Form, Input, Row, Option, FormItem, useForm } from 'cui-solid'
+import { formDataInf } from '../types/form'
 
 interface AddAdFormProps {
-  visable: boolean;
-  onClosed: () => void;
-  onOk: () => void;
+  visable: boolean
+  onClosed: () => void
+  onOk: () => void
 }
 
 interface AddAdFormData {
-  account: string;
-  password: string;
-  deparmentName: string;
-  bgName: string;
-  buName: string;
-  empno: string;
-  name: string;
-  phone: string;
-  email: string;
-  isvalid: boolean;
-  roleName: string;
-  comfirmPassword: string;
+  account: string
+  password: string
+  deparmentName: string
+  bgName: string
+  buName: string
+  empno: string
+  name: string
+  phone: string
+  email: string
+  isvalid: boolean
+  roleName: string
+  comfirmPassword: string
 }
 
 export default function AddAdForm(props: AddAdFormProps) {
-  const { visable, onClosed } = destructure(props);
+  const { visable, onClosed } = destructure(props)
   const form = useForm<formDataInf>({
     data: {
-      name: "",
-      account: "",
-      password: "",
-      deparmentName: "",
-      bgName: "",
-      buName: "",
-      email: "",
-      empno: "",
-      phone: "",
+      name: '',
+      account: '',
+      password: '',
+      deparmentName: '',
+      bgName: '',
+      buName: '',
+      email: '',
+      empno: '',
+      phone: '',
       isvalid: true,
-      roleName: "1",
-      comfirmPassword: "",
+      roleName: '1',
+      comfirmPassword: ''
     },
     validation: {
       account: {
-        required: true,
+        required: true
       },
       password: {
-        required: true,
+        required: true
       },
       empno: {
-        required: true,
+        required: true
       },
       name: {
-        required: true,
+        required: true
       },
       bgName: {
-        required: true,
+        required: true
       },
       buName: {
-        required: true,
+        required: true
       },
       deparmentName: {
-        required: true,
+        required: true
       },
       phone: {
-        required: true,
+        required: true
       },
       email: {
-        required: true,
+        required: true
       },
       roleName: {
-        required: true,
-      },
+        required: true
+      }
     },
     message: {
       account: {
-        required: "请填写账号",
+        required: '请填写账号'
       },
       password: {
-        required: "请填写账号",
+        required: '请填写密码'
       },
       empno: {
-        required: "请填写负责人工号",
+        required: '请填写负责人工号'
       },
       name: {
-        required: "请填写负责人姓名",
+        required: '请填写负责人姓名'
       },
       bgName: {
-        required: "请填写事业群",
+        required: '请填写事业群'
       },
       buName: {
-        required: "请填写事业处",
+        required: '请填写事业处'
       },
       deparmentName: {
-        required: "请填写使用单位(部门)",
+        required: '请填写使用单位(部门)'
       },
       phone: {
-        required: "请填写负责人电话",
+        required: '请填写负责人电话'
       },
       email: {
-        required: "请填写负责人邮箱",
+        required: '请填写负责人邮箱'
       },
       roleName: {
-        required: "请填写角色身份",
-      },
-    },
-  });
+        required: '请填写角色身份'
+      }
+    }
+  })
 
   async function onSubmit() {
     if (await form.validate()) {
-      console.log(form.getFormData());
+      console.log(form.getFormData())
     }
   }
 
   return (
     <>
-      <Modal
-        title="提示"
-        visible={visable()}
-        onClosed={onClosed()}
-        onOk={onSubmit}
-        width={700}
-      >
+      <Modal title="提示" visible={visable()} onClosed={onClosed()} onOk={onSubmit} width={700}>
         <div>
           <Form form={form} labelWidth={120}>
             <Row>
@@ -143,20 +137,20 @@ export default function AddAdForm(props: AddAdFormProps) {
                   rules={[
                     {
                       required: true,
-                      message: "请填写确认密码",
+                      message: '请填写确认密码'
                     },
                     {
                       required: true,
                       asyncValidator: (_rule: any, value: string) => {
                         return new Promise<void>((resolve, reject) => {
                           if (value !== form.password) {
-                            reject("密码不一致"); // reject with error message
+                            reject('密码不一致') // reject with error message
                           } else {
-                            resolve();
+                            resolve()
                           }
-                        });
-                      },
-                    },
+                        })
+                      }
+                    }
                   ]}
                   label="确认密码"
                 >
@@ -216,8 +210,8 @@ export default function AddAdForm(props: AddAdFormProps) {
               <Col grid={1 / 2}>
                 <FormItem name="roleName" label="角色身份">
                   <Input type="select" clearable placeholder="请选择" transfer>
-                    <Option value={"1"} label="管理员"></Option>
-                    <Option value={"2"} label="用户"></Option>
+                    <Option value={'1'} label="管理员"></Option>
+                    <Option value={'2'} label="用户"></Option>
                   </Input>
                 </FormItem>
               </Col>
@@ -226,5 +220,5 @@ export default function AddAdForm(props: AddAdFormProps) {
         </div>
       </Modal>
     </>
-  );
+  )
 }

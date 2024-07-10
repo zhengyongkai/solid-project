@@ -1,37 +1,37 @@
-import useUserStore from "@/stores/user";
-import { Card, Col, Progress, Row } from "cui-solid";
+import useUserStore from '@/stores/user'
+import { Card, Col, Progress, Row } from 'cui-solid'
 
 export default function Tailwindcss() {
   const {
-    userInfo: [userInfo],
-  } = useUserStore().data;
+    userInfo: [userInfo]
+  } = useUserStore().data
 
   const tData = Array(10)
     .fill(10)
     .map((_item, index) => {
       return (
         <tr>
-          <td class="p-4 border-b border-blue-gray-50">
+          <td class="p-8 border-b border-blue-gray-50">
             <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
               {index}
             </p>
           </td>
-          <td class="p-4 border-b border-blue-gray-50">
+          <td class="p-8 border-b border-blue-gray-50">
             <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
               John Michael
             </p>
           </td>
-          <td class="p-4 border-b border-blue-gray-50">
+          <td class="p-8 border-b border-blue-gray-50">
             <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
               Manager
             </p>
           </td>
-          <td class="p-4 border-b border-blue-gray-50">
+          <td class="p-8 border-b border-blue-gray-50">
             <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
               23/04/18
             </p>
           </td>
-          <td class="p-4 border-b border-blue-gray-50">
+          <td class="p-8 border-b border-blue-gray-50">
             <a
               href="#"
               class="block font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900"
@@ -40,8 +40,8 @@ export default function Tailwindcss() {
             </a>
           </td>
         </tr>
-      );
-    });
+      )
+    })
 
   return (
     <>
@@ -69,7 +69,7 @@ export default function Tailwindcss() {
                           <h2 class="text-base">Vue</h2>
                           <Progress
                             value={50}
-                            strokeColor={["#108ee9", "#87d068", "#d9363e"]}
+                            strokeColor={['#108ee9', '#87d068', '#d9363e']}
                           ></Progress>
                         </Col>
                       </Row>
@@ -103,7 +103,7 @@ export default function Tailwindcss() {
                   <table class="w-full text-left table-auto min-w-max">
                     <thead>
                       <tr>
-                        <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+                        <th class="p-4 h-40 border-b border-blue-gray-100 bg-blue-gray-50">
                           <p class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
                             No
                           </p>
@@ -139,5 +139,5 @@ export default function Tailwindcss() {
         <div></div>
       </div>
     </>
-  );
+  )
 }

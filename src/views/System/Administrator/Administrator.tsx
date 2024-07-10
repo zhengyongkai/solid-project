@@ -1,8 +1,8 @@
-import { getAdministratorList } from "@/api/administrator";
-import type { getAdministratorListResult as adminInf } from "@/api/types/adminstrator";
-import Card from "@/components/layout/Card/Card";
+import { getAdministratorList } from '@/api/administrator'
+import type { getAdministratorListResult as adminInf } from '@/api/types/adminstrator'
+import Card from '@/components/layout/Card/Card'
 
-import useTable from "@/hooks/useTable";
+import useTable from '@/hooks/useTable'
 import {
   Input,
   Button,
@@ -17,19 +17,21 @@ import {
   Row,
   modal,
   message,
-} from "cui-solid";
-import { createSignal } from "solid-js";
-import HandleAdForm from "./form/HandleAdForm";
-import { initalData } from "./data/data";
+  Divider,
+  Tag
+} from 'cui-solid'
+import { createSignal } from 'solid-js'
+import HandleAdForm from './form/HandleAdForm'
+import { initalData } from './data/data'
 
 export default function Administrator() {
-  const initalCurrent = Object.assign({}, initalData);
+  const initalCurrent = Object.assign({}, initalData)
 
   const form = useForm({
     data: {
-      account: "",
-    },
-  });
+      account: ''
+    }
+  })
 
   const {
     tableData,
@@ -40,116 +42,112 @@ export default function Administrator() {
     onChangePageSize,
     setSearchForm,
     selectedRowKeys,
-    setSelectedRowKeys,
+    setSelectedRowKeys
   } = useTable<
     adminInf,
     {
-      account: string;
+      account: string
     }
   >(getAdministratorList, {
-    account: form.account,
-  });
+    account: form.account
+  })
 
-  const [addVisabled, setAddVisabled] = createSignal(false);
-  const [current, setCurrent] = createSignal<adminInf>(initalCurrent);
-  const [handleType, setHandleType] = createSignal("add");
+  const [addVisabled, setAddVisabled] = createSignal(false)
+  const [current, setCurrent] = createSignal<adminInf>(initalCurrent)
+  const [handleType, setHandleType] = createSignal('add')
 
   const columns = [
-    { type: "checkbox", width: "55px" },
+    { type: 'checkbox', width: '55px' },
     {
-      type: "account",
-      title: "账号",
-      fixed: "left",
+      type: 'account',
+      title: '账号',
+      fixed: 'left',
       render: (_c: any, _v: any, d: adminInf) => {
-        return d.account;
-      },
+        return d.account
+      }
     },
     {
-      name: "deparmentName",
-      title: "使用单位",
+      name: 'deparmentName',
+      title: '使用单位',
       render: (_c: any, _v: any, d: adminInf) => {
-        return d.deparmentName;
-      },
+        return d.deparmentName
+      }
     },
-    { name: "bgName", title: "事业群" },
-    { name: "buName", title: "事业处" },
-    { name: "empno", title: "負責人工號" },
-    { name: "name", title: "負責人姓名" },
+    { name: 'bgName', title: '事业群' },
+    { name: 'buName', title: '事业处' },
+    { name: 'empno', title: '負責人工號' },
+    { name: 'name', title: '負責人姓名' },
     {
-      name: "isvalid",
-      title: "是否有效",
+      name: 'isvalid',
+      title: '是否有效',
       render: (_c: any, _v: any, d: adminInf) => {
-        return d.isvalid ? "有效" : "无效";
-      },
+        return d.isvalid ? '有效' : '无效'
+      }
     },
-    { name: "roleName", title: "角色身份" },
     {
-      title: "操作",
-      width: "250px",
+      name: 'roleName',
+      title: '角色身份',
+      render: (_c: any, _v: any, d: adminInf) => {
+        return <Tag theme="primary">用户</Tag>
+      }
+    },
+    {
+      title: '操作',
+      width: '250px',
       render: (_c: any, _v: any, d: adminInf) => {
         return (
           <div>
             <Button
-              type="text"
-              class="cui-text-button-primary"
+              type="primary"
               onClick={() => {
-                setCurrent(d);
-                setAddVisabled(true);
-                setHandleType("edit");
+                setCurrent(d)
+                setAddVisabled(true)
+                setHandleType('edit')
               }}
               icon={<Icon name="edit"></Icon>}
-            >
-              编辑
-            </Button>
+            ></Button>
+            <Divider dir="v" />
             <Button
-              type="text"
-              class="cui-text-button-danger"
+              type="error"
               onClick={() => onDelete(d)}
               icon={<Icon name="delete"></Icon>}
-            >
-              删除
-            </Button>
-            <Button
-              type="text"
-              class="cui-text-button-danger"
-              icon={<Icon name="stop-circle"></Icon>}
-            >
-              禁用
-            </Button>
+            ></Button>
+            <Divider dir="v" />
+            <Button type="warning" icon={<Icon name="stop-circle"></Icon>}></Button>
           </div>
-        );
-      },
-    },
-  ];
+        )
+      }
+    }
+  ]
 
   function onHandleClose() {
-    setAddVisabled(false);
+    setAddVisabled(false)
   }
 
   function onAddUser() {
-    return false;
+    return false
   }
 
   function onDelete(data?: adminInf) {
-    let deleteData = [];
+    let deleteData = []
     if (data) {
-      deleteData.push(data.id);
+      deleteData.push(data.id)
     } else {
       if (selectedRowKeys().length === 0) {
-        return message.warning("请选择要清除的数据");
+        return message.warning('请选择要清除的数据')
       }
-      deleteData = selectedRowKeys();
+      deleteData = selectedRowKeys()
     }
     modal.confirm({
       title: `是否删除这${deleteData.length}条数据`,
-      content: "删除后不可恢复！",
+      content: '删除后不可恢复！',
       onOk: () => {
-        setSelectedRowKeys([]);
+        setSelectedRowKeys([])
         message.success({
-          content: "删除成功",
-        });
-      },
-    });
+          content: '删除成功'
+        })
+      }
+    })
   }
 
   return (
@@ -166,9 +164,9 @@ export default function Administrator() {
             <Button
               onClick={() => {
                 setSearchForm({
-                  account: form.account,
-                });
-                requestData(true);
+                  account: form.account
+                })
+                requestData(true)
               }}
               type="primary"
               icon={<Icon name="search"></Icon>}
@@ -178,9 +176,9 @@ export default function Administrator() {
 
             <Button
               onClick={() => {
-                setCurrent(initalCurrent);
-                setAddVisabled(true);
-                setHandleType("add");
+                setCurrent(initalCurrent)
+                setAddVisabled(true)
+                setHandleType('add')
               }}
               type="primary"
               icon={<Icon name="user"></Icon>}
@@ -190,11 +188,11 @@ export default function Administrator() {
 
             <Button
               onClick={() => {
-                form.resetFields();
+                form.resetFields()
                 setSearchForm({
-                  account: form.account,
-                });
-                requestData(true);
+                  account: form.account
+                })
+                requestData(true)
               }}
               type="warning"
               icon={<Icon name="refresh-cw"></Icon>}
@@ -202,11 +200,7 @@ export default function Administrator() {
               重置
             </Button>
 
-            <Button
-              type="error"
-              onClick={() => onDelete()}
-              icon={<Icon name="trash"></Icon>}
-            >
+            <Button type="error" onClick={() => onDelete()} icon={<Icon name="trash"></Icon>}>
               批量删除
             </Button>
           </Row>
@@ -241,5 +235,5 @@ export default function Administrator() {
         handleType={handleType()}
       />
     </div>
-  );
+  )
 }

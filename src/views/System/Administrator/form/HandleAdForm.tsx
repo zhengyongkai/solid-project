@@ -1,104 +1,105 @@
-import Modal from "@/components/common/Modal/Modal";
-import { destructure } from "@solid-primitives/destructure";
-import { Col, Form, Input, Row, Option, FormItem, useForm } from "cui-solid";
+import Modal from '@/components/common/Modal/Modal'
+import { destructure } from '@solid-primitives/destructure'
+import { Col, Form, Input, Row, Option, FormItem, useForm } from 'cui-solid'
 
-import { getAdministratorListResult } from "@/api/types/adminstrator";
-import { createEffect, on } from "solid-js";
+import { getAdministratorListResult } from '@/api/types/adminstrator'
+import { createEffect, on } from 'solid-js'
 
 interface EditAdFormProps {
-  visable: boolean;
-  onClosed: () => void;
-  onOk: () => void;
-  currentData: getAdministratorListResult;
-  handleType: string;
+  visable: boolean
+  onClosed: () => void
+  onOk: () => void
+  currentData: getAdministratorListResult
+  handleType: string
 }
 
 export default function HandleAdForm(props: EditAdFormProps) {
-  const { visable, onClosed, currentData, handleType } = destructure(props);
+  const { visable, onClosed, currentData, handleType } = destructure(props)
 
   const form = useForm<getAdministratorListResult>({
     data: currentData(),
     validation: {
       account: {
-        required: true,
+        required: true
       },
       password: {
-        required: true,
+        required: true
       },
       empno: {
-        required: true,
+        required: true
       },
       name: {
-        required: true,
+        required: true
       },
       bgName: {
-        required: true,
+        required: true
       },
       buName: {
-        required: true,
+        required: true
       },
       deparmentName: {
-        required: true,
+        required: true
       },
       phone: {
-        required: true,
+        required: true
       },
       email: {
-        required: true,
+        required: true
       },
       roleName: {
-        required: true,
-      },
+        required: true
+      }
     },
     message: {
       account: {
-        required: "请填写账号",
+        required: '请填写账号'
       },
       password: {
-        required: "请填写密码",
+        required: '请填写密码'
       },
       empno: {
-        required: "请填写负责人工号",
+        required: '请填写负责人工号'
       },
       name: {
-        required: "请填写负责人姓名",
+        required: '请填写负责人姓名'
       },
       bgName: {
-        required: "请填写事业群",
+        required: '请填写事业群'
       },
       buName: {
-        required: "请填写事业处",
+        required: '请填写事业处'
       },
       deparmentName: {
-        required: "请填写使用单位(部门)",
+        required: '请填写使用单位(部门)'
       },
       phone: {
-        required: "请填写负责人电话",
+        required: '请填写负责人电话'
       },
       email: {
-        required: "请填写负责人邮箱",
+        required: '请填写负责人邮箱'
       },
       roleName: {
-        required: "请填写角色身份",
-      },
-    },
-  });
+        required: '请填写角色身份'
+      }
+    }
+  })
 
   async function onSubmit(type: string) {
     if (await form.validate()) {
-      if (type === "add") {
-        alert("add");
+      if (type === 'add') {
+        alert('add')
       } else {
-        alert("edit");
+        alert('edit')
       }
     }
   }
 
   createEffect(
     on(currentData, () => {
-      form.setFormData(currentData());
+      form.resetFields()
+      form.setFormData(currentData())
     })
-  );
+  )
 
   return (
     <>
@@ -130,20 +131,20 @@ export default function HandleAdForm(props: EditAdFormProps) {
                   rules={[
                     {
                       required: true,
-                      message: "请填写确认密码",
-                    },
-                    {
-                      required: true,
                       asyncValidator: (_rule: any, value: string) => {
                         return new Promise<void>((resolve, reject) => {
                           if (value !== form.password) {
-                            reject("密码不一致"); // reject with error message
+                            reject('密码不一致') // reject with error message
                           } else {
-                            resolve();
+                            resolve()
                           }
-                        });
-                      },
+                        })
+                      }
                     },
+                    {
+                      required: true,
+                      message: '请填写确认密码'
+                    }
                   ]}
                   label="确认密码"
                 >
@@ -203,8 +204,8 @@ export default function HandleAdForm(props: EditAdFormProps) {
               <Col grid={1 / 2}>
                 <FormItem name="roleName" label="角色身份">
                   <Input type="select" clearable placeholder="请选择" transfer>
-                    <Option value={"1"} label="管理员"></Option>
-                    <Option value={"2"} label="用户"></Option>
+                    <Option value={'1'} label="管理员"></Option>
+                    <Option value={'2'} label="用户"></Option>
                   </Input>
                 </FormItem>
               </Col>
@@ -213,5 +214,5 @@ export default function HandleAdForm(props: EditAdFormProps) {
         </div>
       </Modal>
     </>
-  );
+  )
 }

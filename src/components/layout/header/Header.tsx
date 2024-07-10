@@ -1,28 +1,25 @@
-import { Avatar, Dropdown, DropdownItem, DropdownMenu } from "cui-solid";
-import Styles from "./css/header.module.scss";
+import { Avatar, Dropdown, DropdownItem, DropdownMenu } from 'cui-solid'
+import Styles from './css/header.module.scss'
 
-import Setting from "../Setting/Setting";
-import Lang from "@/components/common/Lang/Lang";
-import BreadcrumbLayout from "../Breadcrumb/Breadcrumb";
-import useCommonStore from "@/stores/common/index";
+import Setting from '../Setting/Setting'
+import Lang from '@/components/common/Lang/Lang'
+import BreadcrumbLayout from '../Breadcrumb/Breadcrumb'
+import useCommonStore from '@/stores/common/index'
 
-import useUserStore from "@/stores/user";
+import useUserStore from '@/stores/user'
 
 export default function Header() {
   const {
-    fold: [fold],
-  } = useCommonStore().data;
+    fold: [fold]
+  } = useCommonStore().data
 
   const {
-    userInfo: [userInfo],
-  } = useUserStore().data;
+    userInfo: [userInfo]
+  } = useUserStore().data
 
   return (
-    <div class={Styles["layout_header"]}>
-      <div
-        class={Styles["layout_tabbar"]}
-        classList={{ [Styles["fold"]]: fold() }}
-      >
+    <div class={Styles['layout_header']}>
+      <div class={Styles['layout_tabbar']} classList={{ [Styles['fold']]: fold() }}>
         <BreadcrumbLayout></BreadcrumbLayout>
       </div>
 
@@ -44,14 +41,14 @@ export default function Header() {
             </DropdownMenu>
           }
           onSelect={(name: string) => {
-            console.log(name);
+            console.log(name)
           }}
         >
-          <div>
+          <div class="cursor-pointer">
             <Avatar src={userInfo().avatar}></Avatar>
           </div>
         </Dropdown>
       </div>
     </div>
-  );
+  )
 }
