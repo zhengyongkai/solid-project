@@ -7,7 +7,9 @@
     "build": " vite build",
     "mock": "vite --mode mock --port 3334",
     "dev": "vite --mode dev --port 3333",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "gitmsg": "git --no-pager diff --cached > staged_changes.diff"
+
   },
   "dependencies": {
     "@logicflow/core": "^1.2.22",
